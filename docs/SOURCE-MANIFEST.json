@@ -6,8 +6,8 @@
       "source": "work/sites/chladni-08/README.md",
       "destination": "simulator/README.md",
       "source_sha256": "d8f483a6b879c6a0bf4a8e40fc5a6ff712dcfa692ad45f53671b64e44f41054a",
-      "packaged_sha256": "5df0a5e441d5861cf8d0a7a296099c1cf0b37337d9aa484136e6bb3034bca074",
-      "revision_note": "2026-10-26: documented new web controls and saved sweep behavior; original source hash retained."
+      "packaged_sha256": "90e2fc4d96a48682d0165fd8cde741f9ba4e781c13d8a8ac31f483a461b92af6",
+      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained."
     },
     {
       "source": "work/sites/chladni-08/package.json",
@@ -37,22 +37,22 @@
       "source": "work/sites/chladni-08/dist/index.html",
       "destination": "simulator/dist/index.html",
       "source_sha256": "0ada9803d23b3072c2c3fce33b60c54862bcf7d4048db3cba808a2c22097bfe8",
-      "packaged_sha256": "f6ac6f77de69b1a955132839fda9fc76821e30567f72cb8aa6e8ffcfc005b136",
-      "revision_note": "2026-10-26: browser range 20–4000 Hz, 0.1% FOLD, manual frequency input and numpad shortcuts; original source hash retained."
+      "packaged_sha256": "92d5e774aa50db9552d4fc14b3000d7655858f7566ce78fc89a9aa1ae51cfd4c",
+      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained."
     },
     {
       "source": "work/sites/chladni-08/dist/styles.css",
       "destination": "simulator/dist/styles.css",
       "source_sha256": "85558402daad068d3b3cfce2ebb6fe8134b559cc591f39309643dcfa09dd88a7",
-      "packaged_sha256": "e2a9c01f75e67ae7cef5bbdffa48e66faad23d51f0a88525ca7b90286d94a499",
-      "revision_note": "2026-10-26: browser range 20–4000 Hz, 0.1% FOLD, manual frequency input and numpad shortcuts; original source hash retained."
+      "packaged_sha256": "06114c43abcfba8f44610e67a68f0d98e2001ae0c7bf8b165680c5d1ca35a9a5",
+      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained."
     },
     {
       "source": "work/sites/chladni-08/dist/dsp.js",
       "destination": "simulator/dist/dsp.js",
       "source_sha256": "f1ebfc31832658720e3c8b84967c3472b69875dc36a2763cf03e0f78d92baf11",
-      "packaged_sha256": "1f0b96b27f98ba88b7a724fe984c2a571604344ee5ba90178afff3856d3873f3",
-      "revision_note": "2026-10-26: removed browser-only 0.12 attenuation (+18.42 dB); source_sha256 retains original snapshot hash."
+      "packaged_sha256": "9419b0d5c6f0083775827144f68bd4aeba968c77645b4056c5e895f17f4417ca",
+      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback."
     },
     {
       "source": "work/sites/chladni-08/dist/CP-100-Guide.pdf",
@@ -76,15 +76,15 @@
       "source": "work/sites/chladni-08/dist/model.js",
       "destination": "simulator/dist/model.js",
       "source_sha256": "216f5f1dc215def2bf9257f7faa570887843c24586a75db29c6d0e5789e3827f",
-      "packaged_sha256": "7fb2d1744deb1934c2b9cacbaac4cf7599c8fb8ede8193c5302bc76c0ac7b1c9",
-      "revision_note": "2026-10-26: browser range 20–4000 Hz, 0.1% FOLD, manual frequency input and numpad shortcuts; original source hash retained."
+      "packaged_sha256": "20203bb6ee24effe7d09ebf4b0a62b1e4eef19e07e6e1ed8e6c652060320a13c",
+      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback."
     },
     {
       "source": "work/sites/chladni-08/dist/app.js",
       "destination": "simulator/dist/app.js",
       "source_sha256": "69d8855963cf70a70c5ce9e36444590ea830a2db44a02956635ce4e7e8e100e7",
-      "packaged_sha256": "12ddc684bc8d2c6e49bd26637b433c36f8c9192098b2720186d7e4bb41bf1ae0",
-      "revision_note": "2026-10-26: browser range 20–4000 Hz, 0.1% FOLD, manual frequency input and numpad shortcuts; original source hash retained."
+      "packaged_sha256": "387b12f3f4fe3ef90c85eb4956412801d05fbb23628fd47a53244a9c1c403280",
+      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback."
     },
     {
       "source": "work/sites/chladni-08/tests/simulator.test.js",
@@ -501,6 +501,20 @@
       "source_sha256": "d11e80dd84be50a3c3567c2fb175b9aef4a520d9c16fe50831e34fd7d18755bf",
       "packaged_sha256": "d11e80dd84be50a3c3567c2fb175b9aef4a520d9c16fe50831e34fd7d18755bf",
       "revision_note": "2026-10-26: new keyboard mapping and control regression coverage."
+    },
+    {
+      "source": "simulator/dist/sequencer.js",
+      "destination": "simulator/dist/sequencer.js",
+      "source_sha256": "75b2f1086415f75a7dab5b14460758317689bbeb863202eb5182a482a06a2167",
+      "packaged_sha256": "75b2f1086415f75a7dab5b14460758317689bbeb863202eb5182a482a06a2167",
+      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback."
+    },
+    {
+      "source": "simulator/tests/sequencer.test.js",
+      "destination": "simulator/tests/sequencer.test.js",
+      "source_sha256": "d6e66fe9656fcbb41e53da71c08d1ea7dfa50ccf46421008c39c8ebcdf0adc30",
+      "packaged_sha256": "d6e66fe9656fcbb41e53da71c08d1ea7dfa50ccf46421008c39c8ebcdf0adc30",
+      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback."
     }
   ]
 }

@@ -1,0 +1,46 @@
+✔ canonical slash redirect preserves query (31.519917ms)
+✔ module, PDF and root paths map to the fixed upstream and strip credentials (2.24725ms)
+✔ simulator redirect stays under custom prefix; external redirect stays external (0.323584ms)
+✔ sibling slug and main-site requests fall through unchanged (0.34325ms)
+✔ write requests are rejected without forwarding; HEAD has no body (0.2465ms)
+✔ upstream failure returns uncached 502 (0.332375ms)
+✔ rapid continuous sweep automates frequency without zeroing gain, replacing curves, restarting oscillators, or rebuilding nodes (7.8395ms)
+✔ folder and three-position selector adjust live AudioParams; MUTE and audio-off alone target zero output (10.458334ms)
+✔ top-row and numpad 1–8 map to pads, including Num Lock off (0.652583ms)
+✔ 4000 Hz and fractional fold survive save/export/import and recall (1.5695ms)
+✔ existing 2000 Hz sweep bounds and calibrated custom limits stay intact (0.74625ms)
+✔ sand field follows frequency, wave and harmonic selector and remains finite (33.559459ms)
+✔ sand animation keeps grains inside the glass window under prolonged excitation (26.942166ms)
+✔ settled sand keeps granular nodal bands across presets without piling onto the rim (454.341708ms)
+✔ frequency change moves existing grains toward a new pattern rather than teleporting them (29.232709ms)
+✔ scene geometry matches the final 60 cm plate and 50 cm glass (0.413708ms)
+✔ ordered sequence starts at pad 1, holds each for 3000 ms and loops all eight (2.644667ms)
+✔ random mode visits every pad once per cycle and avoids immediate repeats across cycles (0.219125ms)
+✔ stop and restart cancel pending ticks, including callbacks already queued by the event loop (0.175209ms)
+✔ empty and excluded slots are silent for their full step and never keep the previous pad playing (1.24ms)
+✔ a step callback can stop playback without scheduling another tick (0.118042ms)
+✔ sequence steps disarm SAVE without changing presets and replace the current pad atomically (0.125209ms)
+✔ RUN cannot change parameters or arm SAVE (1.224083ms)
+✔ SAVE captures five independent parameters, persists, and recalls after a muted reboot (1.369583ms)
+✔ leaving SERVICE cancels an armed save and mutes; a subsequent pad recalls rather than overwrites (0.107041ms)
+✔ empty pad does not start or alter output (0.078917ms)
+✔ invalid import is atomic and rejects unsupported waves, bad slot counts, and nonfinite levels (0.298417ms)
+✔ fold zero is an exact bypass and folding remains odd and bounded (2.342167ms)
+✔ normalization holds the signal RMS across waves and folding while preserving peak headroom and zero DC (44.278875ms)
+✔ folding a sine adds a measurable third harmonic (1.813833ms)
+✔ asymmetric folding adds even harmonics and removes DC; symmetric sine remains odd (5.317708ms)
+✔ folding really reflects after the threshold instead of saturating (0.105ms)
+✔ EVEN adds even harmonics while retaining the sine fundamental and no added odd harmonics (2.6615ms)
+✔ version 3 presets migrate explicitly to three-position harmonics without losing slot data (0.381791ms)
+✔ momentary pad release mutes, clears active pad, and cannot resume via RUN mute button (0.249292ms)
+✔ first held pad owns output; other press and release cannot steal or silence it (0.082666ms)
+✔ commissioned sweep limits clamp editing, reject excluded presets and survive reboot (0.14725ms)
+✔ RGB pads are white at standby, pink/tosca while held, and optional pulse stays in visual range (0.215875ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 610.901083

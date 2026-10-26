@@ -1,0 +1,245 @@
+{
+  "url": "https://houseofexp.com/research/cp-100/",
+  "label": "live",
+  "passed": true,
+  "checks": [
+    {
+      "name": "App loaded",
+      "passed": true
+    },
+    {
+      "name": "No autoplay on load",
+      "passed": true
+    },
+    {
+      "name": "Play enables actual audio and immediately starts pad 1",
+      "passed": true
+    },
+    {
+      "name": "Ordered 1–8 loops to 1",
+      "passed": true
+    },
+    {
+      "name": "Each step takes three seconds",
+      "passed": true
+    },
+    {
+      "name": "Empty slots stay muted",
+      "passed": true
+    },
+    {
+      "name": "Stop mutes output",
+      "passed": true
+    },
+    {
+      "name": "Stopped timer cannot restart",
+      "passed": true
+    },
+    {
+      "name": "Random visits each pad exactly once per cycle",
+      "passed": true
+    },
+    {
+      "name": "Random also uses three-second steps",
+      "passed": true
+    },
+    {
+      "name": "Mobile has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Manual pad takes over and stops the timer",
+      "passed": true
+    },
+    {
+      "name": "Manual key release mutes",
+      "passed": true
+    },
+    {
+      "name": "Order change stops playback",
+      "passed": true
+    },
+    {
+      "name": "Opening service stops playback",
+      "passed": true
+    },
+    {
+      "name": "Play cancels SAVE without overwriting a preset",
+      "passed": true
+    },
+    {
+      "name": "Manual edit stops sequence",
+      "passed": true
+    },
+    {
+      "name": "TEST/MUTE stops sequence",
+      "passed": true
+    },
+    {
+      "name": "Audio OFF stops and mutes",
+      "passed": true
+    },
+    {
+      "name": "Leaving page stops sequence",
+      "passed": true
+    },
+    {
+      "name": "Blur cannot leave a later timer playing",
+      "passed": true
+    },
+    {
+      "name": "App loaded",
+      "passed": true
+    },
+    {
+      "name": "Reload never resumes sequence",
+      "passed": true
+    },
+    {
+      "name": "Pending activation exposes Stop",
+      "passed": true
+    },
+    {
+      "name": "Late audio activation cannot restart a stopped sequence",
+      "passed": true
+    },
+    {
+      "name": "Source hash matches: app.js",
+      "passed": true
+    },
+    {
+      "name": "Source hash matches: index.html",
+      "passed": true
+    },
+    {
+      "name": "Source hash matches: styles.css",
+      "passed": true
+    },
+    {
+      "name": "Source hash matches: sequencer.js",
+      "passed": true
+    },
+    {
+      "name": "Source hash matches: model.js",
+      "passed": true
+    },
+    {
+      "name": "Source hash matches: dsp.js",
+      "passed": true
+    }
+  ],
+  "ordered": [
+    {
+      "index": 0,
+      "at": 21,
+      "muted": false,
+      "activePad": 0
+    },
+    {
+      "index": 1,
+      "at": 2791.2999999998137,
+      "muted": false,
+      "activePad": 1
+    },
+    {
+      "index": 2,
+      "at": 5800.5,
+      "muted": false,
+      "activePad": 2
+    },
+    {
+      "index": 3,
+      "at": 8801.400000000373,
+      "muted": false,
+      "activePad": 3
+    },
+    {
+      "index": 4,
+      "at": 11821.900000000373,
+      "muted": true,
+      "activePad": null
+    },
+    {
+      "index": 5,
+      "at": 14821.400000000373,
+      "muted": true,
+      "activePad": null
+    },
+    {
+      "index": 6,
+      "at": 17820.799999999814,
+      "muted": true,
+      "activePad": null
+    },
+    {
+      "index": 7,
+      "at": 20841.900000000373,
+      "muted": true,
+      "activePad": null
+    },
+    {
+      "index": 0,
+      "at": 23841.60000000056,
+      "muted": false,
+      "activePad": 0
+    }
+  ],
+  "random": [
+    {
+      "index": 6,
+      "at": 21.799999999813735,
+      "muted": true,
+      "activePad": null
+    },
+    {
+      "index": 5,
+      "at": 2801.7000000001863,
+      "muted": true,
+      "activePad": null
+    },
+    {
+      "index": 0,
+      "at": 5800.5,
+      "muted": false,
+      "activePad": 0
+    },
+    {
+      "index": 1,
+      "at": 8820.5,
+      "muted": false,
+      "activePad": 1
+    },
+    {
+      "index": 4,
+      "at": 11821.099999999627,
+      "muted": true,
+      "activePad": null
+    },
+    {
+      "index": 7,
+      "at": 14821.5,
+      "muted": true,
+      "activePad": null
+    },
+    {
+      "index": 3,
+      "at": 17841.799999999814,
+      "muted": false,
+      "activePad": 3
+    },
+    {
+      "index": 2,
+      "at": 20841.200000000186,
+      "muted": false,
+      "activePad": 2
+    }
+  ],
+  "hashes": {
+    "app.js": "387b12f3f4fe3ef90c85eb4956412801d05fbb23628fd47a53244a9c1c403280",
+    "index.html": "92d5e774aa50db9552d4fc14b3000d7655858f7566ce78fc89a9aa1ae51cfd4c",
+    "styles.css": "06114c43abcfba8f44610e67a68f0d98e2001ae0c7bf8b165680c5d1ca35a9a5",
+    "sequencer.js": "75b2f1086415f75a7dab5b14460758317689bbeb863202eb5182a482a06a2167",
+    "model.js": "20203bb6ee24effe7d09ebf4b0a62b1e4eef19e07e6e1ed8e6c652060320a13c",
+    "dsp.js": "9419b0d5c6f0083775827144f68bd4aeba968c77645b4056c5e895f17f4417ca"
+  }
+}

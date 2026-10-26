@@ -14,6 +14,10 @@
 
 <section class="pad-grid" id="pad-grid" aria-label="Delapan pad preset momentary"></section>
 <p id="visitor-status" role="status" aria-live="polite">Tahan pad / tombol 1–8 · lepas untuk berhenti</p>
+<section class="sequencer" aria-label="Sequencer pad">
+<div class="sequence-controls"><label for="sequence-order">SEQUENCE<select id="sequence-order"><option value="ordered">1 → 8</option><option value="random">ACAK / RANDOM</option></select></label><button id="sequence-play" class="key" aria-pressed="false" aria-label="Putar sequence">▶ PLAY</button></div>
+<p id="sequence-status" role="status" aria-live="polite">3 DETIK / PAD · ULANG</p><p class="sequence-hint">Pad kosong / di luar batas: diam.</p>
+</section>
 <div id="service-panel" hidden>
 <div class="service-heading">SETUP / MAINTENANCE <span>DI DALAM ENCLOSURE</span></div>
 <section class="display" aria-label="Display dot matrix MAX7219 32 kali 8">

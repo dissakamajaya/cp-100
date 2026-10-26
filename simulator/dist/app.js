@@ -1,4 +1,5 @@
 import { STORAGE_KEY, SPEC, LIMITS, WAVES, HARMONICS, initialState, reduce, parsePresetFile, exportPresetFile, CONFIG_KEY, DEFAULT_SETUP, validSetup, inRange, ledState } from './model.js';
+import { PadSequencer } from './sequencer.js';
 import { padNumberForKey } from './controls.js';
 import { AudioPreview } from './dsp.js';
 import { SandPreview } from './sand.js';
@@ -15,6 +16,28 @@ let lastWrite = true;
 let fine = false, screenMessage = '', screenTimer, messageTimer;
 const audio = new AudioPreview();
 const sand = new SandPreview($('#sand-canvas'));
+let sequencePending=false,sequenceRequest=0;
+const sequence=new PadSequencer({onStep(index){
+ heldSource=null;dispatch({type:'SEQUENCE_STEP',index});
+}});
+function stopSequence(){
+ const playing=sequence.running||sequencePending;
+ sequenceRequest++;sequencePending=false;sequence.stop();
+ if(playing){heldSource=null;dispatch({type:'RELEASE_ALL'});}
+}
+$('#sequence-play').addEventListener('click',async()=>{
+ if(sequence.running||sequencePending){stopSequence();return;}
+ const request=++sequenceRequest;sequencePending=true;render();
+ try{
+  if(!audio.enabled)await audio.enable();
+  if(request!==sequenceRequest||document.hidden)return;
+  sequencePending=false;heldSource=null;
+  sequence.start($('#sequence-order').value);
+ }catch(error){
+  if(request===sequenceRequest){sequencePending=false;audio.disable();dispatch({type:'MUTE',value:true});notify(error.message);}
+ }finally{if(request===sequenceRequest)sequencePending=false;render();}
+});
+$('#sequence-order').addEventListener('change',()=>{stopSequence();render();});
 const fonts = {
 '0':['01110','10001','10011','10101','11001','10001','01110'],
 '1':['00100','01100','00100','00100','00100','00100','01110'],
@@ -60,6 +83,11 @@ function persist() {
   catch { notify('PENYIMPANAN BROWSER TIDAK TERSEDIA'); return false; }
 }
 function dispatch(action) {
+  if((sequence.running||sequencePending)&&['MODE','SETUP','PARAMETERS','ARM','MUTE','IMPORT'].includes(action.type)){
+    // Stop already mutes; a TEST/MUTE toggle must not turn output back on afterward.
+    if(action.type==='MUTE')action={...action,value:true};
+    stopSequence();
+  }
   const before = state; state = reduce(state, action);
   if (state.presets !== before.presets) lastWrite = persist();
   if(state.setup!==before.setup){try{localStorage.setItem(CONFIG_KEY,JSON.stringify(state.setup));}catch{notify('SETUP HANYA TERSIMPAN SEMENTARA');}}
@@ -87,6 +115,7 @@ function drawMatrix() {
   $('.display-unit').style.visibility = screenMessage ? 'hidden' : 'visible';
 }
 function pressPad(index,source){
+  stopSequence();
   if(heldSource)return;
   if(!state.armed&&(!state.presets[index]||!inRange(state.presets[index],state.setup))){
     $('#visitor-status').textContent=state.presets[index]?'Preset di luar batas sweep':'Pad belum diisi';return;
@@ -96,7 +125,7 @@ function pressPad(index,source){
   if(saving){flash(lastWrite?'SAVED':'RAM');notify(lastWrite?`PRESET DISIMPAN KE PAD ${index+1}`:'PRESET SEMENTARA');}
 }
 function releasePad(index,source){if(heldSource!==source)return;heldSource=null;dispatch({type:'RELEASE_ALL'});}
-function releaseAll(){heldSource=null;dispatch({type:'RELEASE_ALL'});}
+function releaseAll(){stopSequence();heldSource=null;dispatch({type:'RELEASE_ALL'});}
 for(let i=0;i<8;i++){
  const b=document.createElement('button');b.className='pad';b.dataset.pad=i;
  b.setAttribute('aria-keyshortcuts',String(i+1));
@@ -131,6 +160,12 @@ $('#setup-form').addEventListener('submit',event=>{
 });
 function render() {
   const p=state.parameters, service=state.mode==='SERVICE';
+  const sequencing=sequence.running||sequencePending;
+  $('#sequence-play').textContent=sequencing?'■ STOP':'▶ PLAY';
+  $('#sequence-play').setAttribute('aria-pressed',String(sequencing));
+  $('#sequence-play').setAttribute('aria-label',sequencing?'Hentikan sequence':'Putar sequence');
+  const sequencePreset=sequence.index===null?null:state.presets[sequence.index];
+  $('#sequence-status').textContent=sequencePending?'MENYIAPKAN AUDIO':sequence.running?`PAD ${sequence.index+1} / 3 DETIK${!sequencePreset?' · KOSONG':!inRange(sequencePreset,state.setup)?' · DI LUAR BATAS':''}`:'3 DETIK / PAD · ULANG';
   $('.device').classList.toggle('locked',!service);
   document.querySelectorAll('[data-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mode===state.mode)));
   $('#save-action').disabled=!service;$('#save-action').setAttribute('aria-pressed',String(state.armed));
@@ -163,6 +198,7 @@ function render() {
   document.querySelectorAll('[data-pad]').forEach(b=>{
     const i=Number(b.dataset.pad),preset=state.presets[i];
     const led=ledState(state,i),blocked=preset&&!inRange(preset,state.setup);
+    b.classList.toggle('sequenced',sequence.running&&sequence.index===i);
     b.classList.toggle('active',led.active);b.classList.toggle('empty',!preset||blocked);b.classList.toggle('armed',state.armed);
     b.dataset.color=led.color;b.classList.toggle('pulsing',led.pulseHz>0);b.style.setProperty('--pulse-duration',`${1/(led.pulseHz||1)}s`);
     b.setAttribute('aria-disabled',String((!preset||blocked)&&!state.armed));
@@ -170,7 +206,7 @@ function render() {
     b.setAttribute('aria-label',`Pad ${i+1}, tekan dan tahan, ${blocked?'di luar batas sweep':preset?`${preset.frequencyHz} Hz, ${waveLabels[preset.wave]}, fold ${preset.foldPct}%, ${harmonicLabels[preset.harmonics]}, level ${preset.levelPct}%`:'kosong'}`);
     b.title=(preset?`${preset.frequencyHz} Hz · ${waveLabels[preset.wave]} · F${preset.foldPct} · L${preset.levelPct}`:'Belum disimpan')+` · Keyboard ${i+1} / Numpad ${i+1}`;
   });
-  $('#visitor-status').textContent=state.activePad!==null?`PAD ${String(state.activePad+1).padStart(2,'0')} / LEPAS UNTUK BERHENTI`:'Tahan pad / tombol 1–8 · lepas untuk berhenti';
+  $('#visitor-status').textContent=sequence.running?'SEQUENCE AKTIF / STOP UNTUK BERHENTI':state.activePad!==null?`PAD ${String(state.activePad+1).padStart(2,'0')} / LEPAS UNTUK BERHENTI`:'Tahan pad / tombol 1–8 · lepas untuk berhenti';
   $('#calibration-status').textContent=state.setup.calibrated?'BATAS TERSIMPAN':'BELUM DIKALIBRASI';
   document.querySelectorAll('#setup-form input,#setup-form select,#setup-form button').forEach(el=>el.disabled=!service);
   $('#sand-frequency').textContent=`${p.frequencyHz.toFixed(1)} Hz`;
@@ -255,5 +291,5 @@ window.addEventListener('blur',releaseAll);
 window.addEventListener('pagehide',releaseAll);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseAll();});
 window.addEventListener('resize',drawMatrix);
-window.chladniDiagnostics=()=>({state:structuredClone(state),audio:audio.diagnostics(),spec:SPEC,display:$('#matrix').getAttribute('aria-label'),sand:sand.diagnostics()});
+window.chladniDiagnostics=()=>({state:structuredClone(state),audio:audio.diagnostics(),sequence:{...sequence.diagnostics(),pending:sequencePending},spec:SPEC,display:$('#matrix').getAttribute('aria-label'),sand:sand.diagnostics()});
 syncSetupForm();render();if(storageProblem)notify('PRESET TIDAK TERBACA / SLOT DIKOSONGKAN');

@@ -75,6 +75,9 @@ export function reduce(state, action) {
       if(!muted&&state.mode==='RUN')return state;
       return { ...state, muted, armed:false,activePad:null };
     }
+    case 'SEQUENCE_STEP':
+      // Move between pads in one update so audio automation never receives an intermediate mute.
+      return reduce({...state,activePad:null,muted:true,armed:false},{type:'PAD_DOWN',index:action.index});
     case 'PAD_UP':
       return state.activePad===action.index?{...state,activePad:null,muted:true}:state;
     case 'RELEASE_ALL':return {...state,activePad:null,muted:true};

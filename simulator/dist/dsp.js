@@ -51,6 +51,13 @@ export class AudioPreview {
     if (!this.context) this.build(new Context());
     await this.context.resume();
     if (this.context.state !== 'running') throw new Error('Audio belum aktif. Tekan Audio sekali lagi.');
+    // A new real-time context can report running before the output device starts pulling samples.
+    // Start timed playback only after its audio clock is advancing.
+    const startedAt=this.context.currentTime,deadline=performance.now()+3000;
+    while(this.context.state==='running'&&this.context.currentTime<startedAt+.03&&performance.now()<deadline){
+      await new Promise(resolve=>setTimeout(resolve,20));
+    }
+    if(this.context.state!=='running'||this.context.currentTime<startedAt+.03)throw new Error('Audio belum siap. Tekan Audio sekali lagi.');
     this.enabled = true;
   }
   build(context) {

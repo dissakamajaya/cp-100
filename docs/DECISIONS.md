@@ -32,3 +32,7 @@ Template potong adalah acuan prototipe. SVG/CSV memakai datum kiri atas (Y turun
 ## Kontrol simulator web — 26 Oktober 2026
 
 Atas permintaan pengguna, jangkauan simulator menjadi **20–4000 Hz** (default MAX 4000), FOLD bergerak per **0,1%**, dan frekuensi dapat diketik dengan presisi **0,1 Hz** melalui PANEL SERVIS. Batas sweep yang pernah disimpan tetap dipertahankan; MAX dapat diperluas lewat SIMPAN SETUP. Tombol keyboard angka 1–8 serta Numpad 1–8 (Num Lock aktif/nonaktif) menahan pad sampai tombol dilepas; input angka tidak memicu pad. Ini bukan perubahan batas aman hardware atau blueprint.
+
+## Sequencer web — 26 Oktober 2026
+
+Pengguna meminta tombol Play untuk sequence pad 1–8 setiap 3 detik dan opsi acak. Sequencer web berulang; acak mengunjungi setiap pad sekali per siklus. Pad kosong/di luar sweep diam selama slotnya. Stop, input pad manual, perubahan kontrol/servis, mute/audio-off dan meninggalkan halaman menghentikan sequence. Tidak ada auto-resume atau perubahan firmware.

@@ -1,0 +1,162 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "label": "local",
+  "checks": [
+    {
+      "name": "App loaded",
+      "passed": true
+    },
+    {
+      "name": "No autoplay on load",
+      "passed": true
+    },
+    {
+      "name": "Play enables actual audio and immediately starts pad 1",
+      "passed": true
+    },
+    {
+      "name": "Ordered 1–8 loops to 1",
+      "passed": true
+    },
+    {
+      "name": "Each step takes three seconds",
+      "passed": true
+    },
+    {
+      "name": "Empty slots stay muted",
+      "passed": true
+    },
+    {
+      "name": "Stop mutes output",
+      "passed": true
+    },
+    {
+      "name": "Stopped timer cannot restart",
+      "passed": true
+    },
+    {
+      "name": "Random visits each pad exactly once per cycle",
+      "passed": true
+    },
+    {
+      "name": "Random also uses three-second steps",
+      "passed": true
+    },
+    {
+      "name": "Mobile has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Manual pad takes over and stops the timer",
+      "passed": true
+    },
+    {
+      "name": "Manual key release mutes",
+      "passed": true
+    },
+    {
+      "name": "Order change stops playback",
+      "passed": true
+    },
+    {
+      "name": "Opening service stops playback",
+      "passed": true
+    },
+    {
+      "name": "Play cancels SAVE without overwriting a preset",
+      "passed": true
+    },
+    {
+      "name": "Manual edit stops sequence",
+      "passed": true
+    },
+    {
+      "name": "TEST/MUTE stops sequence",
+      "passed": false
+    }
+  ],
+  "diagnostics": {
+    "state": {
+      "mode": "SERVICE",
+      "muted": false,
+      "armed": false,
+      "activePad": null,
+      "setup": {
+        "minHz": 20,
+        "maxHz": 4000,
+        "calibrated": false,
+        "ledColor": "alternate",
+        "ledPulse": false
+      },
+      "parameters": {
+        "frequencyHz": 128.5,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 0,
+        "harmonics": "odd"
+      },
+      "presets": [
+        {
+          "frequencyHz": 128.5,
+          "levelPct": 35,
+          "wave": "sine",
+          "foldPct": 0,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 196,
+          "levelPct": 35,
+          "wave": "triangle",
+          "foldPct": 18,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 256,
+          "levelPct": 30,
+          "wave": "sawtooth",
+          "foldPct": 32,
+          "harmonics": "both"
+        },
+        {
+          "frequencyHz": 384,
+          "levelPct": 40,
+          "wave": "sine",
+          "foldPct": 58,
+          "harmonics": "both"
+        },
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "audio": {
+      "context": "running",
+      "enabled": true,
+      "peak": 0.1783476620912552,
+      "rms": 0.11405007125964003
+    },
+    "sequence": {
+      "running": false,
+      "mode": "ordered",
+      "index": null,
+      "intervalMs": 3000,
+      "pending": false
+    },
+    "spec": {
+      "plateCm": 60,
+      "glassDiameterCm": 50,
+      "gapMm": 30,
+      "revision": "07"
+    },
+    "display": "128.5 Hz",
+    "sand": {
+      "particles": 4400,
+      "fieldVersion": 13,
+      "moving": true,
+      "positionHash": -1.96617,
+      "frequencyHz": 128.5
+    }
+  },
+  "error": "Error: TEST/MUTE stops sequence"
+}
