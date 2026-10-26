@@ -57,3 +57,9 @@ Permintaan pengguna: tingkat audio pada situs terlalu rendah. Attenuasi browser 
 Sites versi **7** berhasil dipublikasikan, commit source `cda11c0d66357d6ed61acd46215fcf53e7e184ef`, deployment `appgdep_6adf14cff1e08191bfbd960a801ad2fb`. Stagehand memverifikasi https://houseofexp.com/research/cp-100/ memakai hash DSP yang sama dengan source lokal, audio pad aktif (RMS 0,12616 pada LEVEL 35%), lepas pad = 0, serta 32 render Web Audio tanpa clipping (peak maksimum 0,73029). Tes simulator/router 29/29 dan manifest 80 aset lulus. Bukti, command dan batas verifikasi: [evidence/audio-boost-2026-10-26/README.md](evidence/audio-boost-2026-10-26/README.md).
 
 Publikasi ini hanya mengubah audio web. Koreksi gambar/PDF Rev08 di atas tetap tertunda; tidak ada klaim verifikasi hardware.
+
+## Kontrol web 4000 Hz, FOLD halus dan keyboard — 26 Oktober 2026
+
+Sesuai permintaan pengguna, simulator web kini memiliki default jangkauan **20–4000 Hz**, FOLD per **0,1%** (drag, wheel dan panah), serta input frekuensi manual **0,1 Hz** di PANEL SERVIS (Enter / ATUR). Batas sweep yang sudah tersimpan tetap berlaku; ubah MAX ke 4000 lewat SIMPAN SETUP untuk memperluas batas lama. Preset menyimpan presisi FOLD baru. Keyboard angka 1–8 dan Numpad 1–8 (termasuk Num Lock nonaktif) menahan pad sampai tombol dilepas; input angka tetap dapat diketik tanpa memicu pad.
+
+Sites versi **8** berhasil dipublikasikan, commit source `e362c53ef57614bf3a0cc2c7473623911175b8a9`, deployment `appgdep_6adf269921088191a6d6c57077671c72`. Domain custom terverifikasi melalui Stagehand: 29 pemeriksaan browser lulus, termasuk seluruh 24 kombinasi tombol, persistensi, batas lama, desktop/mobile dan hash source. Render Web Audio 4000 Hz mencapai RMS 0,35993 dan peak 0,49944 tanpa clipping. Tes simulator/router **32/32**, manifest **82** aset. Bukti dan command: [evidence/controls-2026-10-26/README.md](evidence/controls-2026-10-26/README.md). Firmware dan batas hardware tidak diubah.

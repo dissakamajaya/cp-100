@@ -85,3 +85,11 @@ body{padding:32px;place-items:center}.simulator-layout{display:grid;grid-templat
 @media(max-width:600px){.page-brand{gap:12px}.page-brand h1{font-size:14px}.page-brand img{width:82px;height:36px}.page-brand .audio-button{order:3;width:100%;min-height:48px;font-size:12px}.page-brand #maintenance-toggle{font-size:8px;padding:8px}}
 
 .shoe{width:var(--shoe-width,40%)}
+
+.frequency-form{margin:0 0 24px;font:9px var(--mono);color:#c7c7c7}
+.frequency-form>label{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
+#frequency-range{color:#a3a3a3;font-size:8px}
+.frequency-entry{display:flex;gap:10px}
+.frequency-entry input{min-width:0;flex:1;width:100%;min-height:44px;padding:10px 12px;border:1px solid #575757;border-radius:4px;background:#080808;color:#eee;font:16px var(--mono)}
+.frequency-entry .key{min-height:44px;min-width:70px}
+.frequency-entry input:focus-visible{outline:2px solid #e8b768;outline-offset:3px}

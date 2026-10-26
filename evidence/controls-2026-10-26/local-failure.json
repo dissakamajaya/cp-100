@@ -1,0 +1,91 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "label": "local",
+  "checks": [
+    {
+      "name": "App loaded",
+      "passed": true
+    },
+    {
+      "name": "Muted RUN boot",
+      "passed": true
+    },
+    {
+      "name": "Default range ends at 4000 Hz",
+      "passed": true
+    },
+    {
+      "name": "Typing does not trigger pads",
+      "passed": true
+    },
+    {
+      "name": "Enter applies typed decimal frequency",
+      "passed": true
+    },
+    {
+      "name": "4000 Hz applies via button",
+      "passed": true
+    },
+    {
+      "name": "Invalid frequency rejected: 4000.1",
+      "passed": true
+    },
+    {
+      "name": "Invalid frequency rejected: 19.9",
+      "passed": true
+    },
+    {
+      "name": "Invalid frequency rejected: empty",
+      "passed": true
+    },
+    {
+      "name": "FOLD arrow step is 0.1%",
+      "passed": true
+    },
+    {
+      "name": "FOLD wheel step is 0.1%",
+      "passed": true
+    },
+    {
+      "name": "FOLD drag is ten times finer",
+      "passed": true
+    },
+    {
+      "name": "All 24 top-row/numpad/Num-Lock-off combinations hold and release",
+      "passed": true
+    },
+    {
+      "name": "First physical key keeps ownership",
+      "passed": true
+    },
+    {
+      "name": "Numpad typing, modifiers and repeat do not start pads",
+      "passed": true
+    },
+    {
+      "name": "All eight presets store 4000 Hz and fractional FOLD",
+      "passed": true
+    },
+    {
+      "name": "Reload ready",
+      "passed": true
+    },
+    {
+      "name": "Preset precision survives reload",
+      "passed": true
+    },
+    {
+      "name": "Custom-bound reload ready",
+      "passed": true
+    },
+    {
+      "name": "Saved 2000 Hz ceiling is preserved",
+      "passed": true
+    },
+    {
+      "name": "Typed field respects saved ceiling",
+      "passed": true
+    }
+  ],
+  "error": "Error: -32000 Node does not have a layout object"
+}

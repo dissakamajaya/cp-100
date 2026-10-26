@@ -13,7 +13,7 @@
 
 
 <section class="pad-grid" id="pad-grid" aria-label="Delapan pad preset momentary"></section>
-<p id="visitor-status" class="sr-only" role="status" aria-live="polite">Lepas untuk berhenti</p>
+<p id="visitor-status" role="status" aria-live="polite">Tahan pad / tombol 1–8 · lepas untuk berhenti</p>
 <div id="service-panel" hidden>
 <div class="service-heading">SETUP / MAINTENANCE <span>DI DALAM ENCLOSURE</span></div>
 <section class="display" aria-label="Display dot matrix MAX7219 32 kali 8">
@@ -21,10 +21,14 @@
 </section>
 <div class="display-status"><span>ESP32-S3 <span class="muted-text">/ MAX7219</span></span><span id="output-status">MUTE</span></div>
 <section class="knob-row" aria-label="Knob pengaturan">
-<div class="control"><div class="dial" role="slider" tabindex="0" data-knob="frequencyHz" aria-label="Frekuensi" aria-valuemin="20" aria-valuemax="2000" aria-valuenow="128.5" title="Drag atau scroll. Klik untuk mengganti langkah 1 / 0.1 Hz."><span class="dial-face"><i></i></span></div><label>FREQ</label><button class="setting" id="precision-toggle" title="Ganti langkah frekuensi">1 Hz</button></div>
+<div class="control"><div class="dial" role="slider" tabindex="0" data-knob="frequencyHz" aria-label="Frekuensi" aria-valuemin="20" aria-valuemax="4000" aria-valuenow="128.5" title="Drag atau scroll. Klik untuk mengganti langkah 1 / 0.1 Hz."><span class="dial-face"><i></i></span></div><label>FREQ</label><button class="setting" id="precision-toggle" title="Ganti langkah frekuensi">1 Hz</button></div>
 <div class="control"><div class="dial" role="slider" tabindex="0" data-knob="levelPct" aria-label="Level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35" title="Drag atau scroll untuk mengatur level."><span class="dial-face"><i></i></span></div><label>LEVEL</label><output id="level-value" class="setting">35%</output></div>
-<div class="control"><div class="dial" role="slider" tabindex="0" data-knob="foldPct" aria-label="Wavefolder" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" title="Drag atau scroll untuk mengatur jumlah folding."><span class="dial-face"><i></i></span></div><label>FOLD</label><output id="fold-value" class="setting">0%</output></div>
+<div class="control"><div class="dial" role="slider" tabindex="0" data-knob="foldPct" aria-label="Wavefolder" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" title="Drag, scroll, atau tombol panah: langkah folding 0.1%."><span class="dial-face"><i></i></span></div><label>FOLD</label><output id="fold-value" class="setting">0%</output></div>
 </section>
+<form id="frequency-form" class="frequency-form">
+<label for="frequency-input">FREKUENSI / Hz <span id="frequency-range">20–4000 Hz</span></label>
+<div class="frequency-entry"><input id="frequency-input" type="number" inputmode="decimal" min="20" max="4000" step="0.1" value="128.5" aria-describedby="frequency-range" required><button type="submit" class="key">ATUR</button></div>
+</form>
 <section class="selector-row" aria-label="Switch tiga posisi">
 <div class="control selector-control"><label>WAVE</label><div class="choice-switch" role="group" aria-label="Wave selector"><button data-choice="wave" data-value="sine" aria-pressed="true">SINE</button><button data-choice="wave" data-value="sawtooth" aria-pressed="false">SAW</button><button data-choice="wave" data-value="triangle" aria-pressed="false">TRIANGLE</button></div></div>
 <div class="control selector-control"><label>HARMONICS</label><div class="choice-switch" role="group" aria-label="Harmonics selector"><button data-choice="harmonics" data-value="odd" aria-pressed="true">ODD</button><button data-choice="harmonics" data-value="even" aria-pressed="false">EVEN</button><button data-choice="harmonics" data-value="both" aria-pressed="false">ODD + EVEN</button></div></div>
@@ -35,7 +39,7 @@
 </section>
 <form id="setup-form" class="setup-form">
 <div class="setup-title">BATAS SWEEP <span id="calibration-status">BELUM DIKALIBRASI</span></div>
-<div class="range-inputs"><label>MIN / Hz<input id="min-frequency" type="number" min="20" max="2000" step="0.1" value="20" required></label><label>MAX / Hz<input id="max-frequency" type="number" min="20" max="2000" step="0.1" value="2000" required></label></div>
+<div class="range-inputs"><label>MIN / Hz<input id="min-frequency" type="number" min="20" max="4000" step="0.1" value="20" required></label><label>MAX / Hz<input id="max-frequency" type="number" min="20" max="4000" step="0.1" value="4000" required></label></div>
 <label class="check-setting"><input id="calibrated" type="checkbox">Batas sudah diuji pada pelat</label>
 <div class="led-settings"><label>WARNA AKTIF<select id="led-color"><option value="alternate">Pink / Tosca</option><option value="pink">Pink</option><option value="tosca">Tosca</option></select></label><label class="check-setting"><input id="led-pulse" type="checkbox">Pulsa LED mengikuti frekuensi (0,5-2 Hz)</label></div>
 <button type="submit" class="key">SIMPAN SETUP</button><span id="setup-feedback" role="status"></span>

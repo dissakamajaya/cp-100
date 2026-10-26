@@ -1,0 +1,344 @@
+{
+  "url": "https://houseofexp.com/research/cp-100/",
+  "label": "live",
+  "passed": true,
+  "checks": [
+    {
+      "name": "App loaded",
+      "passed": true
+    },
+    {
+      "name": "Muted RUN boot",
+      "passed": true
+    },
+    {
+      "name": "Default range ends at 4000 Hz",
+      "passed": true
+    },
+    {
+      "name": "Typing does not trigger pads",
+      "passed": true
+    },
+    {
+      "name": "Enter applies typed decimal frequency",
+      "passed": true
+    },
+    {
+      "name": "4000 Hz applies via button",
+      "passed": true
+    },
+    {
+      "name": "Invalid frequency rejected: 4000.1",
+      "passed": true
+    },
+    {
+      "name": "Invalid frequency rejected: 19.9",
+      "passed": true
+    },
+    {
+      "name": "Invalid frequency rejected: empty",
+      "passed": true
+    },
+    {
+      "name": "FOLD arrow step is 0.1%",
+      "passed": true
+    },
+    {
+      "name": "FOLD wheel step is 0.1%",
+      "passed": true
+    },
+    {
+      "name": "FOLD drag is ten times finer",
+      "passed": true
+    },
+    {
+      "name": "All 24 top-row/numpad/Num-Lock-off combinations hold and release",
+      "passed": true
+    },
+    {
+      "name": "First physical key keeps ownership",
+      "passed": true
+    },
+    {
+      "name": "Numpad typing, modifiers and repeat do not start pads",
+      "passed": true
+    },
+    {
+      "name": "All eight presets store 4000 Hz and fractional FOLD",
+      "passed": true
+    },
+    {
+      "name": "Reload ready",
+      "passed": true
+    },
+    {
+      "name": "Preset precision survives reload",
+      "passed": true
+    },
+    {
+      "name": "Custom-bound reload ready",
+      "passed": true
+    },
+    {
+      "name": "Saved 2000 Hz ceiling is preserved",
+      "passed": true
+    },
+    {
+      "name": "Typed field respects saved ceiling",
+      "passed": true
+    },
+    {
+      "name": "4000 Hz renders through real Web Audio without clipping",
+      "passed": true
+    },
+    {
+      "name": "Live source matches local: app.js",
+      "passed": true
+    },
+    {
+      "name": "Live source matches local: model.js",
+      "passed": true
+    },
+    {
+      "name": "Live source matches local: controls.js",
+      "passed": true
+    },
+    {
+      "name": "Live source matches local: index.html",
+      "passed": true
+    },
+    {
+      "name": "Live source matches local: styles.css",
+      "passed": true
+    },
+    {
+      "name": "Mobile has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Mobile input is usable",
+      "passed": true
+    }
+  ],
+  "shortcuts": {
+    "results": [
+      {
+        "i": 1,
+        "key": "1",
+        "code": "Digit1",
+        "passed": true
+      },
+      {
+        "i": 1,
+        "key": "1",
+        "code": "Numpad1",
+        "passed": true
+      },
+      {
+        "i": 1,
+        "key": "End",
+        "code": "Numpad1",
+        "passed": true
+      },
+      {
+        "i": 2,
+        "key": "2",
+        "code": "Digit2",
+        "passed": true
+      },
+      {
+        "i": 2,
+        "key": "2",
+        "code": "Numpad2",
+        "passed": true
+      },
+      {
+        "i": 2,
+        "key": "ArrowDown",
+        "code": "Numpad2",
+        "passed": true
+      },
+      {
+        "i": 3,
+        "key": "3",
+        "code": "Digit3",
+        "passed": true
+      },
+      {
+        "i": 3,
+        "key": "3",
+        "code": "Numpad3",
+        "passed": true
+      },
+      {
+        "i": 3,
+        "key": "PageDown",
+        "code": "Numpad3",
+        "passed": true
+      },
+      {
+        "i": 4,
+        "key": "4",
+        "code": "Digit4",
+        "passed": true
+      },
+      {
+        "i": 4,
+        "key": "4",
+        "code": "Numpad4",
+        "passed": true
+      },
+      {
+        "i": 4,
+        "key": "ArrowLeft",
+        "code": "Numpad4",
+        "passed": true
+      },
+      {
+        "i": 5,
+        "key": "5",
+        "code": "Digit5",
+        "passed": true
+      },
+      {
+        "i": 5,
+        "key": "5",
+        "code": "Numpad5",
+        "passed": true
+      },
+      {
+        "i": 5,
+        "key": "Clear",
+        "code": "Numpad5",
+        "passed": true
+      },
+      {
+        "i": 6,
+        "key": "6",
+        "code": "Digit6",
+        "passed": true
+      },
+      {
+        "i": 6,
+        "key": "6",
+        "code": "Numpad6",
+        "passed": true
+      },
+      {
+        "i": 6,
+        "key": "ArrowRight",
+        "code": "Numpad6",
+        "passed": true
+      },
+      {
+        "i": 7,
+        "key": "7",
+        "code": "Digit7",
+        "passed": true
+      },
+      {
+        "i": 7,
+        "key": "7",
+        "code": "Numpad7",
+        "passed": true
+      },
+      {
+        "i": 7,
+        "key": "Home",
+        "code": "Numpad7",
+        "passed": true
+      },
+      {
+        "i": 8,
+        "key": "8",
+        "code": "Digit8",
+        "passed": true
+      },
+      {
+        "i": 8,
+        "key": "8",
+        "code": "Numpad8",
+        "passed": true
+      },
+      {
+        "i": 8,
+        "key": "ArrowUp",
+        "code": "Numpad8",
+        "passed": true
+      }
+    ],
+    "owner": true,
+    "typing": true,
+    "modified": true,
+    "repeat": true,
+    "presets": [
+      {
+        "frequencyHz": 4000,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 1.2,
+        "harmonics": "odd"
+      },
+      {
+        "frequencyHz": 4000,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 1.2,
+        "harmonics": "odd"
+      },
+      {
+        "frequencyHz": 4000,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 1.2,
+        "harmonics": "odd"
+      },
+      {
+        "frequencyHz": 4000,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 1.2,
+        "harmonics": "odd"
+      },
+      {
+        "frequencyHz": 4000,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 1.2,
+        "harmonics": "odd"
+      },
+      {
+        "frequencyHz": 4000,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 1.2,
+        "harmonics": "odd"
+      },
+      {
+        "frequencyHz": 4000,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 1.2,
+        "harmonics": "odd"
+      },
+      {
+        "frequencyHz": 4000,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 1.2,
+        "harmonics": "odd"
+      }
+    ]
+  },
+  "render": {
+    "rms": 0.3599299901296171,
+    "peak": 0.49943992495536804
+  },
+  "hashes": {
+    "app.js": "12ddc684bc8d2c6e49bd26637b433c36f8c9192098b2720186d7e4bb41bf1ae0",
+    "model.js": "7fb2d1744deb1934c2b9cacbaac4cf7599c8fb8ede8193c5302bc76c0ac7b1c9",
+    "controls.js": "cff78f08d249e6055ec7fb1f3b3576b892ddd1526366adbb75addc3892ed9d69",
+    "index.html": "f6ac6f77de69b1a955132839fda9fc76821e30567f72cb8aa6e8ffcfc005b136",
+    "styles.css": "e2a9c01f75e67ae7cef5bbdffa48e66faad23d51f0a88525ca7b90286d94a499"
+  }
+}

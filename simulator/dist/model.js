@@ -1,7 +1,7 @@
 export const STORAGE_KEY = 'chladni-08-presets-v4';
 export const HARMONICS = ['odd', 'even', 'both'];
 export const WAVES = ['sine', 'sawtooth', 'triangle'];
-export const LIMITS = { frequencyHz: [20, 2000], levelPct: [0, 100], foldPct: [0, 100] };
+export const LIMITS = { frequencyHz: [20, 4000], levelPct: [0, 100], foldPct: [0, 100] };
 export const SPEC = Object.freeze({ plateCm: 60, glassDiameterCm: 50, gapMm: 30, revision: '07' });
 export const DEFAULT_PARAMETERS = Object.freeze({ frequencyHz: 128.5, levelPct: 35, wave: 'sine', foldPct: 0, harmonics: 'odd' });
 export function validParameters(p) {
@@ -10,7 +10,7 @@ export function validParameters(p) {
 }
 export function cleanParameters(p) {
   if (!validParameters(p)) throw new Error('Parameter preset tidak valid.');
-  return { frequencyHz: Math.round(p.frequencyHz * 10) / 10, levelPct: Math.round(p.levelPct), wave: p.wave, foldPct: Math.round(p.foldPct), harmonics: p.harmonics };
+  return { frequencyHz: Math.round(p.frequencyHz * 10) / 10, levelPct: Math.round(p.levelPct), wave: p.wave, foldPct: Math.round(p.foldPct * 10) / 10, harmonics: p.harmonics };
 }
 export function examplePresets() {
   return [
@@ -39,8 +39,8 @@ export function exportPresetFile(presets) {
   return { schema: 'chladni-08', version: 4, folding: 'parity-fold-v2', presets: presets.map(p => p ? cleanParameters(p) : null) };
 }
 export const CONFIG_KEY = 'chladni-08-setup-v1';
-export const DEFAULT_SETUP = Object.freeze({minHz:20,maxHz:2000,calibrated:false,ledColor:'alternate',ledPulse:false});
-export function validSetup(p){return Boolean(p&&Number.isFinite(p.minHz)&&Number.isFinite(p.maxHz)&&p.minHz>=20&&p.maxHz<=2000&&p.minHz<p.maxHz&&typeof p.calibrated==='boolean'&&['pink','tosca','alternate'].includes(p.ledColor)&&typeof p.ledPulse==='boolean');}
+export const DEFAULT_SETUP = Object.freeze({minHz:20,maxHz:4000,calibrated:false,ledColor:'alternate',ledPulse:false});
+export function validSetup(p){return Boolean(p&&Number.isFinite(p.minHz)&&Number.isFinite(p.maxHz)&&p.minHz>=20&&p.maxHz<=4000&&p.minHz<p.maxHz&&typeof p.calibrated==='boolean'&&['pink','tosca','alternate'].includes(p.ledColor)&&typeof p.ledPulse==='boolean');}
 export function inRange(p,setup){return p.frequencyHz>=setup.minHz&&p.frequencyHz<=setup.maxHz;}
 export function ledState(state,index){
  const active=state.activePad===index&&!state.muted;
