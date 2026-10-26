@@ -100,7 +100,8 @@ export class AudioPreview {
     this.smooth(this.plus.mix.gain,p.harmonics==='odd'?0:.5);
     this.smooth(this.minus.mix.gain,p.harmonics==='odd'?0:.5);
     this.smooth(this.dcOffset.offset,-mean);
-    this.smooth(this.gain.gain,this.enabled&&!state.muted?.12*p.levelPct/100*gain:0,state.muted?.01:.02);
+    // Use the calibrated signal level directly; no extra browser attenuation.
+    this.smooth(this.gain.gain,this.enabled&&!state.muted?p.levelPct/100*gain:0,state.muted?.01:.02);
   }
   diagnostics() {
     if(!this.analyser)return {context:'not-created',enabled:false,peak:0,rms:0};

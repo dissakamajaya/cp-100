@@ -1,0 +1,697 @@
+{
+  "url": "https://houseofexp.com/research/cp-100/",
+  "label": "live",
+  "passed": true,
+  "dspHash": "1f0b96b27f98ba88b7a724fe984c2a571604344ee5ba90178afff3856d3873f3",
+  "snapshot": "[0-2] RootWebArea: CP-100 — Panel ESP32\n  [0-21] scrollable, html\n    [0-18] main\n      [0-32] div\n        [0-33] heading: CP-100\n        [0-35] button: Nyalakan audio\n          [0-41] StaticText: NYALAKAN AUDIO\n        [0-43] button: PANEL SERVIS\n        [0-45] image: EXP Research\n      [0-46] region: Simulasi panel ESP32 CP-100\n        [0-53] region: Delapan pad preset momentary\n          [0-54] button: Pad 1, tekan dan tahan, 128.5 Hz, SINE, fold 0%, ODD, level 35%\n            [0-55] StaticText: 01\n          [0-57] button: Pad 2, tekan dan tahan, 196 Hz, TRI, fold 18%, ODD, level 35%\n            [0-58] StaticText: 02\n          [0-60] button: Pad 3, tekan dan tahan, 256 Hz, SAW, fold 32%, ODD + EVEN, level 30%\n            [0-61] StaticText: 03\n          [0-63] button: Pad 4, tekan dan tahan, 384 Hz, SINE, fold 58%, ODD + EVEN, level 40%\n            [0-64] StaticText: 04\n          [0-66] button: Pad 5, tekan dan tahan, kosong\n            [0-67] StaticText: 05\n          [0-69] button: Pad 6, tekan dan tahan, kosong\n            [0-70] StaticText: 06\n          [0-72] button: Pad 7, tekan dan tahan, kosong\n            [0-73] StaticText: 07\n          [0-75] button: Pad 8, tekan dan tahan, kosong\n            [0-76] StaticText: 08\n        [0-78] status\n          [0-79] StaticText: Lepas untuk berhenti\n      [0-286] region: Simulasi pasir Chladni dengan sepatu\n        [0-287] sectionheader\n          [0-288] heading: CP-100 / SAND\n            [0-289] StaticText: CP-100\n            [0-291] StaticText: / SAND\n          [0-293] StaticText: MUTE\n        [0-294] div\n          [0-295] image: Ilustrasi pasir membentuk garis simpul di bawah kaca bulat dengan sepatu di atasnya\n          [0-296] image: Sepatu di atas kaca bulat\n        [0-297] div\n          [0-299] StaticText: 128.5 Hz\n          [0-301] StaticText: SINE / ODD\n        [0-302] div\n          [0-304] StaticText: PELAT 60 × 60 cm\n          [0-306] StaticText: KACA Ø50 cm\n        [0-307] paragraph\n          [0-308] StaticText: Pola ilustratif · bukan prediksi resonansi pelat.",
+  "before": {
+    "state": {
+      "mode": "RUN",
+      "muted": true,
+      "armed": false,
+      "activePad": null,
+      "setup": {
+        "minHz": 20,
+        "maxHz": 2000,
+        "calibrated": false,
+        "ledColor": "alternate",
+        "ledPulse": false
+      },
+      "parameters": {
+        "frequencyHz": 128.5,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 0,
+        "harmonics": "odd"
+      },
+      "presets": [
+        {
+          "frequencyHz": 128.5,
+          "levelPct": 35,
+          "wave": "sine",
+          "foldPct": 0,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 196,
+          "levelPct": 35,
+          "wave": "triangle",
+          "foldPct": 18,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 256,
+          "levelPct": 30,
+          "wave": "sawtooth",
+          "foldPct": 32,
+          "harmonics": "both"
+        },
+        {
+          "frequencyHz": 384,
+          "levelPct": 40,
+          "wave": "sine",
+          "foldPct": 58,
+          "harmonics": "both"
+        },
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "audio": {
+      "context": "not-created",
+      "enabled": false,
+      "peak": 0,
+      "rms": 0
+    },
+    "spec": {
+      "plateCm": 60,
+      "glassDiameterCm": 50,
+      "gapMm": 30,
+      "revision": "07"
+    },
+    "display": "128.5 Hz",
+    "sand": {
+      "particles": 4400,
+      "fieldVersion": 1,
+      "moving": false,
+      "positionHash": 43.28457,
+      "frequencyHz": 128.5
+    }
+  },
+  "held": {
+    "state": {
+      "mode": "RUN",
+      "muted": false,
+      "armed": false,
+      "activePad": 0,
+      "setup": {
+        "minHz": 20,
+        "maxHz": 2000,
+        "calibrated": false,
+        "ledColor": "alternate",
+        "ledPulse": false
+      },
+      "parameters": {
+        "frequencyHz": 128.5,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 0,
+        "harmonics": "odd"
+      },
+      "presets": [
+        {
+          "frequencyHz": 128.5,
+          "levelPct": 35,
+          "wave": "sine",
+          "foldPct": 0,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 196,
+          "levelPct": 35,
+          "wave": "triangle",
+          "foldPct": 18,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 256,
+          "levelPct": 30,
+          "wave": "sawtooth",
+          "foldPct": 32,
+          "harmonics": "both"
+        },
+        {
+          "frequencyHz": 384,
+          "levelPct": 40,
+          "wave": "sine",
+          "foldPct": 58,
+          "harmonics": "both"
+        },
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "audio": {
+      "context": "running",
+      "enabled": true,
+      "peak": 0.17836914956569672,
+      "rms": 0.12615876400081363
+    },
+    "spec": {
+      "plateCm": 60,
+      "glassDiameterCm": 50,
+      "gapMm": 30,
+      "revision": "07"
+    },
+    "display": "128.5 Hz",
+    "sand": {
+      "particles": 4400,
+      "fieldVersion": 1,
+      "moving": true,
+      "positionHash": 43.29234,
+      "frequencyHz": 128.5
+    }
+  },
+  "released": {
+    "state": {
+      "mode": "RUN",
+      "muted": true,
+      "armed": false,
+      "activePad": null,
+      "setup": {
+        "minHz": 20,
+        "maxHz": 2000,
+        "calibrated": false,
+        "ledColor": "alternate",
+        "ledPulse": false
+      },
+      "parameters": {
+        "frequencyHz": 128.5,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 0,
+        "harmonics": "odd"
+      },
+      "presets": [
+        {
+          "frequencyHz": 128.5,
+          "levelPct": 35,
+          "wave": "sine",
+          "foldPct": 0,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 196,
+          "levelPct": 35,
+          "wave": "triangle",
+          "foldPct": 18,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 256,
+          "levelPct": 30,
+          "wave": "sawtooth",
+          "foldPct": 32,
+          "harmonics": "both"
+        },
+        {
+          "frequencyHz": 384,
+          "levelPct": 40,
+          "wave": "sine",
+          "foldPct": 58,
+          "harmonics": "both"
+        },
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "audio": {
+      "context": "running",
+      "enabled": true,
+      "peak": 0,
+      "rms": 0
+    },
+    "spec": {
+      "plateCm": 60,
+      "glassDiameterCm": 50,
+      "gapMm": 30,
+      "revision": "07"
+    },
+    "display": "128.5 Hz",
+    "sand": {
+      "particles": 4400,
+      "fieldVersion": 1,
+      "moving": false,
+      "positionHash": 43.29234,
+      "frequencyHz": 128.5
+    }
+  },
+  "disabled": {
+    "state": {
+      "mode": "RUN",
+      "muted": true,
+      "armed": false,
+      "activePad": null,
+      "setup": {
+        "minHz": 20,
+        "maxHz": 2000,
+        "calibrated": false,
+        "ledColor": "alternate",
+        "ledPulse": false
+      },
+      "parameters": {
+        "frequencyHz": 128.5,
+        "levelPct": 35,
+        "wave": "sine",
+        "foldPct": 0,
+        "harmonics": "odd"
+      },
+      "presets": [
+        {
+          "frequencyHz": 128.5,
+          "levelPct": 35,
+          "wave": "sine",
+          "foldPct": 0,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 196,
+          "levelPct": 35,
+          "wave": "triangle",
+          "foldPct": 18,
+          "harmonics": "odd"
+        },
+        {
+          "frequencyHz": 256,
+          "levelPct": 30,
+          "wave": "sawtooth",
+          "foldPct": 32,
+          "harmonics": "both"
+        },
+        {
+          "frequencyHz": 384,
+          "levelPct": 40,
+          "wave": "sine",
+          "foldPct": 58,
+          "harmonics": "both"
+        },
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "audio": {
+      "context": "running",
+      "enabled": false,
+      "peak": 0,
+      "rms": 0
+    },
+    "spec": {
+      "plateCm": 60,
+      "glassDiameterCm": 50,
+      "gapMm": 30,
+      "revision": "07"
+    },
+    "display": "128.5 Hz",
+    "sand": {
+      "particles": 4400,
+      "fieldVersion": 1,
+      "moving": false,
+      "positionHash": 43.29234,
+      "frequencyHz": 128.5
+    }
+  },
+  "rendered": [
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "odd",
+        "foldPct": 0
+      },
+      "rms": 0.3600786836594823,
+      "peak": 0.5093206763267517,
+      "mean": -0.000009535858754437262
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "odd",
+        "foldPct": 40
+      },
+      "rms": 0.36001696915339904,
+      "peak": 0.6982641816139221,
+      "mean": -0.000006303944164149774
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "odd",
+        "foldPct": 100
+      },
+      "rms": 0.35989944238756033,
+      "peak": 0.5753616094589233,
+      "mean": 0.000002375226501802293
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "even",
+        "foldPct": 0
+      },
+      "rms": 0.3600786826919636,
+      "peak": 0.5093206167221069,
+      "mean": -0.000009536217745335307
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "even",
+        "foldPct": 40
+      },
+      "rms": 0.3600726417506645,
+      "peak": 0.5678244233131409,
+      "mean": 0.00017967253112677401
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "even",
+        "foldPct": 100
+      },
+      "rms": 0.3600490627165759,
+      "peak": 0.6200313568115234,
+      "mean": 0.0001175391890734924
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "both",
+        "foldPct": 0
+      },
+      "rms": 0.36007868248061564,
+      "peak": 0.5093206167221069,
+      "mean": -0.000009536170660188267
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "both",
+        "foldPct": 40
+      },
+      "rms": 0.36001126635029257,
+      "peak": 0.7132859826087952,
+      "mean": 0.00024892338729356805
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "both",
+        "foldPct": 100
+      },
+      "rms": 0.35991461900118316,
+      "peak": 0.5411802530288696,
+      "mean": 0.0001396657701410125
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "odd",
+        "foldPct": 0
+      },
+      "rms": 0.3041951258919726,
+      "peak": 0.620633602142334,
+      "mean": -0.000008064203211688436
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "odd",
+        "foldPct": 40
+      },
+      "rms": 0.38523812477358294,
+      "peak": 0.6383023858070374,
+      "mean": -0.00001286761484031255
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "odd",
+        "foldPct": 100
+      },
+      "rms": 0.3669404860998807,
+      "peak": 0.6407575011253357,
+      "mean": 0.0000041469868083368056
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "even",
+        "foldPct": 0
+      },
+      "rms": 0.30419512723068787,
+      "peak": 0.6206336617469788,
+      "mean": -0.000008064089178030069
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "even",
+        "foldPct": 40
+      },
+      "rms": 0.30955657449408813,
+      "peak": 0.7166404128074646,
+      "mean": 0.00013207521958975122
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "even",
+        "foldPct": 100
+      },
+      "rms": 0.32213449957767515,
+      "peak": 0.7302853465080261,
+      "mean": -0.00014031730577642064
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "both",
+        "foldPct": 0
+      },
+      "rms": 0.30419512723068787,
+      "peak": 0.6206336617469788,
+      "mean": -0.000008064089178030069
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "both",
+        "foldPct": 40
+      },
+      "rms": 0.3812826258512145,
+      "peak": 0.6450759768486023,
+      "mean": 0.00013049087765587805
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "sawtooth",
+        "harmonics": "both",
+        "foldPct": 100
+      },
+      "rms": 0.3613970949366404,
+      "peak": 0.5587850213050842,
+      "mean": -0.00013056847832437294
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "odd",
+        "foldPct": 0
+      },
+      "rms": 0.36014870132489496,
+      "peak": 0.6202340722084045,
+      "mean": -0.000010249912059710672
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "odd",
+        "foldPct": 40
+      },
+      "rms": 0.3599732306777331,
+      "peak": 0.6290454864501953,
+      "mean": -0.000007366323971533954
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "odd",
+        "foldPct": 100
+      },
+      "rms": 0.3600108896494532,
+      "peak": 0.59880530834198,
+      "mean": 0.0000013879004048552209
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "even",
+        "foldPct": 0
+      },
+      "rms": 0.36014870210604566,
+      "peak": 0.6202342510223389,
+      "mean": -0.000010250685028343771
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "even",
+        "foldPct": 40
+      },
+      "rms": 0.3601311715980824,
+      "peak": 0.7085980176925659,
+      "mean": 0.00011534548984491267
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "even",
+        "foldPct": 100
+      },
+      "rms": 0.3600820996082404,
+      "peak": 0.7195100784301758,
+      "mean": 0.00015881075810951492
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "both",
+        "foldPct": 0
+      },
+      "rms": 0.36014870214710737,
+      "peak": 0.6202341914176941,
+      "mean": -0.000010250622008849556
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "both",
+        "foldPct": 40
+      },
+      "rms": 0.35997411546304514,
+      "peak": 0.6109926104545593,
+      "mean": 0.00012070396812244629
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 100,
+        "wave": "triangle",
+        "harmonics": "both",
+        "foldPct": 100
+      },
+      "rms": 0.35999328354340093,
+      "peak": 0.5289152264595032,
+      "mean": 0.00016810203456164648
+    },
+    {
+      "parameters": {
+        "frequencyHz": 20,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "odd",
+        "foldPct": 0
+      },
+      "rms": 0.37289824933472315,
+      "peak": 0.5273829698562622,
+      "mean": -6.317314352296913e-7
+    },
+    {
+      "parameters": {
+        "frequencyHz": 2000,
+        "levelPct": 100,
+        "wave": "sine",
+        "harmonics": "odd",
+        "foldPct": 0
+      },
+      "rms": 0.36000112905076737,
+      "peak": 0.5088563561439514,
+      "mean": -0.000010366210248321295
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 0,
+        "wave": "sine",
+        "harmonics": "odd",
+        "foldPct": 0
+      },
+      "rms": 0,
+      "peak": 0,
+      "mean": 0
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 35,
+        "wave": "sine",
+        "harmonics": "odd",
+        "foldPct": 0
+      },
+      "rms": 0.12602753297079677,
+      "peak": 0.17826223373413086,
+      "mean": -0.000003337515305853837
+    },
+    {
+      "parameters": {
+        "frequencyHz": 256,
+        "levelPct": 50,
+        "wave": "sine",
+        "harmonics": "odd",
+        "foldPct": 0
+      },
+      "rms": 0.18003934182974116,
+      "peak": 0.25466033816337585,
+      "mean": -0.000004767929377218631
+    }
+  ]
+}

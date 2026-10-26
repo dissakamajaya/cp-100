@@ -49,3 +49,11 @@ Diskusi ChatGPT tambahan masih memuat opsi MIDI keyboard 25-key/plate 100 cm dan
 ## Batas bukti
 
 `evidence/historical/` merupakan salinan bukti terdahulu, bukan pengujian live tanggal 26 Oktober. Detail capture dan hash ada di `docs/SOURCE-MANIFEST.json`. Perubahan portability pada builder dan manifest foto dijelaskan di `docs/SOURCES.md`. Tidak ada credential yang diperlukan untuk menjalankan simulator lokal atau tes.
+
+## Pembaruan audio web — 26 Oktober 2026
+
+Permintaan pengguna: tingkat audio pada situs terlalu rendah. Attenuasi browser tetap `0.12` di `AudioPreview.update()` dihapus, sehingga amplitudo pada LEVEL yang sama naik 8,33× (+18,42 dB). Preset, firmware, normalisasi DSP, ramp dan mute tetap mengikuti perilaku sebelumnya.
+
+Sites versi **7** berhasil dipublikasikan, commit source `cda11c0d66357d6ed61acd46215fcf53e7e184ef`, deployment `appgdep_6adf14cff1e08191bfbd960a801ad2fb`. Stagehand memverifikasi https://houseofexp.com/research/cp-100/ memakai hash DSP yang sama dengan source lokal, audio pad aktif (RMS 0,12616 pada LEVEL 35%), lepas pad = 0, serta 32 render Web Audio tanpa clipping (peak maksimum 0,73029). Tes simulator/router 29/29 dan manifest 80 aset lulus. Bukti, command dan batas verifikasi: [evidence/audio-boost-2026-10-26/README.md](evidence/audio-boost-2026-10-26/README.md).
+
+Publikasi ini hanya mengubah audio web. Koreksi gambar/PDF Rev08 di atas tetap tertunda; tidak ada klaim verifikasi hardware.

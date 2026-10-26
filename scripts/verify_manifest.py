@@ -8,5 +8,5 @@ for item in data['files']:
     if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != item['packaged_sha256']:
         failures.append(item['destination'])
 if failures:
-    raise SystemExit('Files differ from initial handoff snapshot: ' + ', '.join(failures))
-print(f"PASS: {len(data['files'])} source assets match the initial handoff snapshot")
+    raise SystemExit('Files differ from packaged source manifest: ' + ', '.join(failures))
+print(f"PASS: {len(data['files'])} source assets match the packaged source manifest")

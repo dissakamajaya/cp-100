@@ -48,7 +48,8 @@
       "source": "work/sites/chladni-08/dist/dsp.js",
       "destination": "simulator/dist/dsp.js",
       "source_sha256": "f1ebfc31832658720e3c8b84967c3472b69875dc36a2763cf03e0f78d92baf11",
-      "packaged_sha256": "f1ebfc31832658720e3c8b84967c3472b69875dc36a2763cf03e0f78d92baf11"
+      "packaged_sha256": "1f0b96b27f98ba88b7a724fe984c2a571604344ee5ba90178afff3856d3873f3",
+      "revision_note": "2026-10-26: removed browser-only 0.12 attenuation (+18.42 dB); source_sha256 retains original snapshot hash."
     },
     {
       "source": "work/sites/chladni-08/dist/CP-100-Guide.pdf",
