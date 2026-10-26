@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#edede8">
+<title>CP-100 — Panel ESP32</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%232e302d'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23d5a262' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css"><script type="module" src="app.js"></script>
+</head>
+<body>
+<main class="simulator-layout">
+<div class="page-brand"><h1>CP-100</h1><button id="audio-toggle" class="audio-button" aria-pressed="false" aria-label="Nyalakan audio" title="Klik untuk menyalakan suara"><svg class="audio-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3Z"/><path class="audio-waves" d="M16 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span id="audio-label">NYALAKAN AUDIO</span><i class="led" aria-hidden="true"></i></button><button id="maintenance-toggle" aria-expanded="false" aria-controls="service-panel">PANEL SERVIS</button><img src="exp-research.svg" alt="EXP Research" width="100" height="44"></div><section class="device" aria-label="Simulasi panel ESP32 CP-100">
+<i class="screw tl" aria-hidden="true"></i><i class="screw tr" aria-hidden="true"></i><i class="screw bl" aria-hidden="true"></i><i class="screw br" aria-hidden="true"></i>
+
+
+<section class="pad-grid" id="pad-grid" aria-label="Delapan pad preset momentary"></section>
+<p id="visitor-status" class="sr-only" role="status" aria-live="polite">Lepas untuk berhenti</p>
+<div id="service-panel" hidden>
+<div class="service-heading">SETUP / MAINTENANCE <span>DI DALAM ENCLOSURE</span></div>
+<section class="display" aria-label="Display dot matrix MAX7219 32 kali 8">
+<canvas id="matrix" width="768" height="192" role="img" aria-label="128.5 Hz"></canvas><span class="display-unit">Hz</span>
+</section>
+<div class="display-status"><span>ESP32-S3 <span class="muted-text">/ MAX7219</span></span><span id="output-status">MUTE</span></div>
+<section class="knob-row" aria-label="Knob pengaturan">
+<div class="control"><div class="dial" role="slider" tabindex="0" data-knob="frequencyHz" aria-label="Frekuensi" aria-valuemin="20" aria-valuemax="2000" aria-valuenow="128.5" title="Drag atau scroll. Klik untuk mengganti langkah 1 / 0.1 Hz."><span class="dial-face"><i></i></span></div><label>FREQ</label><button class="setting" id="precision-toggle" title="Ganti langkah frekuensi">1 Hz</button></div>
+<div class="control"><div class="dial" role="slider" tabindex="0" data-knob="levelPct" aria-label="Level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35" title="Drag atau scroll untuk mengatur level."><span class="dial-face"><i></i></span></div><label>LEVEL</label><output id="level-value" class="setting">35%</output></div>
+<div class="control"><div class="dial" role="slider" tabindex="0" data-knob="foldPct" aria-label="Wavefolder" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" title="Drag atau scroll untuk mengatur jumlah folding."><span class="dial-face"><i></i></span></div><label>FOLD</label><output id="fold-value" class="setting">0%</output></div>
+</section>
+<section class="selector-row" aria-label="Switch tiga posisi">
+<div class="control selector-control"><label>WAVE</label><div class="choice-switch" role="group" aria-label="Wave selector"><button data-choice="wave" data-value="sine" aria-pressed="true">SINE</button><button data-choice="wave" data-value="sawtooth" aria-pressed="false">SAW</button><button data-choice="wave" data-value="triangle" aria-pressed="false">TRIANGLE</button></div></div>
+<div class="control selector-control"><label>HARMONICS</label><div class="choice-switch" role="group" aria-label="Harmonics selector"><button data-choice="harmonics" data-value="odd" aria-pressed="true">ODD</button><button data-choice="harmonics" data-value="even" aria-pressed="false">EVEN</button><button data-choice="harmonics" data-value="both" aria-pressed="false">ODD + EVEN</button></div></div>
+</section>
+<section class="transport" aria-label="Tombol kontrol">
+<div class="mode-control" role="group" aria-label="Mode panel"><button id="run-mode" data-mode="RUN" aria-pressed="false"><span class="mode-name"><i aria-hidden="true"></i>RUN</span><span class="mode-detail">MAIN PRESET</span></button><button id="service-mode" data-mode="SERVICE" aria-pressed="true"><span class="mode-name"><i aria-hidden="true"></i>SERVICE</span><span class="mode-detail">EDIT &amp; SAVE</span></button></div>
+<div class="actions"><button id="save-action" class="key save" aria-pressed="false"><i class="led" aria-hidden="true"></i>SAVE</button><button id="mute-action" class="key" aria-pressed="true"><i class="led" aria-hidden="true"></i>TEST / MUTE</button></div>
+</section>
+<form id="setup-form" class="setup-form">
+<div class="setup-title">BATAS SWEEP <span id="calibration-status">BELUM DIKALIBRASI</span></div>
+<div class="range-inputs"><label>MIN / Hz<input id="min-frequency" type="number" min="20" max="2000" step="0.1" value="20" required></label><label>MAX / Hz<input id="max-frequency" type="number" min="20" max="2000" step="0.1" value="2000" required></label></div>
+<label class="check-setting"><input id="calibrated" type="checkbox">Batas sudah diuji pada pelat</label>
+<div class="led-settings"><label>WARNA AKTIF<select id="led-color"><option value="alternate">Pink / Tosca</option><option value="pink">Pink</option><option value="tosca">Tosca</option></select></label><label class="check-setting"><input id="led-pulse" type="checkbox">Pulsa LED mengikuti frekuensi (0,5-2 Hz)</label></div>
+<button type="submit" class="key">SIMPAN SETUP</button><span id="setup-feedback" role="status"></span>
+</form>
+<div class="bottom-line"><span id="message" role="status" aria-live="polite">DRAG / SCROLL UNTUK MEMUTAR</span><span class="sim-label">SIMULATOR</span></div>
+</div>
+</section>
+<section class="sand-panel" aria-label="Simulasi pasir Chladni dengan sepatu">
+<header><h2>CP-100 <span>/ SAND</span></h2><span id="sand-status">MUTE</span></header>
+<div class="sand-scene"><canvas id="sand-canvas" width="900" height="900" role="img" aria-label="Ilustrasi pasir membentuk garis simpul di bawah kaca bulat dengan sepatu di atasnya"></canvas><img class="shoe" src="shoe.svg" alt="Sepatu di atas kaca bulat" draggable="false"></div>
+<div class="sand-readout"><span id="sand-frequency">128.5 Hz</span><span id="sand-wave">SINE / ODD</span></div>
+<div class="sand-dimensions"><span>PELAT 60 × 60 cm</span><span>KACA Ø50 cm</span></div>
+<p class="sand-note">Pola ilustratif · bukan prediksi resonansi pelat.</p>
+</section>
+</main>
+</body></html>

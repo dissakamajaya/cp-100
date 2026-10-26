@@ -1,0 +1,486 @@
+{
+  "source_folder": "/Users/0xtx/Documents/Codex/2026-10-21/maaf-baru-bangun-untuk-audio-source",
+  "captured_date": "2026-10-26",
+  "files": [
+    {
+      "source": "work/sites/chladni-08/README.md",
+      "destination": "simulator/README.md",
+      "source_sha256": "d8f483a6b879c6a0bf4a8e40fc5a6ff712dcfa692ad45f53671b64e44f41054a",
+      "packaged_sha256": "d8f483a6b879c6a0bf4a8e40fc5a6ff712dcfa692ad45f53671b64e44f41054a"
+    },
+    {
+      "source": "work/sites/chladni-08/package.json",
+      "destination": "simulator/package.json",
+      "source_sha256": "d3c184dd2416ea091322c76e88284ef942277f8210ae436a548449099d294476",
+      "packaged_sha256": "d3c184dd2416ea091322c76e88284ef942277f8210ae436a548449099d294476"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/shoe.svg",
+      "destination": "simulator/dist/shoe.svg",
+      "source_sha256": "e534ddd0e9866d8c18f11bc59e311e12be5f4bccf9b9423d057406cd2f249c01",
+      "packaged_sha256": "e534ddd0e9866d8c18f11bc59e311e12be5f4bccf9b9423d057406cd2f249c01"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/exp-research.svg",
+      "destination": "simulator/dist/exp-research.svg",
+      "source_sha256": "937bda67456bdd974372cb29a34b626ae8b90be9922478d4d5d9695a120acdbf",
+      "packaged_sha256": "937bda67456bdd974372cb29a34b626ae8b90be9922478d4d5d9695a120acdbf"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/Chladni-08-Guide.pdf",
+      "destination": "simulator/dist/Chladni-08-Guide.pdf",
+      "source_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78",
+      "packaged_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/index.html",
+      "destination": "simulator/dist/index.html",
+      "source_sha256": "0ada9803d23b3072c2c3fce33b60c54862bcf7d4048db3cba808a2c22097bfe8",
+      "packaged_sha256": "0ada9803d23b3072c2c3fce33b60c54862bcf7d4048db3cba808a2c22097bfe8"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/styles.css",
+      "destination": "simulator/dist/styles.css",
+      "source_sha256": "85558402daad068d3b3cfce2ebb6fe8134b559cc591f39309643dcfa09dd88a7",
+      "packaged_sha256": "85558402daad068d3b3cfce2ebb6fe8134b559cc591f39309643dcfa09dd88a7"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/dsp.js",
+      "destination": "simulator/dist/dsp.js",
+      "source_sha256": "f1ebfc31832658720e3c8b84967c3472b69875dc36a2763cf03e0f78d92baf11",
+      "packaged_sha256": "f1ebfc31832658720e3c8b84967c3472b69875dc36a2763cf03e0f78d92baf11"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/CP-100-Guide.pdf",
+      "destination": "simulator/dist/CP-100-Guide.pdf",
+      "source_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78",
+      "packaged_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/sand.js",
+      "destination": "simulator/dist/sand.js",
+      "source_sha256": "20d0dec0efe1d8a0d8dba665f2f924d43410702d88a3d48bcfd8006292ca1fff",
+      "packaged_sha256": "20d0dec0efe1d8a0d8dba665f2f924d43410702d88a3d48bcfd8006292ca1fff"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/CP-100-Blueprint-Build.zip",
+      "destination": "simulator/dist/CP-100-Blueprint-Build.zip",
+      "source_sha256": "b83a137db201d4c7ea8c7a4eac78e1c5771823f58d4d1ec4f0d04cefe5419d15",
+      "packaged_sha256": "b83a137db201d4c7ea8c7a4eac78e1c5771823f58d4d1ec4f0d04cefe5419d15"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/model.js",
+      "destination": "simulator/dist/model.js",
+      "source_sha256": "216f5f1dc215def2bf9257f7faa570887843c24586a75db29c6d0e5789e3827f",
+      "packaged_sha256": "216f5f1dc215def2bf9257f7faa570887843c24586a75db29c6d0e5789e3827f"
+    },
+    {
+      "source": "work/sites/chladni-08/dist/app.js",
+      "destination": "simulator/dist/app.js",
+      "source_sha256": "69d8855963cf70a70c5ce9e36444590ea830a2db44a02956635ce4e7e8e100e7",
+      "packaged_sha256": "69d8855963cf70a70c5ce9e36444590ea830a2db44a02956635ce4e7e8e100e7"
+    },
+    {
+      "source": "work/sites/chladni-08/tests/simulator.test.js",
+      "destination": "simulator/tests/simulator.test.js",
+      "source_sha256": "838377f395c498c9618c8820d1fc0fcab8c4bde1d99fca50ca162b1d02d79780",
+      "packaged_sha256": "838377f395c498c9618c8820d1fc0fcab8c4bde1d99fca50ca162b1d02d79780"
+    },
+    {
+      "source": "work/sites/chladni-08/tests/sand.test.js",
+      "destination": "simulator/tests/sand.test.js",
+      "source_sha256": "9d66c96a87c0de01e64b6a75aea529bd9cad390ce36a48c78b64997ed45fe0be",
+      "packaged_sha256": "9d66c96a87c0de01e64b6a75aea529bd9cad390ce36a48c78b64997ed45fe0be"
+    },
+    {
+      "source": "work/sites/chladni-08/tests/audio-continuity.test.js",
+      "destination": "simulator/tests/audio-continuity.test.js",
+      "source_sha256": "09ed44f92854f5859e1b5e29edc23157810aa3c4f690ce22465e47420e59751a",
+      "packaged_sha256": "09ed44f92854f5859e1b5e29edc23157810aa3c4f690ce22465e47420e59751a"
+    },
+    {
+      "source": "outputs/cp100-domain-router/worker.mjs",
+      "destination": "domain-router/worker.mjs",
+      "source_sha256": "bf5c93b671279155f91081a361d836462a7aad8bee409ececf06a1df91906987",
+      "packaged_sha256": "bf5c93b671279155f91081a361d836462a7aad8bee409ececf06a1df91906987"
+    },
+    {
+      "source": "outputs/cp100-domain-router/worker.test.mjs",
+      "destination": "domain-router/worker.test.mjs",
+      "source_sha256": "e0ec180927ab53b0960160c4dba25314335e2b012116f5896763c116514a1274",
+      "packaged_sha256": "e0ec180927ab53b0960160c4dba25314335e2b012116f5896763c116514a1274"
+    },
+    {
+      "source": "outputs/cp100-domain-router/wrangler.json",
+      "destination": "domain-router/wrangler.json",
+      "source_sha256": "ca9eb1c7856c2720f7d36f056550dcc4a7298ceb38db08820ec20a53ea20baff",
+      "packaged_sha256": "ca9eb1c7856c2720f7d36f056550dcc4a7298ceb38db08820ec20a53ea20baff"
+    },
+    {
+      "source": "outputs/cp100-domain-router/README.md",
+      "destination": "domain-router/README.md",
+      "source_sha256": "cc35138dcc84fb6caabf399fada76be850a18236a756aaa100b6340c8013b5c9",
+      "packaged_sha256": "cc35138dcc84fb6caabf399fada76be850a18236a756aaa100b6340c8013b5c9"
+    },
+    {
+      "source": "outputs/CP-100-Rev07-Desain-dan-Wiring.pdf",
+      "destination": "outputs/CP-100-Rev07-Desain-dan-Wiring.pdf",
+      "source_sha256": "c247056fdf7313bdd9945e1232a69dab636a54c33aa781f2da8f86bb278faa96",
+      "packaged_sha256": "c247056fdf7313bdd9945e1232a69dab636a54c33aa781f2da8f86bb278faa96"
+    },
+    {
+      "source": "outputs/CP-100-Rev07-Pinout.csv",
+      "destination": "outputs/CP-100-Rev07-Pinout.csv",
+      "source_sha256": "c44dd4563797c455b9fa2a59ff6d95e231c1ffa8ed032ca3b0edaa33dacccc1c",
+      "packaged_sha256": "c44dd4563797c455b9fa2a59ff6d95e231c1ffa8ed032ca3b0edaa33dacccc1c"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint-dan-Wiring.pdf",
+      "destination": "outputs/CP-100-Rev08-Blueprint-dan-Wiring.pdf",
+      "source_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78",
+      "packaged_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint-Build.zip",
+      "destination": "outputs/CP-100-Rev08-Blueprint-Build.zip",
+      "source_sha256": "b83a137db201d4c7ea8c7a4eac78e1c5771823f58d4d1ec4f0d04cefe5419d15",
+      "packaged_sha256": "b83a137db201d4c7ea8c7a4eac78e1c5771823f58d4d1ec4f0d04cefe5419d15"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Pinout.csv",
+      "destination": "outputs/CP-100-Rev08-Pinout.csv",
+      "source_sha256": "4b345b6edeaf3fbc9e2b79062146cec2c23a87bab43c9db63ca8f8c3e2babb93",
+      "packaged_sha256": "4b345b6edeaf3fbc9e2b79062146cec2c23a87bab43c9db63ca8f8c3e2babb93"
+    },
+    {
+      "source": "outputs/Chladni-08-Visual-Rev03.png",
+      "destination": "outputs/Chladni-08-Visual-Rev03.png",
+      "source_sha256": "89f82189091a250d78528285660dedc7809cfc4535e4dc33a35ba725ed88c8d2",
+      "packaged_sha256": "89f82189091a250d78528285660dedc7809cfc4535e4dc33a35ba725ed88c8d2"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/CP-100-Rev08-Pinout.csv",
+      "destination": "outputs/CP-100-Rev08-Blueprint/CP-100-Rev08-Pinout.csv",
+      "source_sha256": "4b345b6edeaf3fbc9e2b79062146cec2c23a87bab43c9db63ca8f8c3e2babb93",
+      "packaged_sha256": "4b345b6edeaf3fbc9e2b79062146cec2c23a87bab43c9db63ca8f8c3e2babb93"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/CP-100-Rev08-Blueprint-dan-Wiring.pdf",
+      "destination": "outputs/CP-100-Rev08-Blueprint/CP-100-Rev08-Blueprint-dan-Wiring.pdf",
+      "source_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78",
+      "packaged_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/visitor-cutout-1to1.svg",
+      "destination": "outputs/CP-100-Rev08-Blueprint/visitor-cutout-1to1.svg",
+      "source_sha256": "4634ca97c9d7afc0c8ef35ccce252fc02bd3df1eb2f1039471baa87f4666276e",
+      "packaged_sha256": "4634ca97c9d7afc0c8ef35ccce252fc02bd3df1eb2f1039471baa87f4666276e"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/service-cutout-1to1.svg",
+      "destination": "outputs/CP-100-Rev08-Blueprint/service-cutout-1to1.svg",
+      "source_sha256": "dda5d874745b2a7aa849533dc61c57f88daf3e5bcff7842e19cf26d679cd5a9f",
+      "packaged_sha256": "dda5d874745b2a7aa849533dc61c57f88daf3e5bcff7842e19cf26d679cd5a9f"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/CP-100-Panel-Templates-1to1-A3.pdf",
+      "destination": "outputs/CP-100-Rev08-Blueprint/CP-100-Panel-Templates-1to1-A3.pdf",
+      "source_sha256": "3ba3199070f05bcd748c286d2377b608a21b31511e0664c5aaff426755cf612d",
+      "packaged_sha256": "3ba3199070f05bcd748c286d2377b608a21b31511e0664c5aaff426755cf612d"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/README.txt",
+      "destination": "outputs/CP-100-Rev08-Blueprint/README.txt",
+      "source_sha256": "bc926a4b8a7b3ae474566a408479c0827a85127ad227117b28d19d7f37e49c0c",
+      "packaged_sha256": "bc926a4b8a7b3ae474566a408479c0827a85127ad227117b28d19d7f37e49c0c"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/visitor-cutout-1to1.dxf",
+      "destination": "outputs/CP-100-Rev08-Blueprint/visitor-cutout-1to1.dxf",
+      "source_sha256": "1cff019cdbd6cbc86d44bd0e6fbb05f7465b719dabc4adbe7ab8ee2bd1634a20",
+      "packaged_sha256": "1cff019cdbd6cbc86d44bd0e6fbb05f7465b719dabc4adbe7ab8ee2bd1634a20"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/service-cutout-1to1.dxf",
+      "destination": "outputs/CP-100-Rev08-Blueprint/service-cutout-1to1.dxf",
+      "source_sha256": "6fd4bd76d39987ae6ec537280be838cda785d0b005c4be2cda308936adba1488",
+      "packaged_sha256": "6fd4bd76d39987ae6ec537280be838cda785d0b005c4be2cda308936adba1488"
+    },
+    {
+      "source": "outputs/CP-100-Rev08-Blueprint/cutout-coordinates-mm.csv",
+      "destination": "outputs/CP-100-Rev08-Blueprint/cutout-coordinates-mm.csv",
+      "source_sha256": "462bee007f714dd301e958f589565d6c5f6aec43a07e01218714cbd332cbf056",
+      "packaged_sha256": "462bee007f714dd301e958f589565d6c5f6aec43a07e01218714cbd332cbf056"
+    },
+    {
+      "source": "outputs/chladni-simulator/exp-research.svg",
+      "destination": "outputs/chladni-simulator/exp-research.svg",
+      "source_sha256": "937bda67456bdd974372cb29a34b626ae8b90be9922478d4d5d9695a120acdbf",
+      "packaged_sha256": "937bda67456bdd974372cb29a34b626ae8b90be9922478d4d5d9695a120acdbf"
+    },
+    {
+      "source": "work/build_rev8.py",
+      "destination": "work/build_rev8.py",
+      "source_sha256": "a14d55651f6b18334075b9e8936d2fbe93a08ec43e0c353ee061b0381f4894f0",
+      "packaged_sha256": "2c234db41b2053f1f0c1c9b6f13e9f3378b5b56b48947d5eb5d5e0db4f9d105e"
+    },
+    {
+      "source": "work/build_rev5_concise.py",
+      "destination": "work/build_rev5_concise.py",
+      "source_sha256": "d50f4f01a38c451e0ebe08d1ad798d7dafa8a37b951367b6c7d8d47852c0d6a1",
+      "packaged_sha256": "d50f4f01a38c451e0ebe08d1ad798d7dafa8a37b951367b6c7d8d47852c0d6a1"
+    },
+    {
+      "source": "work/rev3_data.py",
+      "destination": "work/rev3_data.py",
+      "source_sha256": "0d2e48b4b8018856053dfa50fe956339f469e88a449b8537c0edef58d7f42f93",
+      "packaged_sha256": "0d2e48b4b8018856053dfa50fe956339f469e88a449b8537c0edef58d7f42f93"
+    },
+    {
+      "source": "work/component-photos/sources.json",
+      "destination": "work/component-photos/sources.json",
+      "source_sha256": "87498de42e5c10028b07ce68dfd1e0ecfd3479494719429e1f41452f5053d6ee",
+      "packaged_sha256": "52bb7cb3dd08bd188f10aef1dc32a40cc93b2c5e4cb973347f54f71f0943df40"
+    },
+    {
+      "source": "work/component-photos/rgb.jpg",
+      "destination": "work/component-photos/rgb.jpg",
+      "source_sha256": "19d3e6e31158d153fc53219262b34b76c647917f040f8a3a8e481cdf75201de0",
+      "packaged_sha256": "19d3e6e31158d153fc53219262b34b76c647917f040f8a3a8e481cdf75201de0"
+    },
+    {
+      "source": "work/component-photos/trs.jpg",
+      "destination": "work/component-photos/trs.jpg",
+      "source_sha256": "88d12d32289692ace988ca36f9bc1e039eaf640fb491e621a1da1d0bb53841ff",
+      "packaged_sha256": "88d12d32289692ace988ca36f9bc1e039eaf640fb491e621a1da1d0bb53841ff"
+    },
+    {
+      "source": "work/component-photos/ahct.jpg",
+      "destination": "work/component-photos/ahct.jpg",
+      "source_sha256": "8f5853294e81be6b64995eab294791335fdc8722a102d1f3b97869c7f049b24f",
+      "packaged_sha256": "8f5853294e81be6b64995eab294791335fdc8722a102d1f3b97869c7f049b24f"
+    },
+    {
+      "source": "work/component-photos/resistor.jpg",
+      "destination": "work/component-photos/resistor.jpg",
+      "source_sha256": "14b07c20fc7af6eb07383dcd21e61f53979b8fcc694c1cc4e1a86bff10dd2dd2",
+      "packaged_sha256": "14b07c20fc7af6eb07383dcd21e61f53979b8fcc694c1cc4e1a86bff10dd2dd2"
+    },
+    {
+      "source": "work/component-photos/selector.jpg",
+      "destination": "work/component-photos/selector.jpg",
+      "source_sha256": "4627376bfe0724ecfcc903d7583590f5579fd343c5738cad14ec2eeb8eee06f3",
+      "packaged_sha256": "4627376bfe0724ecfcc903d7583590f5579fd343c5738cad14ec2eeb8eee06f3"
+    },
+    {
+      "source": "work/component-photos/encoder.jpg",
+      "destination": "work/component-photos/encoder.jpg",
+      "source_sha256": "407c0ef32761c8d33457b3af025bff9a3de22f425c14fdf2004d97b83b0d0748",
+      "packaged_sha256": "407c0ef32761c8d33457b3af025bff9a3de22f425c14fdf2004d97b83b0d0748"
+    },
+    {
+      "source": "work/component-photos/power.jpg",
+      "destination": "work/component-photos/power.jpg",
+      "source_sha256": "d2edd5af7e7b2329578a90b1585fb380af4a4d28d25df66c991efb7d4d07d3b1",
+      "packaged_sha256": "d2edd5af7e7b2329578a90b1585fb380af4a4d28d25df66c991efb7d4d07d3b1"
+    },
+    {
+      "source": "work/component-photos/ceramic.jpg",
+      "destination": "work/component-photos/ceramic.jpg",
+      "source_sha256": "6782807ead5e94bcbf2e4c33abcf7d822b43ecc6f4acfa171f4146cac26181cb",
+      "packaged_sha256": "6782807ead5e94bcbf2e4c33abcf7d822b43ecc6f4acfa171f4146cac26181cb"
+    },
+    {
+      "source": "work/component-photos/matrix.jpg",
+      "destination": "work/component-photos/matrix.jpg",
+      "source_sha256": "3131f7eede7d7867547c0a20aaca18122581647498c06a146bee57684184f751",
+      "packaged_sha256": "3131f7eede7d7867547c0a20aaca18122581647498c06a146bee57684184f751"
+    },
+    {
+      "source": "work/component-photos/esp32.jpg",
+      "destination": "work/component-photos/esp32.jpg",
+      "source_sha256": "d17c5b8c8144f0d0badf9273ceee839130841172eeba5c2b169a67f331e55b58",
+      "packaged_sha256": "d17c5b8c8144f0d0badf9273ceee839130841172eeba5c2b169a67f331e55b58"
+    },
+    {
+      "source": "work/component-photos/amp-01.jpg",
+      "destination": "work/component-photos/amp-01.jpg",
+      "source_sha256": "af7bca1a49ec6638cfb354b01af25a9f5a65c45fb35c78d518226ec294de2231",
+      "packaged_sha256": "af7bca1a49ec6638cfb354b01af25a9f5a65c45fb35c78d518226ec294de2231"
+    },
+    {
+      "source": "work/component-photos/mcp.jpg",
+      "destination": "work/component-photos/mcp.jpg",
+      "source_sha256": "566e4526544c6cdad829125652384088dd0dcf8368c476820fed481754d21f8f",
+      "packaged_sha256": "566e4526544c6cdad829125652384088dd0dcf8368c476820fed481754d21f8f"
+    },
+    {
+      "source": "work/component-photos/amp-02.jpg",
+      "destination": "work/component-photos/amp-02.jpg",
+      "source_sha256": "22f2db5d29847ed769078aff39cdbe7e0fe2d9ee39725e06459c1398592c5b7f",
+      "packaged_sha256": "22f2db5d29847ed769078aff39cdbe7e0fe2d9ee39725e06459c1398592c5b7f"
+    },
+    {
+      "source": "work/component-photos/amp.jpg",
+      "destination": "work/component-photos/amp.jpg",
+      "source_sha256": "286ebb4419cddbd3da72df59297dd9ad710e05a08fac8f6a1ac3d87f6b6af906",
+      "packaged_sha256": "286ebb4419cddbd3da72df59297dd9ad710e05a08fac8f6a1ac3d87f6b6af906"
+    },
+    {
+      "source": "work/component-photos/elco.jpg",
+      "destination": "work/component-photos/elco.jpg",
+      "source_sha256": "d1db998c9e794af0d75ceb72c480c61cb200102197b4ea1fdd4ee969c0afcd02",
+      "packaged_sha256": "d1db998c9e794af0d75ceb72c480c61cb200102197b4ea1fdd4ee969c0afcd02"
+    },
+    {
+      "source": "work/component-photos/dac.jpg",
+      "destination": "work/component-photos/dac.jpg",
+      "source_sha256": "575bcf95d5bd5ba77038bd85fffcee44f1b1d62b26cd768916d727dda30c67d8",
+      "packaged_sha256": "575bcf95d5bd5ba77038bd85fffcee44f1b1d62b26cd768916d727dda30c67d8"
+    },
+    {
+      "source": "work/component-photos/tactile.jpg",
+      "destination": "work/component-photos/tactile.jpg",
+      "source_sha256": "bddc58444edde7395a3c6a0689b3e1081e71fd9de86bdd5eb3d46db246372efb",
+      "packaged_sha256": "bddc58444edde7395a3c6a0689b3e1081e71fd9de86bdd5eb3d46db246372efb"
+    },
+    {
+      "source": "work/component-photos/toggle.jpg",
+      "destination": "work/component-photos/toggle.jpg",
+      "source_sha256": "7f3e6fb236eb46d230e030374f526d7376c8cb0ca6fa87d83f48957a805a1400",
+      "packaged_sha256": "7f3e6fb236eb46d230e030374f526d7376c8cb0ca6fa87d83f48957a805a1400"
+    },
+    {
+      "source": "work/rev8/sources/bourns.pdf",
+      "destination": "work/rev8/sources/bourns.pdf",
+      "source_sha256": "ac88f657e611bc82fe79b102426fb5abcb7f40740540f0c681727e2d74784491",
+      "packaged_sha256": "ac88f657e611bc82fe79b102426fb5abcb7f40740540f0c681727e2d74784491"
+    },
+    {
+      "source": "work/rev8/sources/alps-08.png",
+      "destination": "work/rev8/sources/alps-08.png",
+      "source_sha256": "639c5819fcdf8ff6fb0ebc40e60e0655cb4cc336c82b2fb1c449b0f59000d941",
+      "packaged_sha256": "639c5819fcdf8ff6fb0ebc40e60e0655cb4cc336c82b2fb1c449b0f59000d941"
+    },
+    {
+      "source": "work/rev8/sources/alps.pdf",
+      "destination": "work/rev8/sources/alps.pdf",
+      "source_sha256": "63fe085c1c07481524d515a5a391de5422e3398638db21ebb909faade654ffc3",
+      "packaged_sha256": "63fe085c1c07481524d515a5a391de5422e3398638db21ebb909faade654ffc3"
+    },
+    {
+      "source": "work/rev8/sources/tactile-4.png",
+      "destination": "work/rev8/sources/tactile-4.png",
+      "source_sha256": "939831d07e36f529598571b5198437ae9e39697653afa4071d74d22fb1f8c548",
+      "packaged_sha256": "939831d07e36f529598571b5198437ae9e39697653afa4071d74d22fb1f8c548"
+    },
+    {
+      "source": "work/rev8/sources/os102.jpg",
+      "destination": "work/rev8/sources/os102.jpg",
+      "source_sha256": "5bfc5e7a04ad8f56795696d9c47a1e05fe1b6449ff3a102985fe8662ed7d63a6",
+      "packaged_sha256": "5bfc5e7a04ad8f56795696d9c47a1e05fe1b6449ff3a102985fe8662ed7d63a6"
+    },
+    {
+      "source": "work/rev8/sources/pec11r.jpg",
+      "destination": "work/rev8/sources/pec11r.jpg",
+      "source_sha256": "0425551c355fc50a06ecfb7ffe9109f16f6973777fe9ff51aec0f64ac3fdc8b5",
+      "packaged_sha256": "0425551c355fc50a06ecfb7ffe9109f16f6973777fe9ff51aec0f64ac3fdc8b5"
+    },
+    {
+      "source": "work/rev8/sources/bourns-1.png",
+      "destination": "work/rev8/sources/bourns-1.png",
+      "source_sha256": "66a37d668d889a56dadebb4e88ca73e000615a8cb5eab4891cd7d4c47ba3d070",
+      "packaged_sha256": "66a37d668d889a56dadebb4e88ca73e000615a8cb5eab4891cd7d4c47ba3d070"
+    },
+    {
+      "source": "work/rev8/sources/tactile.pdf",
+      "destination": "work/rev8/sources/tactile.pdf",
+      "source_sha256": "be9cf69e5f43fb7689448a2097c19858e5643c0e2e49cd77d018881543e27a1f",
+      "packaged_sha256": "be9cf69e5f43fb7689448a2097c19858e5643c0e2e49cd77d018881543e27a1f"
+    },
+    {
+      "source": "work/rev8/reference-dimensions.png",
+      "destination": "work/rev8/reference-dimensions.png",
+      "source_sha256": "e32a2e57e550a60469113091e33840080b808c06ac0b1ef532b3b7121f230d5a",
+      "packaged_sha256": "e32a2e57e550a60469113091e33840080b808c06ac0b1ef532b3b7121f230d5a"
+    },
+    {
+      "source": "work/rev8/reference-render.png",
+      "destination": "work/rev8/reference-render.png",
+      "source_sha256": "a1b4280cad9cb14e4a15c121e603cd7b80ccd0efb92d250789e5ebb588037fb8",
+      "packaged_sha256": "a1b4280cad9cb14e4a15c121e603cd7b80ccd0efb92d250789e5ebb588037fb8"
+    },
+    {
+      "source": "work/rev8/photo-sources.json",
+      "destination": "work/rev8/photo-sources.json",
+      "source_sha256": "589551f0f1f766f9ffbdf36c5da1695d712d5a4b98779cd68bd589eaf3f2e6a3",
+      "packaged_sha256": "b2a1cc6a1056c041f9f8a6c6c50401a6b39f4d647c49383e8d258a7e2897b5f1"
+    },
+    {
+      "source": "work/rev8/final-contact-0.png",
+      "destination": "work/rev8/final-contact-0.png",
+      "source_sha256": "16dffc2362af260863e1c9d197150d1c9d2047da5821a23d312cb35a2d0844e3",
+      "packaged_sha256": "16dffc2362af260863e1c9d197150d1c9d2047da5821a23d312cb35a2d0844e3"
+    },
+    {
+      "source": "work/rev8/final-contact-1.png",
+      "destination": "work/rev8/final-contact-1.png",
+      "source_sha256": "a6e3f474764c96955b13cbd7bffa66db92da6163f780b6e41764d4ed30dcecd0",
+      "packaged_sha256": "a6e3f474764c96955b13cbd7bffa66db92da6163f780b6e41764d4ed30dcecd0"
+    },
+    {
+      "source": "work/CP-100-Live-QA.json",
+      "destination": "evidence/historical/CP-100-Live-QA.json",
+      "source_sha256": "41fa222862dca2c1afc8f11c1b044008683f373a619dfe35aa89d5804d2bd245",
+      "packaged_sha256": "41fa222862dca2c1afc8f11c1b044008683f373a619dfe35aa89d5804d2bd245"
+    },
+    {
+      "source": "work/rev7-review/live-qa.json",
+      "destination": "evidence/historical/rev7-review/live-qa.json",
+      "source_sha256": "b846299c01b1a8af4440f75798ccb6fb25c8a4a92129e3a75f56de07a1a25ec2",
+      "packaged_sha256": "b846299c01b1a8af4440f75798ccb6fb25c8a4a92129e3a75f56de07a1a25ec2"
+    },
+    {
+      "source": "work/rev7-review/desktop.png",
+      "destination": "evidence/historical/rev7-review/desktop.png",
+      "source_sha256": "447fcc84e6a0af4263f38d4d11eb4826754ba41eb9a87a5b6018e4c9660b2cd4",
+      "packaged_sha256": "447fcc84e6a0af4263f38d4d11eb4826754ba41eb9a87a5b6018e4c9660b2cd4"
+    },
+    {
+      "source": "work/rev7-review/mobile.png",
+      "destination": "evidence/historical/rev7-review/mobile.png",
+      "source_sha256": "645a2b3320eb313e648d11b1c6eebb25595851609c592573821ffbf6ee24720a",
+      "packaged_sha256": "645a2b3320eb313e648d11b1c6eebb25595851609c592573821ffbf6ee24720a"
+    },
+    {
+      "source": "work/cp100-route/evidence/momentary-standby.png",
+      "destination": "evidence/historical/domain-route/momentary-standby.png",
+      "source_sha256": "069f6cb051557ce5d8afbde735d67a9172e5dd2158b268f06421d3280155f25f",
+      "packaged_sha256": "069f6cb051557ce5d8afbde735d67a9172e5dd2158b268f06421d3280155f25f"
+    },
+    {
+      "source": "work/cp100-route/evidence/momentary-held.png",
+      "destination": "evidence/historical/domain-route/momentary-held.png",
+      "source_sha256": "af4d7285b5f9597ba6b4bac8cd8a76f398422b06fb78636d425ad440b88b80ae",
+      "packaged_sha256": "af4d7285b5f9597ba6b4bac8cd8a76f398422b06fb78636d425ad440b88b80ae"
+    },
+    {
+      "source": "work/cp100-route/evidence/momentary-maintenance.png",
+      "destination": "evidence/historical/domain-route/momentary-maintenance.png",
+      "source_sha256": "f4356cd433f8174d8306bdb6d63af9366acc0035def8c59cc1a52a3c7ba76fcb",
+      "packaged_sha256": "f4356cd433f8174d8306bdb6d63af9366acc0035def8c59cc1a52a3c7ba76fcb"
+    },
+    {
+      "source": "work/cp100-route/evidence/momentary-mobile.png",
+      "destination": "evidence/historical/domain-route/momentary-mobile.png",
+      "source_sha256": "109da4c032b90a1274bed7db0130020970ea7ef0f4f5b8500eb34b8f9b339bed",
+      "packaged_sha256": "109da4c032b90a1274bed7db0130020970ea7ef0f4f5b8500eb34b8f9b339bed"
+    },
+    {
+      "source": "work/cp100-route/evidence/domain-smoke.png",
+      "destination": "evidence/historical/domain-route/domain-smoke.png",
+      "source_sha256": "ed0d484e0a5544abdac4d0dcfe5fa49610a70fc46309bec873019da82443c9a6",
+      "packaged_sha256": "ed0d484e0a5544abdac4d0dcfe5fa49610a70fc46309bec873019da82443c9a6"
+    }
+  ]
+}

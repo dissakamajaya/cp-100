@@ -1,0 +1,22 @@
+{
+  "pass": true,
+  "url": "https://houseofexp.com/research/cp-100/",
+  "dimensions": {
+    "spec": {
+      "plateCm": 60,
+      "glassDiameterCm": 50,
+      "gapMm": 30,
+      "revision": "07"
+    },
+    "label": "PELAT 60 × 60 cmKACA Ø50 cm",
+    "shoe": 220.523,
+    "scene": 552,
+    "pads": 8,
+    "hidden": true
+  },
+  "artifacts": [
+    "work/rev7-review/desktop.png",
+    "work/rev7-review/mobile.png"
+  ],
+  "command": "stagehand-run work/rev7-review/dimension-qa.mjs"
+}

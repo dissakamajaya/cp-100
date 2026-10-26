@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-26",
+  "timezone": "Asia/Jakarta",
+  "node_tests": {
+    "total": 29,
+    "passed": 29,
+    "failed": 0,
+    "simulator": 23,
+    "domain_router": 6,
+    "command": "node --test simulator/tests/*.test.js domain-router/worker.test.mjs"
+  },
+  "source_manifest": {
+    "assets": 80,
+    "passed": true
+  },
+  "credential_pattern_scan": {
+    "passed": true,
+    "scope": "UTF-8 text files in selected handoff package; heuristic scan only"
+  },
+  "photo_paths": {
+    "manifests": 2,
+    "entries_each": 16,
+    "missing": 0
+  },
+  "pdf_rebuild": {
+    "passed": true,
+    "environment": "macOS, Python 3.12.14",
+    "pages": 14,
+    "cut_features": 25,
+    "page_text_matches_original": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "snapshot_sha256": "b3e7737a3d976300a234f36f12e0768f8040ac7b33e8340b50d6c048138e7f78",
+    "rebuilt_sha256": "fbd7c05aadffc9d7da9443b6dae39d118bcb02529f0468eaf261ddb1d1643cf0",
+    "command": "python work/build_rev8.py (in an isolated copy of this package)",
+    "note": "Rebuild verified execution and page text, not new visual approval. Packaged PDF remains the original incomplete visual revision."
+  },
+  "live_qa_performed": false,
+  "hardware_qa_performed": false
+}

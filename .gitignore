@@ -1,0 +1,13 @@
+# Credentials and machine-local state
+.env
+.env.*
+!.env.example
+.openai/
+.wrangler/
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+# New scratch files; selected legacy builder inputs under work/ are tracked
+scratch/

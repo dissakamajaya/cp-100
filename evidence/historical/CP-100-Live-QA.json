@@ -1,0 +1,168 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "name": "Boot exposes pads with service panel hidden and output muted",
+      "pass": true
+    },
+    {
+      "name": "Audio activation alone keeps output muted",
+      "pass": true
+    },
+    {
+      "name": "Hold starts audio and makes pad pink",
+      "pass": true,
+      "data": {
+        "audio": {
+          "context": "running",
+          "enabled": true,
+          "peak": 0,
+          "rms": 0
+        },
+        "state": {
+          "mode": "RUN",
+          "muted": false,
+          "armed": false,
+          "activePad": 0,
+          "setup": {
+            "minHz": 20,
+            "maxHz": 2000,
+            "calibrated": false,
+            "ledColor": "alternate",
+            "ledPulse": false
+          },
+          "parameters": {
+            "frequencyHz": 128.5,
+            "levelPct": 35,
+            "wave": "sine",
+            "foldPct": 0,
+            "harmonics": "odd"
+          },
+          "presets": [
+            {
+              "frequencyHz": 128.5,
+              "levelPct": 35,
+              "wave": "sine",
+              "foldPct": 0,
+              "harmonics": "odd"
+            },
+            {
+              "frequencyHz": 196,
+              "levelPct": 35,
+              "wave": "triangle",
+              "foldPct": 18,
+              "harmonics": "odd"
+            },
+            {
+              "frequencyHz": 256,
+              "levelPct": 30,
+              "wave": "sawtooth",
+              "foldPct": 32,
+              "harmonics": "both"
+            },
+            {
+              "frequencyHz": 384,
+              "levelPct": 40,
+              "wave": "sine",
+              "foldPct": 58,
+              "harmonics": "both"
+            },
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "color": "pink"
+      }
+    },
+    {
+      "name": "Held pad produces measurable audio",
+      "pass": true,
+      "data": {
+        "audio": {
+          "context": "running",
+          "enabled": true,
+          "peak": 0.020375175401568413,
+          "rms": 0.01293690737223854
+        }
+      }
+    },
+    {
+      "name": "Second pad does not steal held output",
+      "pass": true
+    },
+    {
+      "name": "Release stops output and restores white",
+      "pass": true
+    },
+    {
+      "name": "Second pad is tosca",
+      "pass": true
+    },
+    {
+      "name": "Lost window focus releases pad",
+      "pass": true
+    },
+    {
+      "name": "CP-100 uses three knobs and two three-position switches",
+      "pass": true
+    },
+    {
+      "name": "Maintenance opens hidden service module",
+      "pass": true
+    },
+    {
+      "name": "Measured limits apply and excluded preset is flagged",
+      "pass": true
+    },
+    {
+      "name": "Out-of-range preset stays silent",
+      "pass": true
+    },
+    {
+      "name": "Allowed pad uses frequency-mapped LED pulse",
+      "pass": true
+    },
+    {
+      "name": "Setup persists; reboot hides service and mutes",
+      "pass": true
+    },
+    {
+      "name": "RUN hides every service control and shows eight pads only",
+      "pass": true
+    },
+    {
+      "name": "Mobile public view fits",
+      "pass": true
+    },
+    {
+      "name": "Small mobile maintenance fits",
+      "pass": true
+    },
+    {
+      "name": "Switches select wave and harmonics",
+      "pass": true
+    },
+    {
+      "name": "Native pointer down and up gate output",
+      "pass": true
+    },
+    {
+      "name": "Hosted PDF matches reviewed CP-100 document",
+      "pass": true,
+      "data": {
+        "ok": true,
+        "hash": "51f075a9b1bd1452f1299f2c79fb7cb7448c2a4fabdad6b1bef38c2d1c8cd63c"
+      }
+    }
+  ],
+  "url": "https://chladni-08-lab.vocallime128.chatgpt.site/",
+  "artifacts": [
+    "/Users/0xtx/Documents/Codex/2026-10-21/maaf-baru-bangun-untuk-audio-source/work/continuous-review/momentary-standby.png",
+    "/Users/0xtx/Documents/Codex/2026-10-21/maaf-baru-bangun-untuk-audio-source/work/continuous-review/momentary-held.png",
+    "/Users/0xtx/Documents/Codex/2026-10-21/maaf-baru-bangun-untuk-audio-source/work/continuous-review/momentary-maintenance.png",
+    "/Users/0xtx/Documents/Codex/2026-10-21/maaf-baru-bangun-untuk-audio-source/work/continuous-review/momentary-mobile.png"
+  ],
+  "command": "stagehand-run /Users/0xtx/Documents/Codex/2026-10-21/maaf-baru-bangun-untuk-audio-source/work/momentary-qa.mjs"
+}

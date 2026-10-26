@@ -1,0 +1,130 @@
+[
+  {
+    "key": "esp32",
+    "label": "ESP32-S3 DevKitC-1 N16R8",
+    "path": "work/component-photos/esp32.jpg",
+    "source": "https://elektroweb.pl/pl/esp32/1312-modul-esp32-s3-devkitc-1-wroom-1-n16r8-16mb-flash-wifi-bluetooth-usb-c.html",
+    "image_url": "https://elektroweb.pl/11651-large_default2x/modul-esp32-s3-devkitc-1-wroom-1-n16r8-16mb-flash-wifi-bluetooth-usb-c.jpg",
+    "bytes": 296912
+  },
+  {
+    "key": "dac",
+    "label": "GY-PCM5102 / I2S DAC",
+    "path": "work/component-photos/dac.jpg",
+    "source": "https://www.ebay.com/itm/314748193002",
+    "image_url": "https://i.ebayimg.com/images/g/DrMAAOSw-UdkUhsa/s-l1600.jpg",
+    "bytes": 142126
+  },
+  {
+    "key": "matrix",
+    "label": "MAX7219 / 32 x 8 quad",
+    "path": "work/component-photos/matrix.jpg",
+    "source": "https://www.otronic.nl/en/led-matrix-32x8-with-max7219-module.html",
+    "image_url": "https://cdn.webshopapp.com/shops/346407/files/420568506/otronic-led-matrix-32x8-with-max7219-module.jpg",
+    "bytes": 123214
+  },
+  {
+    "key": "amp",
+    "label": "YS-502MT",
+    "path": "work/component-photos/amp-01.jpg",
+    "source": "https://electronica.perfil9.com/tienda/mini-amplificador-bluetooth-100w-hi-fi-2-0-estereo-2x50w-ys-502mt/",
+    "image_url": "https://electronica.perfil9.com/wp-content/uploads/2026/07/ys-502mt-01.jpg",
+    "bytes": 206317
+  },
+  {
+    "key": "mcp",
+    "label": "MCP23017-E/SP / DIP-28",
+    "path": "work/component-photos/mcp.jpg",
+    "source": "https://thepihut.com/products/mcp23017-esp-io-expander",
+    "image_url": "https://thepihut.com/cdn/shop/products/mcp23017-port-expander-the-pi-hut-mmp-0548-7008635289662.jpg?v=1646399881&width=2048",
+    "bytes": 44202
+  },
+  {
+    "key": "ahct",
+    "label": "SN74AHCT125N / DIP-14",
+    "path": "work/component-photos/ahct.jpg",
+    "source": "https://www.ebay.com/itm/196424793180",
+    "image_url": "https://i.ebayimg.com/images/g/GAcAAOSwDINiouOJ/s-l1200.jpg",
+    "bytes": 339317
+  },
+  {
+    "key": "rgb",
+    "label": "WS2812B / RGB addressable",
+    "path": "work/component-photos/rgb.jpg",
+    "source": "https://www.sparkfun.com/sparkfun-rgb-led-breakout-ws2812b-with-headers.html",
+    "image_url": "https://www.sparkfun.com/media/catalog/product/cache/6481a7e801770ff450b11f3cf63d7638/2/9/29762-RGB-LED-Breakout-WS2812B-Headers-Feature2.jpg",
+    "bytes": 183430
+  },
+  {
+    "key": "encoder",
+    "label": "Bourns PEC11R-4215F-S0024",
+    "path": "work/rev8/sources/pec11r.jpg",
+    "source": "https://www.digikey.com/en/products/detail/bourns-inc/PEC11R-4215F-S0024/4499665",
+    "image_url": "https://keeb.io/cdn/shop/products/image_c06a03c8-f2a4-484f-a3f5-8f71e725f60c.jpg?v=1601329298&width=2000",
+    "bytes": 92374
+  },
+  {
+    "key": "selector",
+    "label": "Switch geser SP3T / foto keluarga",
+    "path": "work/component-photos/selector.jpg",
+    "source": "https://www.ebay.com/itm/373647240906",
+    "image_url": "https://i.ebayimg.com/images/g/j0kAAOSwEzxYUq5N/s-l400.jpg",
+    "bytes": 69185
+  },
+  {
+    "key": "tactile",
+    "label": "Tactile 6 mm / foto keluarga",
+    "path": "work/component-photos/tactile.jpg",
+    "source": "https://circuits-elec.com/products/push-button-6x6-4-pins",
+    "image_url": "https://cdn.shopify.com/s/files/1/0565/6159/8663/products/pushbutton4pin_grande.jpg?v=1624116723",
+    "bytes": 15775
+  },
+  {
+    "key": "toggle",
+    "label": "C&K OS102011MA1QN1 / MODE",
+    "path": "work/rev8/sources/os102.jpg",
+    "source": "https://www.digikey.com/en/products/detail/c-k/OS102011MA1QN1/1981430",
+    "image_url": "https://down-ph.img.susercontent.com/file/ph-11134208-7rasi-m8og2tlf164379",
+    "bytes": 303644
+  },
+  {
+    "key": "power",
+    "label": "Adaptor 5 V / 3 A",
+    "path": "work/component-photos/power.jpg",
+    "source": "https://www.ebay.co.uk/itm/305198934952",
+    "image_url": "https://i.ebayimg.com/images/g/p6IAAOSwpspjKZPs/s-l400.jpg",
+    "bytes": 25496
+  },
+  {
+    "key": "resistor",
+    "label": "Resistor / 330R, 4k7, 10k",
+    "path": "work/component-photos/resistor.jpg",
+    "source": "https://www.sgbotic.com/index.php?dispatch=products.view&product_id=791",
+    "image_url": "https://www.sgbotic.com/images/detailed/5/00791-1-L.jpg?t=1438891728",
+    "bytes": 47366
+  },
+  {
+    "key": "ceramic",
+    "label": "Kapasitor keramik / 100 nF",
+    "path": "work/component-photos/ceramic.jpg",
+    "source": "https://www.electrocomponentes.es/ceramicos/94-condensador-ceramico-100nf-50v.html",
+    "image_url": "https://www.electrocomponentes.es/8446-large_default/condensador-ceramico-100nf-50v.jpg",
+    "bytes": 24947
+  },
+  {
+    "key": "elco",
+    "label": "Kapasitor elco / 100, 470 uF",
+    "path": "work/component-photos/elco.jpg",
+    "source": "https://kitsguru.com/products/470uf-16v-electrolytic-capacitor-6-12mm-lead-space-3mm",
+    "image_url": "https://kitsguru.com/cdn/shop/files/470uF16V_Electrolytic_Capacitor-1_2048x.jpg?v=1718428477",
+    "bytes": 35798
+  },
+  {
+    "key": "trs",
+    "label": "Kabel audio / TRS 3,5 mm",
+    "path": "work/component-photos/trs.jpg",
+    "source": "https://worldofstereo.com/hosa-cmm-103-stereo-interconnect-cable-3-5mm-trs-male-to-3-5mm-trs-male-3-foot/",
+    "image_url": "https://cdn11.bigcommerce.com/s-edf37/images/stencil/1280x1280/products/25496/64377/1748359113_160647__51642.1775879331.jpg?c=3%3Fimbypass%3Don",
+    "bytes": 30730
+  }
+]
