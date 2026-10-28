@@ -41,6 +41,13 @@
 <div class="mode-control" role="group" aria-label="Mode panel"><button id="run-mode" data-mode="RUN" aria-pressed="false"><span class="mode-name"><i aria-hidden="true"></i>RUN</span><span class="mode-detail">MAIN PRESET</span></button><button id="service-mode" data-mode="SERVICE" aria-pressed="true"><span class="mode-name"><i aria-hidden="true"></i>SERVICE</span><span class="mode-detail">EDIT &amp; SAVE</span></button></div>
 <div class="actions"><button id="save-action" class="key save" aria-pressed="false"><i class="led" aria-hidden="true"></i>SAVE</button><button id="mute-action" class="key" aria-pressed="true"><i class="led" aria-hidden="true"></i>TEST / MUTE</button></div>
 </section>
+<section class="gather" aria-labelledby="gather-title">
+<div class="setup-title" id="gather-title">KUMPULKAN PASIR / GATHER <span>SINE · SEKALI</span></div>
+<p class="gather-hint">Glide antar langkah lalu fade dan mute. Contoh awal belum dikalibrasi: isi dengan frekuensi ring dari pelat, urut dari ring terbesar ke terkecil, level makin kecil. Atur FREQ/LEVEL, lalu + DARI FREQ.</p>
+<div class="gather-table"><table><thead><tr><th scope="col">#</th><th scope="col">Hz</th><th scope="col">LEVEL %</th><th scope="col">GLIDE s</th><th scope="col">HOLD s</th><th scope="col"><span class="sr-only">Hapus</span></th></tr></thead><tbody id="gather-rows"></tbody></table></div>
+<div class="gather-actions"><button type="button" id="gather-add" class="key">+ DARI FREQ</button><button type="button" id="gather-example" class="key">CONTOH</button><button type="button" id="gather-play" class="key" aria-pressed="false">▶ GATHER</button></div>
+<p id="gather-status" role="status" aria-live="polite"></p><span id="gather-feedback" role="status"></span>
+</section>
 <form id="setup-form" class="setup-form">
 <div class="setup-title">BATAS SWEEP <span id="calibration-status">BELUM DIKALIBRASI</span></div>
 <div class="range-inputs"><label>MIN / Hz<input id="min-frequency" type="number" min="20" max="4000" step="0.1" value="20" required></label><label>MAX / Hz<input id="max-frequency" type="number" min="20" max="4000" step="0.1" value="4000" required></label></div>

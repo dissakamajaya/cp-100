@@ -1,0 +1,8 @@
+[stagehand] INFO stagehand.init
+{
+  "url": "http://127.0.0.1:8080/",
+  "label": "local",
+  "passed": true,
+  "checks": 28
+}
+[stagehand] INFO stagehand.close

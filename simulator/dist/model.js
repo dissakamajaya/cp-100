@@ -78,6 +78,14 @@ export function reduce(state, action) {
     case 'SEQUENCE_STEP':
       // Move between pads in one update so audio automation never receives an intermediate mute.
       return reduce({...state,activePad:null,muted:true,armed:false},{type:'PAD_DOWN',index:action.index});
+    case 'GATHER_FRAME': {
+      // GATHER drives a plain sine directly; it never touches presets and clamps to the sweep limits.
+      if (state.mode !== 'SERVICE') return state;
+      const p = { frequencyHz: action.frequencyHz, levelPct: action.levelPct, wave: 'sine', foldPct: 0, harmonics: 'odd' };
+      if (!validParameters(p)) return state;
+      p.frequencyHz = Math.max(state.setup.minHz, Math.min(state.setup.maxHz, p.frequencyHz));
+      return { ...state, parameters: cleanParameters(p), activePad: null, armed: false, muted: false };
+    }
     case 'PAD_UP':
       return state.activePad===action.index?{...state,activePad:null,muted:true}:state;
     case 'RELEASE_ALL':return {...state,activePad:null,muted:true};

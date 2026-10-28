@@ -3,6 +3,7 @@ import { PadSequencer } from './sequencer.js';
 import { padNumberForKey } from './controls.js';
 import { AudioPreview } from './dsp.js';
 import { SandPreview } from './sand.js';
+import { GATHER_KEY, GATHER_LIMITS, GatherPlayer, cleanGather, exampleGather, exportGatherFile, gatherDuration, parseGatherFile } from './gather.js';
 const $ = selector => document.querySelector(selector);
 const harmonicLabels = {odd:'ODD', even:'EVEN', both:'ODD + EVEN'};
 const waveLabels = { sine: 'SINE', sawtooth: 'SAW', triangle: 'TRI' };
@@ -16,6 +17,17 @@ let lastWrite = true;
 let fine = false, screenMessage = '', screenTimer, messageTimer;
 const audio = new AudioPreview();
 const sand = new SandPreview($('#sand-canvas'));
+let gatherSteps;try{const data=localStorage.getItem(GATHER_KEY);gatherSteps=data?parseGatherFile(data):exampleGather();}catch{gatherSteps=exampleGather();}
+let gatherPending=false,gatherRequest=0;
+const gather=new GatherPlayer({
+ onFrame(frame){heldSource=null;dispatch({type:'GATHER_FRAME',frequencyHz:frame.frequencyHz,levelPct:frame.levelPct});},
+ onDone(){dispatch({type:'RELEASE_ALL'});notify('GATHER SELESAI / MUTE');}
+});
+function stopGather(){
+ const playing=gather.running||gatherPending;
+ gatherRequest++;gatherPending=false;gather.stop();
+ if(playing){heldSource=null;dispatch({type:'RELEASE_ALL'});}
+}
 let sequencePending=false,sequenceRequest=0;
 const sequence=new PadSequencer({onStep(index){
  heldSource=null;dispatch({type:'SEQUENCE_STEP',index});
@@ -27,7 +39,7 @@ function stopSequence(){
 }
 $('#sequence-play').addEventListener('click',async()=>{
  if(sequence.running||sequencePending){stopSequence();return;}
- const request=++sequenceRequest;sequencePending=true;render();
+ stopGather();const request=++sequenceRequest;sequencePending=true;render();
  try{
   if(!audio.enabled)await audio.enable();
   if(request!==sequenceRequest||document.hidden)return;
@@ -83,6 +95,10 @@ function persist() {
   catch { notify('PENYIMPANAN BROWSER TIDAK TERSEDIA'); return false; }
 }
 function dispatch(action) {
+  if((gather.running||gatherPending)&&['MODE','SETUP','PARAMETERS','ARM','MUTE','IMPORT'].includes(action.type)){
+    if(action.type==='MUTE')action={...action,value:true};
+    stopGather();
+  }
   if((sequence.running||sequencePending)&&['MODE','SETUP','PARAMETERS','ARM','MUTE','IMPORT'].includes(action.type)){
     // Stop already mutes; a TEST/MUTE toggle must not turn output back on afterward.
     if(action.type==='MUTE')action={...action,value:true};
@@ -115,7 +131,7 @@ function drawMatrix() {
   $('.display-unit').style.visibility = screenMessage ? 'hidden' : 'visible';
 }
 function pressPad(index,source){
-  stopSequence();
+  stopSequence();stopGather();
   if(heldSource)return;
   if(!state.armed&&(!state.presets[index]||!inRange(state.presets[index],state.setup))){
     $('#visitor-status').textContent=state.presets[index]?'Preset di luar batas sweep':'Pad belum diisi';return;
@@ -125,7 +141,7 @@ function pressPad(index,source){
   if(saving){flash(lastWrite?'SAVED':'RAM');notify(lastWrite?`PRESET DISIMPAN KE PAD ${index+1}`:'PRESET SEMENTARA');}
 }
 function releasePad(index,source){if(heldSource!==source)return;heldSource=null;dispatch({type:'RELEASE_ALL'});}
-function releaseAll(){stopSequence();heldSource=null;dispatch({type:'RELEASE_ALL'});}
+function releaseAll(){stopSequence();stopGather();heldSource=null;dispatch({type:'RELEASE_ALL'});}
 for(let i=0;i<8;i++){
  const b=document.createElement('button');b.className='pad';b.dataset.pad=i;
  b.setAttribute('aria-keyshortcuts',String(i+1));
@@ -158,6 +174,67 @@ $('#setup-form').addEventListener('submit',event=>{
  if(!validSetup(patch)){$('#setup-feedback').textContent='MIN harus lebih kecil dari MAX (20-4000 Hz).';return;}
  heldSource=null;dispatch({type:'SETUP',patch});$('#setup-feedback').textContent='Setup tersimpan';
 });
+const gatherFields=[['frequencyHz','Hz',.1],['levelPct','Level %',1],['glideS','Glide detik',.1],['holdS','Hold detik',.1]];
+function persistGather(){
+ try{localStorage.setItem(GATHER_KEY,JSON.stringify(exportGatherFile(gatherSteps)));return true;}catch{return false;}
+}
+function buildGatherRows(){
+ const body=$('#gather-rows');body.textContent='';
+ gatherSteps.forEach((step,i)=>{
+  const row=document.createElement('tr');row.dataset.gatherStep=i;
+  row.innerHTML=`<th scope="row">${i+1}</th>`+gatherFields.map(([key,label,step2])=>{
+   const [min,max]=GATHER_LIMITS[key];
+   return `<td><input type="number" inputmode="decimal" data-gather-field="${key}" min="${min}" max="${max}" step="${step2}" value="${step[key]}" aria-label="Langkah ${i+1} ${label}"></td>`;
+  }).join('')+`<td><button type="button" class="gather-remove" data-gather-remove="${i}" aria-label="Hapus langkah ${i+1}">✕</button></td>`;
+  body.append(row);
+ });
+}
+function editGather(next,rebuild){
+ stopGather();
+ try{gatherSteps=cleanGather(next);$('#gather-feedback').textContent=persistGather()?'GATHER TERSIMPAN':'GATHER HANYA TERSIMPAN SEMENTARA';}
+ catch(error){$('#gather-feedback').textContent=error.message;rebuild=true;}
+ if(rebuild)buildGatherRows();render();
+}
+$('#gather-rows').addEventListener('change',event=>{
+ const input=event.target.closest('[data-gather-field]');if(!input)return;
+ const i=Number(input.closest('[data-gather-step]').dataset.gatherStep),value=input.valueAsNumber;
+ if(!input.checkValidity()||!Number.isFinite(value)){$('#gather-feedback').textContent=`Langkah ${i+1}: nilai di luar batas.`;input.value=gatherSteps[i][input.dataset.gatherField];return;}
+ editGather(gatherSteps.map((step,j)=>j===i?{...step,[input.dataset.gatherField]:value}:step),false);
+});
+$('#gather-rows').addEventListener('click',event=>{
+ const button=event.target.closest('[data-gather-remove]');if(!button)return;
+ editGather(gatherSteps.filter((_,j)=>j!==Number(button.dataset.gatherRemove)),true);
+});
+$('#gather-add').addEventListener('click',()=>{
+ const p=state.parameters;editGather([...gatherSteps,{frequencyHz:p.frequencyHz,levelPct:p.levelPct,glideS:4,holdS:4}],true);
+});
+$('#gather-example').addEventListener('click',()=>editGather(exampleGather(),true));
+$('#gather-play').addEventListener('click',async()=>{
+ if(gather.running||gatherPending){stopGather();return;}
+ if(state.mode!=='SERVICE')return;
+ stopSequence();const request=++gatherRequest;gatherPending=true;render();
+ try{
+  if(!audio.enabled)await audio.enable();
+  if(request!==gatherRequest||document.hidden)return;
+  gatherPending=false;heldSource=null;gather.start(gatherSteps);
+ }catch(error){
+  if(request===gatherRequest){gatherPending=false;gather.stop();dispatch({type:'RELEASE_ALL'});notify(error.message);}
+ }finally{if(request===gatherRequest)gatherPending=false;render();}
+});
+function renderGather(service){
+ const gathering=gather.running||gatherPending,frame=gather.frame,phases={glide:'GLIDE',hold:'HOLD',fade:'FADE'};
+ $('#gather-play').textContent=gathering?'■ STOP':'▶ GATHER';
+ $('#gather-play').setAttribute('aria-pressed',String(gathering));
+ $('#gather-play').disabled=!service;$('#gather-add').disabled=!service||gatherSteps.length>=GATHER_LIMITS.steps[1];$('#gather-example').disabled=!service;
+ document.querySelectorAll('#gather-rows input,#gather-rows button').forEach(el=>el.disabled=!service||(el.dataset.gatherRemove!==undefined&&gatherSteps.length<=GATHER_LIMITS.steps[0]));
+ const outside=gatherSteps.filter(s=>s.frequencyHz<state.setup.minHz||s.frequencyHz>state.setup.maxHz).length;
+ document.querySelectorAll('[data-gather-step]').forEach(row=>{
+  const i=Number(row.dataset.gatherStep),s=gatherSteps[i];
+  row.classList.toggle('current',Boolean(gather.running&&frame&&frame.index===i));
+  row.classList.toggle('outside',Boolean(s&&(s.frequencyHz<state.setup.minHz||s.frequencyHz>state.setup.maxHz)));
+ });
+ $('#gather-status').textContent=gatherPending?'MENYIAPKAN AUDIO':gather.running&&frame?`LANGKAH ${frame.index+1}/${gatherSteps.length} · ${phases[frame.phase]} · ${state.parameters.frequencyHz.toFixed(1)} Hz · L${state.parameters.levelPct}`:`${gatherSteps.length} LANGKAH · ${gatherDuration(gatherSteps).toFixed(1)} DETIK · SEKALI LALU MUTE${outside?` · ${outside} DI LUAR BATAS SWEEP`:''}`;
+}
 function render() {
   const p=state.parameters, service=state.mode==='SERVICE';
   const sequencing=sequence.running||sequencePending;
@@ -206,13 +283,14 @@ function render() {
     b.setAttribute('aria-label',`Pad ${i+1}, tekan dan tahan, ${blocked?'di luar batas sweep':preset?`${preset.frequencyHz} Hz, ${waveLabels[preset.wave]}, fold ${preset.foldPct}%, ${harmonicLabels[preset.harmonics]}, level ${preset.levelPct}%`:'kosong'}`);
     b.title=(preset?`${preset.frequencyHz} Hz · ${waveLabels[preset.wave]} · F${preset.foldPct} · L${preset.levelPct}`:'Belum disimpan')+` · Keyboard ${i+1} / Numpad ${i+1}`;
   });
-  $('#visitor-status').textContent=sequence.running?'SEQUENCE AKTIF / STOP UNTUK BERHENTI':state.activePad!==null?`PAD ${String(state.activePad+1).padStart(2,'0')} / LEPAS UNTUK BERHENTI`:'Tahan pad / tombol 1–8 · lepas untuk berhenti';
+  $('#visitor-status').textContent=gather.running?'GATHER AKTIF / STOP DI PANEL SERVIS':sequence.running?'SEQUENCE AKTIF / STOP UNTUK BERHENTI':state.activePad!==null?`PAD ${String(state.activePad+1).padStart(2,'0')} / LEPAS UNTUK BERHENTI`:'Tahan pad / tombol 1–8 · lepas untuk berhenti';
   $('#calibration-status').textContent=state.setup.calibrated?'BATAS TERSIMPAN':'BELUM DIKALIBRASI';
   document.querySelectorAll('#setup-form input,#setup-form select,#setup-form button').forEach(el=>el.disabled=!service);
   $('#sand-frequency').textContent=`${p.frequencyHz.toFixed(1)} Hz`;
   $('#sand-wave').textContent=`${waveLabels[p.wave]} / ${harmonicLabels[p.harmonics]}`;
   $('#sand-status').textContent=state.muted||p.levelPct===0?'MUTE':'ACTIVE';
   $('#sand-status').classList.toggle('active',!state.muted&&p.levelPct>0);
+  renderGather(service);
   sand.setState(state);
   drawMatrix();
 }
@@ -291,5 +369,5 @@ window.addEventListener('blur',releaseAll);
 window.addEventListener('pagehide',releaseAll);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseAll();});
 window.addEventListener('resize',drawMatrix);
-window.chladniDiagnostics=()=>({state:structuredClone(state),audio:audio.diagnostics(),sequence:{...sequence.diagnostics(),pending:sequencePending},spec:SPEC,display:$('#matrix').getAttribute('aria-label'),sand:sand.diagnostics()});
-syncSetupForm();render();if(storageProblem)notify('PRESET TIDAK TERBACA / SLOT DIKOSONGKAN');
+window.chladniDiagnostics=()=>({state:structuredClone(state),audio:audio.diagnostics(),sequence:{...sequence.diagnostics(),pending:sequencePending},gather:{...gather.diagnostics(),pending:gatherPending},spec:SPEC,display:$('#matrix').getAttribute('aria-label'),sand:sand.diagnostics()});
+buildGatherRows();syncSetupForm();render();if(storageProblem)notify('PRESET TIDAK TERBACA / SLOT DIKOSONGKAN');

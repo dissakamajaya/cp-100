@@ -1,0 +1,36 @@
+{
+  "project_id": "appgprj_6ad8a720c7bc81919ed7d22134c3c6aa",
+  "source_commit": "2f24f07020fecfc938db9d0b2373c5a8221ae181",
+  "saved_version": {
+    "id": "appgprj_6ad8a720c7bc81919ed7d22134c3c6aa~appgver_2180d4346708819187c1da953c04eda4",
+    "project_id": "appgprj_6ad8a720c7bc81919ed7d22134c3c6aa",
+    "version_number": 10,
+    "source": {
+      "commit_sha": "2f24f07020fecfc938db9d0b2373c5a8221ae181"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000006a5c82118e1d229f18391ff4",
+      "content_hash": "sha256:22eafebf1b532d9df1869b79781ca91d19496436d0f89f5c678fe68db9903dd9",
+      "size_bytes": 8724480,
+      "file_count": 15
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6ae1b562ce308191bc56632e81b2c1c1",
+    "project_id": "appgprj_6ad8a720c7bc81919ed7d22134c3c6aa",
+    "title": "CP-100",
+    "version_id": "appgprj_6ad8a720c7bc81919ed7d22134c3c6aa~appgver_2180d4346708819187c1da953c04eda4",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://chladni-08-lab.vocallime128.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad8a720c7bc81919ed7d22134c3c6aa",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-28T08:42:31.245051+00:00"
+  }
+}

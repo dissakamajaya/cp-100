@@ -36,3 +36,7 @@ Atas permintaan pengguna, jangkauan simulator menjadi **20–4000 Hz** (default 
 ## Sequencer web — 26 Oktober 2026
 
 Pengguna meminta tombol Play untuk sequence pad 1–8 setiap 3 detik dan opsi acak. Sequencer web berulang; acak mengunjungi setiap pad sekali per siklus. Pad kosong/di luar sweep diam selama slotnya. Stop, input pad manual, perubahan kontrol/servis, mute/audio-off dan meninggalkan halaman menghentikan sequence. Tidak ada auto-resume atau perubahan firmware.
+
+## GATHER / kumpulkan pasir — 28 Oktober 2026
+
+Masalah di pelat: pasir kadang lari ke samping. Pengguna meminta sequence untuk mengumpulkan pasir kembali ke tengah (tumpukan acak, bukan pola). Diputuskan: rutin terpisah dari 8 pad, hanya di PANEL SERVIS simulator, sine saja, sekali jalan dengan glide antar langkah lalu fade dan mute. Frekuensi harus dicari di pelat nyata (simulasi pasir hanya ilustratif). Periksa dulu kerataan pelat dan posisi klem di tengah speaker. Firmware menyusul setelah rutin terbukti di pelat (kandidat: jalan otomatis saat idle).

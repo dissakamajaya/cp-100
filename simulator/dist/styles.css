@@ -104,3 +104,13 @@ body{padding:32px;place-items:center}.simulator-layout{display:grid;grid-templat
 .sequence-hint{margin:7px 0 0;font-size:8px;color:#939393;line-height:1.5}
 .sequence-controls select:focus-visible{outline:2px solid #e8b768;outline-offset:3px}
 .device .pad.sequenced{outline:2px solid #e8b768;outline-offset:3px}
+.gather{margin-top:24px;border-top:1px solid #383838;padding-top:20px;font:9px var(--mono);color:#bbb}
+.gather-hint{margin:0 0 12px;font-size:8px;color:#939393;line-height:1.5}
+.gather-table{overflow-x:auto}.gather table{width:100%;border-collapse:collapse;font:10px var(--mono)}
+.gather th{font-weight:400;font-size:8px;color:#8b8b8b;text-align:left;padding:4px 3px}.gather tbody th{color:#c4a16c}
+.gather td{padding:3px}.gather input{width:100%;min-width:52px;min-height:34px;padding:6px;background:#080808;border:1px solid #575757;border-radius:4px;color:#eee;font:11px var(--mono)}
+.gather tr.current td input{border-color:#e8b768}.gather tr.current th{color:#e8b768}.gather tr.outside input[data-gather-field=frequencyHz]{border-color:#9a4b4b;color:#e3a0a0}
+.gather-remove{min-width:30px;min-height:34px;background:none;border:1px solid #393939;border-radius:4px;color:#999}.gather-remove:disabled{opacity:.35}
+.gather-actions{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:12px}.gather-actions .key{min-height:42px}
+.device #gather-play[aria-pressed=true]{background:#e8b768;color:#211a10;border-color:#e8b768}
+#gather-status{margin:12px 0 0;font-size:9px;color:#d5a262;min-height:14px}#gather-feedback{display:block;min-height:14px;margin-top:6px;color:#939393;font-size:8px}

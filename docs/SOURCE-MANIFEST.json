@@ -6,8 +6,8 @@
       "source": "work/sites/chladni-08/README.md",
       "destination": "simulator/README.md",
       "source_sha256": "d8f483a6b879c6a0bf4a8e40fc5a6ff712dcfa692ad45f53671b64e44f41054a",
-      "packaged_sha256": "90e2fc4d96a48682d0165fd8cde741f9ba4e781c13d8a8ac31f483a461b92af6",
-      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained."
+      "packaged_sha256": "6ef215a011598ccce02a7a2832138978d79e8fc290153e5ddf8bf7defff72749",
+      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained. 2026-10-28: added one-shot GATHER (kumpulkan pasir) routine in PANEL SERVIS."
     },
     {
       "source": "work/sites/chladni-08/package.json",
@@ -37,15 +37,15 @@
       "source": "work/sites/chladni-08/dist/index.html",
       "destination": "simulator/dist/index.html",
       "source_sha256": "0ada9803d23b3072c2c3fce33b60c54862bcf7d4048db3cba808a2c22097bfe8",
-      "packaged_sha256": "92d5e774aa50db9552d4fc14b3000d7655858f7566ce78fc89a9aa1ae51cfd4c",
-      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained."
+      "packaged_sha256": "9b114a43cbf7b36a32f0244118218fa54ccb3c36b368749fa05fda4dc29f9297",
+      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained. 2026-10-28: added one-shot GATHER (kumpulkan pasir) routine in PANEL SERVIS."
     },
     {
       "source": "work/sites/chladni-08/dist/styles.css",
       "destination": "simulator/dist/styles.css",
       "source_sha256": "85558402daad068d3b3cfce2ebb6fe8134b559cc591f39309643dcfa09dd88a7",
-      "packaged_sha256": "06114c43abcfba8f44610e67a68f0d98e2001ae0c7bf8b165680c5d1ca35a9a5",
-      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained."
+      "packaged_sha256": "f366d58a6d10ee2728193fa43305381965a8d06a537da3c591cd810099ebb48a",
+      "revision_note": "2026-10-26: added ordered/random 3-second web sequencer with cancellation; original source hash retained. 2026-10-28: added one-shot GATHER (kumpulkan pasir) routine in PANEL SERVIS."
     },
     {
       "source": "work/sites/chladni-08/dist/dsp.js",
@@ -76,15 +76,15 @@
       "source": "work/sites/chladni-08/dist/model.js",
       "destination": "simulator/dist/model.js",
       "source_sha256": "216f5f1dc215def2bf9257f7faa570887843c24586a75db29c6d0e5789e3827f",
-      "packaged_sha256": "20203bb6ee24effe7d09ebf4b0a62b1e4eef19e07e6e1ed8e6c652060320a13c",
-      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback."
+      "packaged_sha256": "d33407658abe00665a32390fe7ac816c2361e0b5374c1a2d850ef30c8882ab71",
+      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback. 2026-10-28: added one-shot GATHER (kumpulkan pasir) routine in PANEL SERVIS."
     },
     {
       "source": "work/sites/chladni-08/dist/app.js",
       "destination": "simulator/dist/app.js",
       "source_sha256": "69d8855963cf70a70c5ce9e36444590ea830a2db44a02956635ce4e7e8e100e7",
-      "packaged_sha256": "387b12f3f4fe3ef90c85eb4956412801d05fbb23628fd47a53244a9c1c403280",
-      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback."
+      "packaged_sha256": "ab2a59b0b808df56a1c1c29e004400a07e47044806fb70c2cb7151e63e4278f1",
+      "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback. 2026-10-28: added one-shot GATHER (kumpulkan pasir) routine in PANEL SERVIS."
     },
     {
       "source": "work/sites/chladni-08/tests/simulator.test.js",
@@ -515,6 +515,20 @@
       "source_sha256": "d6e66fe9656fcbb41e53da71c08d1ea7dfa50ccf46421008c39c8ebcdf0adc30",
       "packaged_sha256": "d6e66fe9656fcbb41e53da71c08d1ea7dfa50ccf46421008c39c8ebcdf0adc30",
       "revision_note": "2026-10-26: ordered/random web sequencer; atomic pad transitions and audio-clock readiness before playback."
+    },
+    {
+      "source": "(new) simulator/dist/gather.js",
+      "destination": "simulator/dist/gather.js",
+      "source_sha256": null,
+      "packaged_sha256": "923d164fd4e0443ccbb4cdd0c7ac585b8d1f5fe536e81116339b5e046271535e",
+      "revision_note": "2026-10-28: added one-shot GATHER (kumpulkan pasir) routine in PANEL SERVIS."
+    },
+    {
+      "source": "(new) simulator/tests/gather.test.js",
+      "destination": "simulator/tests/gather.test.js",
+      "source_sha256": null,
+      "packaged_sha256": "0f1b6f64d45120dd3b9dcb7442340c7343182013ac86687764389895bc8d84c4",
+      "revision_note": "2026-10-28: added one-shot GATHER (kumpulkan pasir) routine in PANEL SERVIS."
     }
   ]
 }
