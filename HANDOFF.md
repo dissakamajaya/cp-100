@@ -1,5 +1,17 @@
 # Mulai di sini
 
+## Firmware v1.1.0 - pad maksimal 5 detik dan preset/operator baru (1 November 2026)
+
+Empat pad fisik dan pad preview HP kini **momentary maksimal 5 detik per tekan**: release mute, cutoff tidak autorepeat, harus release/re-press. Deadline controller tahan wrap dan budget DSP 240.000 sampel/48 kHz (fade 10 ms sebelum cutoff) membatasi output termasuk release tail meski control loop tertunda. ID press hanya berubah saat penekanan baru diterima. TEST/sequence/GATHER mempertahankan aturan masing-masing.
+
+Preset awal: **1096 / 1360 / 2249 / 2386 Hz**. Parameter selain frekuensi tetap. Upgrade mempertahankan preset/sweep tersimpan; gunakan **Preset awal -> Pulihkan empat preset awal** untuk mengganti slot lama. MAX 2000 lama tetap membatasi pad 3/4 sampai operator mengubah batas sesuai uji rakitan.
+
+Pengguna secara eksplisit memilih password hotspot bersama untuk operator. Konfigurasi ada di `firmware/include/service_config.h`; firmware menggunakannya langsung dan mengabaikan record password acak lama tanpa erase NVS. Ini menggantikan keputusan password acak/per-perangkat terdahulu. Token sesi HTTP tetap acak dan password tidak masuk API state/ekspor.
+
+Build tanpa warning: RAM **46.732 byte**, flash aplikasi **862.405 byte**. DSP/state dan **419 cek kontrol/protokol/NVS** sanitizer lulus; simulator/router **44/44**, manifest **86 aset**, QA UI HP lokal dan tujuh halaman **PDF Rev03** lulus. Bukti [evidence/momentary-2026-11-01/README.md](evidence/momentary-2026-11-01/README.md). **Belum ada upload/uji hardware.**
+
+Paket: `firmware/releases/CP-100-remote-v1.1.0.zip`; PDF tetap di `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf`. SHA256 PDF `ceead13b56bc9136de795f47e22dabe5a8a3bce4035fcde33631e768e1fffa7c`; ZIP `05cde2f552754c741cb326e2f4a12643b696b3463bea086743b7f0d5cf2e7d3d`. Rilis repo: [firmware-remote-v1.1.0](https://github.com/dissakamajaya/cp-100/releases/tag/firmware-remote-v1.1.0) (prerelease, privat). Rilis/dokumen di bawah adalah riwayat. Tidak ada deployment Sites.
+
 ## PDF wiring Rev02 - foto DevKit dan diagram kabel (1 November 2026)
 
 Mengikuti koreksi pengguna, PDF terbaru kini **tujuh halaman**, termasuk foto DevKit N16R8 dengan lingkaran penanda pin/leader kabel (halaman 2), diagram header fisik ke empat pad/MUTE dan resistor pull-up (halaman 3), serta diagram DevKit ke PCM5102 berikut foto modul dan kedua terminal catu +5V/GND (halaman 4). J1/J3 dicocokkan dengan dokumentasi Espressif dan pin firmware. Foto referensi pemasok telah ada di bahan proyek; sumber/hak foto tetap dicantumkan, tidak berlisensi bebas.

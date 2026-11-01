@@ -4,6 +4,7 @@
 
 constexpr uint32_t kSessionLeaseMs = 2500;
 constexpr uint32_t kRemotePadLeaseMs = 1200;
+constexpr uint32_t kPadMaxHoldMs = 5000;
 constexpr int kGatherMaxSteps = 16;
 struct GatherStep { float frequencyHz, levelPct, glideS, holdS; };
 struct GatherRoutine { int count = 0; GatherStep steps[kGatherMaxSteps] = {}; };
@@ -50,15 +51,18 @@ class Controller {
   void emergencyMute();
   ControlSnapshot snapshot(uint32_t now) const;
   const State& state() const { return state_; }
+  uint32_t padPressId() const { return held_ >= 0 ? pressId_ : 0; }
   const GatherRoutine& gather() const { return gather_; }
  private:
   State state_{};
   GatherRoutine gather_;
   uint32_t owner_ = 0, lastHeartbeat_ = 0, lastPad_ = 0;
   uint32_t started_ = 0, nextStep_ = 0, rng_ = 1;
+  uint32_t padStarted_ = 0, pressId_ = 0;
   int held_ = -1, step_ = -1, cursor_ = kPadCount;
   int order_[kPadCount] = {};
   Playback playback_ = Playback::Idle;
+  void beginHold(int source, uint32_t now);
   void stopPlayback();
   void stopAll();
   void advanceSequence(uint32_t now);

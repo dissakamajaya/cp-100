@@ -118,6 +118,16 @@ Synth::Synth(float sampleRate) : fs_(sampleRate) {
 float Synth::coeff(float seconds) const { return 1 - expf(-1 / (seconds * fs_)); }
 
 void Synth::render(float* out, int frames, const SynthTarget& t) {
+  // Keep the pad budget through a release tail; a pad-up at 4.99 s must
+  // not disable the ceiling. A new non-pad sounding target explicitly exits it.
+  const bool limitedPad = (t.padPressId != 0 && t.padMaxFrames != 0) ||
+                          (padPressId_ != 0 && t.level == 0);
+  if (t.padPressId && t.padPressId != padPressId_) {
+    padPressId_ = t.padPressId; padFramesLeft_ = t.padMaxFrames;
+  } else if (!t.padPressId && t.level > 0) {
+    padPressId_ = 0; padFramesLeft_ = 0;
+  }
+  const float fadeFrames = fs_ * .01f; // finish the last 10 ms before the hard cutoff
   const float amount = t.foldPct / 100;
   const bool even = t.harmonics == Harmonics::Even, odd = t.harmonics == Harmonics::Odd;
   const float innerRate = fs_ * kOversample;
@@ -177,6 +187,13 @@ void Synth::render(float* out, int frames, const SynthTarget& t) {
     float v = hpY_ * level_.value;
     if (v > 1) v = 1;
     if (v < -1) v = -1;
+    if (limitedPad) {
+      if (!padFramesLeft_) v = 0;
+      else {
+        if (padFramesLeft_ < fadeFrames) v *= padFramesLeft_ / fadeFrames;
+        --padFramesLeft_;
+      }
+    }
     out[n] = v;
     if (fabsf(v) > peak) peak = fabsf(v);
   }

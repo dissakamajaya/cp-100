@@ -1,0 +1,1 @@
+PASS: 86 source assets match the packaged source manifest

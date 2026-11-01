@@ -31,7 +31,11 @@ GatherRoutine exampleGather() {
 void Controller::begin(const Preset presets[kPadCount], const Setup& setup, const GatherRoutine& gather) {
   state_ = initialState(presets, setup);
   gather_ = validGather(gather) ? gather : exampleGather();
-  owner_ = 0; held_ = -1; playback_ = Playback::Idle; step_ = -1;
+  owner_ = 0; held_ = -1; pressId_ = 0; playback_ = Playback::Idle; step_ = -1;
+}
+void Controller::beginHold(int source, uint32_t now) {
+  held_ = source; padStarted_ = now;
+  if (++pressId_ == 0) ++pressId_; // zero means no manual pad in the audio target
 }
 void Controller::stopPlayback() {
   if (playback_ == Playback::Idle) return;
@@ -104,7 +108,7 @@ ControlResult Controller::apply(const Command& c, uint32_t now) {
       stopPlayback();
       if (held_ != -1) return refused("Pad lain sedang ditahan.");
       if (!padDown(state_, c.index)) return refused("Pad kosong atau di luar batas sweep.");
-      held_ = kRemoteSource + c.index; lastPad_ = now; return {};
+      beginHold(kRemoteSource + c.index, now); lastPad_ = now; return {};
     case Action::PadUp:
       if (held_ == kRemoteSource + c.index) { held_ = -1; releaseAll(state_); }
       return {};
@@ -127,7 +131,7 @@ ControlResult Controller::apply(const Command& c, uint32_t now) {
       return {true, "Preset diimpor.", true, false, false};
     case Action::Factory:
       stopAll(); examplePresets(state_.presets);
-      return {true, "Empat preset contoh dipulihkan.", true, false, false};
+      return {true, "Empat preset awal dipulihkan.", true, false, false};
     case Action::Sequence:
       stopAll(); playback_ = c.flag ? Playback::Random : Playback::Ordered;
       started_ = now; cursor_ = kPadCount; advanceSequence(now); return {};
@@ -141,6 +145,9 @@ ControlResult Controller::apply(const Command& c, uint32_t now) {
   }
 }
 void Controller::tick(uint32_t now) {
+  // Keep ownership after the cutoff: only release/re-press can start another hold.
+  // Heartbeats and duplicate down events never extend this absolute deadline.
+  if (held_ >= 0 && now - padStarted_ >= kPadMaxHoldMs) releaseAll(state_);
   if (owner_ && now - lastHeartbeat_ >= kSessionLeaseMs) {
     stopAll(); setMode(state_, Mode::Run); owner_ = 0; return;
   }
@@ -180,7 +187,7 @@ void Controller::physicalDown(int i, uint32_t now) {
   if (i < 0 || i >= kPadCount || held_ != -1) return;
   bool saved = false;
   // Saving to an explicit slot in the app replaces physical SAVE arming.
-  if (padDown(state_, i, &saved)) held_ = i;
+  if (padDown(state_, i, &saved)) beginHold(i, now);
 }
 void Controller::physicalUp(int i) {
   if (held_ != i) return;

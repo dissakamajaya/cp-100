@@ -260,7 +260,7 @@ $('presetFile').addEventListener('change',async () => {
     releasePad();const data=await afterParameters({action:'import',file:payload});if(data?.persisted)notice('Empat slot preset berhasil diimpor.');
   }catch(error){notice(error.message,true);}finally{$('presetFile').value='';}
 });
-$('factory').addEventListener('click',async ()=> {if(window.confirm('Ganti keempat preset tersimpan dengan contoh?')) {releasePad();const data=await afterParameters({action:'factory'});if(data?.persisted)notice('Empat preset contoh dipulihkan.');}});
+$('factory').addEventListener('click',async ()=> {if(window.confirm('Ganti keempat preset tersimpan dengan preset awal 1096 / 1360 / 2249 / 2386 Hz?')) {releasePad();const data=await afterParameters({action:'factory'});if(data?.persisted)notice('Empat preset awal dipulihkan.');}});
 function endSession() {
   const session=token;invalidate();token='';
   if(session)request('/api/action',{action:'release'},session,true).catch(()=>{});

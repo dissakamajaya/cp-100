@@ -44,7 +44,7 @@ def arrow(d,x1,y1,x2,y2,label=None):
 def footer(c,doc):
     c.setFillColor(INK);c.setFont('Helvetica-Bold',8);c.drawString(40,H-30,'HOUSE OF EXP / ATMOS')
     c.setStrokeColor(LINE);c.line(40,43,W-40,43)
-    c.setFont('Helvetica',7.5);c.setFillColor(MUTED);c.drawString(40,29,'CP-100 | Rev02 | 4 pad + SERVICE HP | 01 NOV 2026 | tanpa display / LED eksternal')
+    c.setFont('Helvetica',7.5);c.setFillColor(MUTED);c.drawString(40,29,'CP-100 | Rev03 | 4 pad + SERVICE HP | 01 NOV 2026 | tanpa display / LED eksternal')
     c.drawRightString(W-40,29,f'{doc.page} / 7')
 
 title(1,'Wiring versi minimal')
@@ -63,6 +63,7 @@ d.add(String(0,8,'Sinyal audio dibuat di ESP32, bukan di HP. Ground logika/audio
 flow.append(d)
 sub('Komponen yang disiapkan')
 table([['Komponen','Jumlah / catatan'],['ESP32-S3 DevKit / N16R8','1; flash 16 MB, PSRAM 8 MB. Cocokkan marking modul aktual.'],['PCM5102 breakout','1; versi dengan regulator dan label VIN yang jelas.'],['Tombol momentary NO','4 pad; resistor pull-up 10k ohm per pad. MUTE kelima opsional.'],['Amplifier + shaker/speaker','Ikuti spesifikasi input, catu, impedansi dan daya unit aktual.'],['Catu DC dan kabel','5 V teratur untuk logika; catu amplifier sesuai modul, bukan dari GPIO.']],[180,WIDTH-180])
+p('<b>Preset awal:</b> PAD 1 = 1096 Hz; PAD 2 = 1360 Hz; PAD 3 = 2249 Hz; PAD 4 = 2386 Hz. Satu tekan maksimal 5 detik; harus lepas/tekan ulang. Preset tersimpan lama tetap ada; gunakan <b>Pulihkan empat preset awal</b> di HP untuk menggantinya. Batas sweep lama tetap berlaku.')
 p('<b>Status:</b> pin mengikuti firmware minimal di repo. Build/tes host bukan uji rakitan fisik. Diagram bukan skala mekanik. PDF Rev08 lama masih memuat wiring delapan pad dan panel servis.')
 flow.append(PageBreak())
 title(2,'Ini pin yang dicolok')
@@ -85,7 +86,7 @@ flow.append(P('<b>Audio keluar:</b> L OUT DAC ke input LINE L/SIGNAL amplifier; 
 flow.append(PageBreak())
 title(5,'Tabel pin dan rangkaian pad')
 p('Gunakan label <b>GPIO</b> pada board, bukan urutan nomor lubang header. Letak header dapat berbeda pada board clone. Semua input tombol bekerja <b>aktif LOW</b>.')
-rows=[['Dari ESP32','Ke komponen','Fungsi'],['GPIO1','Pad 1 -> GND','Tahan = preset bunyi'],['GPIO2','Pad 2 -> GND','Tahan = preset bunyi'],['GPIO4','Pad 3 -> GND','Tahan = preset bunyi'],['GPIO5','Pad 4 -> GND','Tahan = preset bunyi'],['GPIO16 (opsional)','MUTE -> GND','Hanya mute; tidak menjadi TEST'],['GPIO18','PCM5102 BCK / BCLK','Bit clock I2S'],['GPIO21','PCM5102 LCK / LRCK','Clock kanal I2S'],['GPIO47','PCM5102 DIN','Data I2S dari ESP32'],['GND','Pad + DAC GND','Referensi ground bersama']]
+rows=[['Dari ESP32','Ke komponen','Fungsi'],['GPIO1','Pad 1 -> GND','Tahan maks 5 detik; lepas mute'],['GPIO2','Pad 2 -> GND','Tahan maks 5 detik; lepas mute'],['GPIO4','Pad 3 -> GND','Tahan maks 5 detik; lepas mute'],['GPIO5','Pad 4 -> GND','Tahan maks 5 detik; lepas mute'],['GPIO16 (opsional)','MUTE -> GND','Hanya mute; tidak menjadi TEST'],['GPIO18','PCM5102 BCK / BCLK','Bit clock I2S'],['GPIO21','PCM5102 LCK / LRCK','Clock kanal I2S'],['GPIO47','PCM5102 DIN','Data I2S dari ESP32'],['GND','Pad + DAC GND','Referensi ground bersama']]
 table(rows,[108,186,WIDTH-294])
 sub('Satu rangkaian ini diulang untuk setiap pad')
 d=Drawing(WIDTH,123)
@@ -119,12 +120,12 @@ flow.append(Spacer(1,8))
 flow.append(P('gh repo clone dissakamajaya/cp-100<br/>cd cp-100<br/>pio run -d firmware -t upload<br/>pio device monitor -d firmware','CodeCP'))
 p('Sambungkan kabel data ke port berlabel <b>UART</b>. Bila autodetect gagal, tambahkan <font name="Courier">--upload-port COM5</font> atau port serial aktual. Bila perlu masuk download mode: tahan BOOT, tekan/lepas RESET, lalu lepas BOOT. [1]')
 sub('Pilihan B - paket binary dari repo')
-p('Unduh folder/ZIP <font name="Courier">firmware/releases/remote-v1.0.0</font>. Baca README di paket dan jalankan <font name="Courier">python flash.py --check</font> sebelum flash. File terpisah beserta offset disertakan; jangan menulis application-only <font name="Courier">firmware.bin</font> ke alamat 0x0.')
+p('Unduh folder/ZIP <font name="Courier">firmware/releases/remote-v1.1.0</font>. Baca README di paket dan jalankan <font name="Courier">python flash.py --check</font> sebelum flash. File terpisah beserta offset disertakan; jangan menulis application-only <font name="Courier">firmware.bin</font> ke alamat 0x0.')
 sub('Urutan uji')
 for s in [
-'1. ESP32 saja: upload, buka serial 115200, ketik <b>wifi</b>. Catat password per perangkat untuk operator; jangan masukkan password ke repo.',
+'1. ESP32 saja: upload, buka serial 115200. Password hotspot bersama untuk operator: <b>300300300</b> (dipilih pemilik; menggantikan password acak firmware lama). Ketik <b>wifi</b> untuk memeriksa koneksi.',
 '2. HP: sambungkan ke <b>ATMOS-CP-300-EXP</b>, tetap tersambung meski tanpa internet. Buka <b>http://192.168.4.1</b> lalu Hubungkan kontrol. Boot dan masuk SERVICE harus mute.',
-'3. Pasang DAC dan cek sinyal lewat input line speaker aktif/alat ukur, level rendah. TEST dan MUTE harus bekerja. Berikutnya pasang empat pad; tahan bunyi, lepas mute.',
+'3. Pasang DAC dan cek sinyal lewat input line speaker aktif/alat ukur, level rendah. TEST dan MUTE harus bekerja. Berikutnya pasang empat pad; tahan maksimal 5 detik, lepas langsung mute. Lepas dan tekan ulang untuk mengulang.',
 '4. Simpan preset, matikan/nyalakan, lalu cek preset/sweep tetap tersimpan dan boot tetap mute. Tutup tab/putus Wi-Fi saat TEST: output servis harus mute paling lambat setelah lease 2,5 detik.',
 '5. Baru pasang amplifier dan shaker. Tentukan sweep/level serta langkah GATHER pada pelat nyata. Batas tersimpan lama tidak diperluas otomatis ke 4000 Hz.'
 ]:flow.append(P(s,'SmallCP'))
@@ -134,7 +135,7 @@ flow.append(P('[2] <link href="https://www.ti.com/lit/ds/symlink/pcm5102a.pdf" c
 flow.append(P('[3] <link href="https://elektroweb.pl/pl/esp32/1312-modul-esp32-s3-devkitc-1-wroom-1-n16r8-16mb-flash-wifi-bluetooth-usb-c.html" color="#367e75">Elektroweb: foto referensi DevKit N16R8</link>. [4] <link href="https://www.ebay.com/itm/314748193002" color="#367e75">Foto referensi GY-PCM5102</link>. Foto telah ada dalam bahan proyek; hak tetap pada pemilik, tidak berlisensi bebas.','SmallCP'))
 flow.append(P('Sumber pin proyek: firmware/include/pins.h; konfigurasi I2S: firmware/src/audio.cpp. Header J1/J3 dicocokkan dengan [1]. Pinout dan diagram tidak menggantikan pemeriksaan modul aktual; dokumen ini belum menjadi bukti uji perangkat fisik.','SmallCP'))
 
-doc=SimpleDocTemplate(str(OUT),pagesize=A4,rightMargin=40,leftMargin=40,topMargin=58,bottomMargin=58,title='CP-100 Wiring Rev02 - Foto DevKit dan Diagram Kabel',author='House of EXP',pageCompression=1)
+doc=SimpleDocTemplate(str(OUT),pagesize=A4,rightMargin=40,leftMargin=40,topMargin=58,bottomMargin=58,title='CP-100 Wiring Rev03 - Foto DevKit dan Diagram Kabel',author='House of EXP',pageCompression=1)
 doc.build(flow,onFirstPage=footer,onLaterPages=footer)
 # Keep an editable machine-readable wire list beside the PDF.
 pins=(ROOT/'firmware/include/pins.h').read_text()

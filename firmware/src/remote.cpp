@@ -7,16 +7,16 @@
 #include <string>
 #include "audio.h"
 #include "protocol.h"
-#include "storage.h"
+#include "service_config.h"
 #include "web_assets.h"
 
 namespace {
-constexpr const char* kSsid = "ATMOS-CP-300-EXP";
+constexpr const char* kSsid = kServiceSsid;
 QueueHandle_t requests = nullptr, replies = nullptr;
 struct Reply { uint32_t id; bool ok, persisted; const char* message; };
 portMUX_TYPE snapshotLock = portMUX_INITIALIZER_UNLOCKED;
 ControlSnapshot published;
-char password[17] = {}, token[33] = {};
+char token[33] = {};
 uint32_t owner = 0, nextId = 0;
 bool ready = false;
 
@@ -131,21 +131,17 @@ void remoteReply(uint32_t id, const ControlResult& result, bool persisted) {
   xQueueSend(replies, &reply, 0);
 }
 void remotePrintWifi() {
-  if (ready) Serial.printf("Wi-Fi: %s\nPassword: %s\nRemote: http://192.168.4.1\n", kSsid, password);
+  if (ready) Serial.printf("Wi-Fi: %s\nPassword: %s\nRemote: http://192.168.4.1\n", kSsid, kServicePassword);
   else Serial.println("Wi-Fi unavailable; pads and physical MUTE still operate.");
 }
 void remoteBegin(const ControlSnapshot& initial) {
   remotePublish(initial);
   requests = xQueueCreate(2, sizeof(RemoteRequest)); replies = xQueueCreate(2, sizeof(Reply));
   if (!requests || !replies) return;
-  // Generated per device; credentials never enter source code or the HTTP API.
+  // The owner selected a shared operator password; ignore legacy random NVS credentials.
   if (!WiFi.mode(WIFI_AP)) return;
-  if (!storageLoadWifi(password)) {
-    for (int i = 0; i < 2; ++i) snprintf(password + i * 8, 9, "%08lx", (unsigned long)esp_random());
-    if (!storageSaveWifi(password)) { WiFi.mode(WIFI_OFF); Serial.println("Wi-Fi password could not be saved; hotspot disabled."); return; }
-  }
   const IPAddress address(192, 168, 4, 1);
-  if (!WiFi.softAPConfig(address, address, IPAddress(255, 255, 255, 0)) || !WiFi.softAP(kSsid, password, 1, 0, 2)) return;
+  if (!WiFi.softAPConfig(address, address, IPAddress(255, 255, 255, 0)) || !WiFi.softAP(kSsid, kServicePassword, 1, 0, 2)) return;
   httpd_config_t config = HTTPD_DEFAULT_CONFIG();
   config.core_id = 0; config.stack_size = 8192; config.max_uri_handlers = 6;
   config.max_open_sockets = 4; config.lru_purge_enable = true;

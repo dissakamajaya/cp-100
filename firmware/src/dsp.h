@@ -34,6 +34,8 @@ struct SynthTarget {
   float mean = 0;
   Wave wave = Wave::Sine;
   Harmonics harmonics = Harmonics::Odd;
+  uint32_t padPressId = 0;     // nonzero for a manual pad; new ID only on new press
+  uint32_t padMaxFrames = 0;   // hard audio-sample ceiling, independent of loop/network
   bool fastRelease = false;  // mute uses the 10 ms release, like the simulator
 };
 
@@ -67,4 +69,5 @@ class Synth {
   int historyPos_ = 0;
   float hpX_ = 0, hpY_ = 0, hpR_;
   float peak_ = 0;
+  uint32_t padPressId_ = 0, padFramesLeft_ = 0;
 };

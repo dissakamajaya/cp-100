@@ -1,0 +1,112 @@
+Processing cp100 (platform: espressif32@6.9.0; board: esp32-s3-devkitc-1; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (6.9.0) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES:
+ - framework-arduinoespressif32 @ 3.20017.241212+sha.dcc1105b
+ - tool-esptoolpy @ 1.40501.0 (4.5.1)
+ - toolchain-riscv32-esp @ 8.4.0+2021r2-patch5
+ - toolchain-xtensa-esp32s3 @ 8.4.0+2021r2-patch5
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 34 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- ArduinoJson @ 6.21.5
+|-- WiFi @ 2.0.0
+|-- Preferences @ 2.0.0
+Building in release mode
+Compiling .pio/build/cp100/src/audio.cpp.o
+Compiling .pio/build/cp100/src/controller.cpp.o
+Compiling .pio/build/cp100/src/dsp.cpp.o
+Compiling .pio/build/cp100/src/inputs.cpp.o
+Compiling .pio/build/cp100/src/main.cpp.o
+Compiling .pio/build/cp100/src/model.cpp.o
+Compiling .pio/build/cp100/src/protocol.cpp.o
+Compiling .pio/build/cp100/src/remote.cpp.o
+Compiling .pio/build/cp100/src/storage.cpp.o
+Building .pio/build/cp100/bootloader.bin
+Generating partitions .pio/build/cp100/partitions.bin
+esptool.py v4.5.1
+Creating esp32s3 image...
+Merged 1 ELF section
+Successfully created esp32s3 image.
+Compiling .pio/build/cp100/libdb1/WiFi/WiFi.cpp.o
+Compiling .pio/build/cp100/libdb1/WiFi/WiFiAP.cpp.o
+Compiling .pio/build/cp100/libdb1/WiFi/WiFiClient.cpp.o
+Compiling .pio/build/cp100/libdb1/WiFi/WiFiGeneric.cpp.o
+Compiling .pio/build/cp100/libdb1/WiFi/WiFiMulti.cpp.o
+Compiling .pio/build/cp100/libdb1/WiFi/WiFiSTA.cpp.o
+Compiling .pio/build/cp100/libdb1/WiFi/WiFiScan.cpp.o
+Compiling .pio/build/cp100/libdb1/WiFi/WiFiServer.cpp.o
+Compiling .pio/build/cp100/libdb1/WiFi/WiFiUdp.cpp.o
+Compiling .pio/build/cp100/libc9a/Preferences/Preferences.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/Esp.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/FirmwareMSC.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/FunctionalInterrupt.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/HWCDC.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/HardwareSerial.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/IPAddress.cpp.o
+Archiving .pio/build/cp100/libdb1/libWiFi.a
+Indexing .pio/build/cp100/libdb1/libWiFi.a
+Compiling .pio/build/cp100/FrameworkArduino/IPv6Address.cpp.o
+Archiving .pio/build/cp100/libc9a/libPreferences.a
+Indexing .pio/build/cp100/libc9a/libPreferences.a
+Compiling .pio/build/cp100/FrameworkArduino/MD5Builder.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/Print.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/Stream.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/StreamString.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/Tone.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/USB.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/USBCDC.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/USBMSC.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/WMath.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/WString.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/base64.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/cbuf.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-adc.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-bt.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-cpu.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-dac.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-gpio.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-i2c-slave.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-i2c.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-ledc.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-matrix.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-misc.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-psram.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-rgb-led.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-rmt.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-sigmadelta.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-spi.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-time.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-timer.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-tinyusb.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-touch.c.o
+Compiling .pio/build/cp100/FrameworkArduino/esp32-hal-uart.c.o
+Compiling .pio/build/cp100/FrameworkArduino/firmware_msc_fat.c.o
+Compiling .pio/build/cp100/FrameworkArduino/libb64/cdecode.c.o
+Compiling .pio/build/cp100/FrameworkArduino/libb64/cencode.c.o
+Compiling .pio/build/cp100/FrameworkArduino/main.cpp.o
+Compiling .pio/build/cp100/FrameworkArduino/stdlib_noniso.c.o
+Compiling .pio/build/cp100/FrameworkArduino/wiring_pulse.c.o
+Compiling .pio/build/cp100/FrameworkArduino/wiring_shift.c.o
+Archiving .pio/build/cp100/libFrameworkArduino.a
+Indexing .pio/build/cp100/libFrameworkArduino.a
+Linking .pio/build/cp100/firmware.elf
+Retrieving maximum program size .pio/build/cp100/firmware.elf
+Checking size .pio/build/cp100/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=         ]  14.3% (used 46732 bytes from 327680 bytes)
+Flash: [=         ]  13.2% (used 862405 bytes from 6553600 bytes)
+Building .pio/build/cp100/firmware.bin with action:
+  "$PYTHONEXE" "$OBJCOPY" --chip esp32s3 elf2image --flash_mode ${__get_board_flash_mode(__env__)} --flash_freq ${__get_board_f_image(__env__)} --flash_size 16MB --elf-sha256-offset 0xb0 -o $TARGET $SOURCES
+Building .pio/build/cp100/firmware.bin
+esptool.py v4.5.1
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+========================= [SUCCESS] Took 10.14 seconds =========================

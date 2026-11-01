@@ -129,7 +129,7 @@ static void testStateRules() {
   CHECK(s.muted && s.mode == Mode::Run && s.activePad == -1, "boot must be RUN and muted");
 
   CHECK(padDown(s, 1), "pad 2 has a preset");
-  CHECK(!s.muted && s.activePad == 1 && s.parameters.frequencyHz == 196, "pad 2 plays 196 Hz");
+  CHECK(!s.muted && s.activePad == 1 && s.parameters.frequencyHz == 1360, "pad 2 plays 1360 Hz");
   CHECK(!padDown(s, 2), "second pad is ignored while the first is held");
   CHECK(!padUp(s, 2) && !s.muted, "releasing the ignored pad changes nothing");
   CHECK(padUp(s, 1) && s.muted && s.activePad == -1, "release mutes");
@@ -150,16 +150,47 @@ static void testStateRules() {
   CHECK(!s.armed && s.muted && s.activePad == -1, "saving disarms and stays muted");
 
   Setup narrow = s.setup;
-  narrow.minHz = 150;
-  narrow.maxHz = 300;
+  narrow.minHz = 1200;
+  narrow.maxHz = 1500;
   CHECK(applySetup(s, narrow), "sweep limits apply in SERVICE");
   setMode(s, Mode::Run);
-  CHECK(!padDown(s, 0), "128.5 Hz preset is outside 150-300 and blocked");
-  CHECK(padDown(s, 1), "196 Hz preset is inside and plays");
+  CHECK(!padDown(s, 0), "1096 Hz preset is outside 1200-1500 and blocked");
+  CHECK(padDown(s, 1), "1360 Hz preset is inside and plays");
 
   const LedState led = ledState(s, 1);
   CHECK(led.active && led.color == LedState::Tosca, "odd index pad lights tosca when alternating");
   CHECK(ledState(s, 0).color == LedState::White, "idle pads are white");
+}
+
+static void testPadAudioLimit() {
+  // Deliberately keep sending a sounding target for >5 seconds: the audio side
+  // must stop even if the controller loop stalls, or Wi-Fi heartbeats continue.
+  Synth synth(48000);float buffer[128];SynthTarget t;
+  t.frequencyHz=1096;t.level=.35f;t.padPressId=1;t.padMaxFrames=240000;
+  bool sounded=false,tailSilent=true;
+  for(int block=0;block<2000;++block) {
+    if(block==1000)t.frequencyHz=1360; // edits must not reset the sample counter
+    synth.render(buffer,128,t);
+    for(int n=0;n<128;++n) {
+      const int frame=block*128+n;
+      if(frame<239000 && fabsf(buffer[n])>.001f)sounded=true;
+      if(frame>=240000 && buffer[n]!=0)tailSilent=false;
+    }
+  }
+  CHECK(sounded,"limited pad should produce audio before cutoff");
+  CHECK(tailSilent,"all samples after five seconds must be exactly zero without control-loop help");
+  synth.render(buffer,128,t);CHECK(rms(buffer,128)==0,"same held press cannot restart audio");
+  t.padPressId=2;synth.render(buffer,128,t);CHECK(rms(buffer,128)>.001f,"a new press gets a new five-second budget");
+  // Release just before the deadline: the fade tail also stays inside 5 s.
+  Synth released(48000);t.padPressId=1;t.padMaxFrames=240000;
+  for(int block=0;block<1874;++block)released.render(buffer,128,t); // 239872 frames
+  t.padPressId=0;t.padMaxFrames=0;t.level=0;t.fastRelease=true;
+  released.render(buffer,128,t);released.render(buffer,128,t);
+  CHECK(rms(buffer,128)==0,"release tail cannot exceed the five-second pad budget");
+  t.level=.35f;t.fastRelease=false;
+  t.padPressId=0;t.padMaxFrames=0; // TEST/sequence/GATHER use their own existing rules
+  for(int block=0;block<1900;++block)synth.render(buffer,128,t);
+  CHECK(rms(buffer,128)>.001f,"manual pad ceiling does not impose a global five-second playback limit");
 }
 
 static void testExtendedRange() {
@@ -185,6 +216,7 @@ int main() {
   testSynthLevelMuteAndContinuity();
   testStateRules();
   testExtendedRange();
+  testPadAudioLimit();
   printf(failures ? "%d check(s) failed\n" : "all checks passed\n", failures);
   return failures ? 1 : 0;
 }

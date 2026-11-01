@@ -1,5 +1,12 @@
 # Daftar kelanjutan
 
+## Firmware v1.1.0 - 1 November 2026
+
+- [x] Pad momentary maksimal 5 detik/tekan, tanpa autorepeat; deadline + hard cap sampel DSP; tes boundary/release/re-arm/wrap.
+- [x] Preset awal 1096/1360/2249/2386 Hz; NVS lama tetap tersedia, pemulihan eksplisit di HP.
+- [x] Password bersama pilihan pemilik untuk operator; paket binary dan PDF Rev03 diperbarui.
+- [ ] Flash dan uji koneksi HP serta durasi audio/GPIO/I2S pada ESP32 nyata.
+
 ## Rilis minimal — 1 November 2026
 
 - [x] Hapus display/LED eksternal dan kontrol LED dari firmware aktif; SERVICE seluruhnya di HP.

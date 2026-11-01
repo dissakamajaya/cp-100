@@ -5,16 +5,22 @@ Revisi minimal 1 November 2026: **empat pad horizontal**, ESP32-S3 N16R8, FREQ *
 ## Memakai panel HP
 
 1. Upload firmware melalui port **UART** pada DevKit, lalu buka monitor serial 115200.
-2. Ketik `wifi` untuk melihat password hotspot. Password 16 karakter dibuat acak per perangkat dan disimpan di NVS; tidak ada password universal di source. Simpan password untuk operator, jangan publikasikan log serial tersebut.
+2. Password hotspot bersama: **300300300**, sesuai pilihan pemilik untuk operator. Firmware memakai konfigurasi ini langsung, menggantikan password acak lama tanpa menghapus preset/NVS. Ketik `wifi` untuk melihat info koneksi. Konfigurasi ada di `include/service_config.h`; password tidak dimasukkan ke API state atau ekspor preset.
 3. Sambungkan HP ke Wi-Fi **ATMOS-CP-300-EXP**. Pilih tetap tersambung jika HP mengatakan jaringan tidak memiliki internet.
 4. Buka **http://192.168.4.1** di browser HP, lalu tekan **Hubungkan kontrol**. Tidak perlu internet, akun, aplikasi terpasang, atau koneksi router.
 5. Perangkat masuk SERVICE dalam keadaan **mute**. Atur FREQ, LEVEL, FOLD, WAVE dan HARMONICS. Geser knob ke atas/bawah, gunakan tombol ±, atau ketik angka. **TEST SUARA** membunyikan suara yang sedang diedit.
-6. **SIMPAN 1–4** menyimpan suara ke pad tujuan dan mematikan output. Preview pad di HP: tahan untuk bunyi, lepas untuk mute. Pad fisik tetap memakai prioritas pad pertama yang ditahan.
+6. **SIMPAN 1–4** menyimpan suara ke pad tujuan dan mematikan output. Pad fisik dan preview pad di HP: tahan untuk bunyi, lepas untuk mute, maksimal **5 detik per tekan**. Setelah timeout harus dilepas lalu ditekan ulang, tanpa autorepeat. Pad fisik tetap memakai prioritas pad pertama yang ditahan sampai dilepas.
 7. **Selesai servis** mengembalikan perangkat ke RUN dan mute. Untuk pengunjung, pad fisik beroperasi tanpa HP.
 
 Tombol **MUTE / STOP** selalu tersedia di bagian bawah layar. Hanya satu sesi kontrol dapat aktif. Tab ditutup, HP tidur atau koneksi hilang: sesi kedaluwarsa setelah **2,5 detik**, playback berhenti, perangkat kembali RUN dan mute. Hold pad remote memiliki batas tambahan **1,2 detik** tanpa pembaruan hold. Tidak ada auto-resume saat tersambung kembali. Physical MUTE opsional tetap berfungsi.
 
 Hotspot memakai HTTP lokal melalui jaringan Wi-Fi berpassword. Alamat dibuka manual; firmware ini tidak mengandalkan captive portal, mDNS, atau internet. Dua perangkat dapat bergabung ke hotspot, tetapi hanya satu sesi dapat mengubah pengaturan. Jangan menjalankan dua rakitan dengan SSID yang sama di tempat yang sama tanpa penamaan jaringan tersendiri.
+
+## Preset awal
+
+PAD 1 **1096 Hz**, PAD 2 **1360 Hz**, PAD 3 **2249 Hz**, PAD 4 **2386 Hz**. Wave/level/fold/harmonics selain frekuensi tetap seperti versi sebelumnya. Nilai ini dipakai pada NVS baru atau saat memilih **Preset awal -> Pulihkan empat preset awal** di HP. Upgrade tidak menimpa preset tersimpan. Batas sweep lama tetap berlaku; bila MAX masih 2000 Hz, pad 3/4 diblokir sampai batas diperluas dan diuji pada rakitan.
+
+Batas 5 detik menggunakan deadline `millis()` yang tahan wrap dan batas **240.000 sampel pada 48 kHz** di DSP, dengan fade 10 ms di akhir sebelum cutoff. Heartbeat, drag knob, dan event down duplikat tidak mengulang budget. TEST/sequence/GATHER tetap memakai aturan playback masing-masing.
 
 ## Fitur panel
 
@@ -34,7 +40,7 @@ Input pad manual, edit parameter, perubahan mode/setup, MUTE, atau sesi terputus
 
 ## Build dan upload
 
-**Paket siap flash:** [remote-v1.0.0](releases/remote-v1.0.0/README.md) atau [ZIP binary + PDF](releases/CP-100-remote-v1.0.0.zip). **PDF wiring terbaru:** [Rev02: foto DevKit dan diagram kabel, tanpa display/LED](../output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf). Paket binary berisi empat image terpisah dan checksum; tidak menulis padding ke NVS.
+**Paket siap flash:** [remote-v1.1.0](releases/remote-v1.1.0/README.md) atau [ZIP binary + PDF](releases/CP-100-remote-v1.1.0.zip). **PDF wiring terbaru:** [Rev03: foto DevKit dan diagram kabel, tanpa display/LED](../output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf). Paket binary berisi empat image terpisah dan checksum; tidak menulis padding ke NVS.
 
 PlatformIO, `espressif32@6.9.0` / Arduino 2.0.17, flash QIO 16 MB, PSRAM OPI. Satu dependency terpin: ArduinoJson 6.21.5. HTTP server memakai ESP-IDF bawaan. Asset HTML/CSS/JS lokal di `web/` dikompresi gzip dan di-embed otomatis oleh `tools/embed_web.py`; tidak perlu upload filesystem terpisah.
 
@@ -96,7 +102,7 @@ Buka `http://127.0.0.1:8765`. Ini pengujian UI/control engine, bukan emulasi ESP
 1. ESP32 saja: upload, `wifi`, akses panel HP, cek boot mute, disconnect/reconnect dan sesi kedua.
 2. Tambahkan PCM5102 ke speaker aktif berlevel rendah; cek TEST, MUTE, hold/release dan perubahan cepat kontrol sambil memantau stall I2S.
 3. Tambahkan empat pad dan MUTE fisik opsional. Cek penekanan bersamaan, satu siklus sequencer, dan putus Wi-Fi saat TEST/sequence/GATHER.
-4. Matikan/nyalakan perangkat, verifikasi preset, sweep, rutin GATHER dan password tetap tersimpan, tetapi output tetap mute.
+4. Matikan/nyalakan perangkat, verifikasi preset, sweep, rutin GATHER serta password operator tetap berlaku, tetapi output tetap mute.
 5. Baru sambungkan amplifier/shaker/pelat; tentukan batas sweep dan level pada rakitan nyata.
 
-Build/host/UI QA tidak membuktikan timing Wi-Fi+audio pada ESP32, kestabilan koneksi HP, level DAC, atau keberhasilan mengumpulkan pasir. Bukti dan hasil terkini: `../evidence/release-2026-11-01/`; riwayat QA remote lengkap: `../evidence/remote-service-2026-10-31/`.
+Build/host/UI QA tidak membuktikan timing Wi-Fi+audio pada ESP32, kestabilan koneksi HP, level DAC, atau keberhasilan mengumpulkan pasir. Bukti dan hasil terkini: `../evidence/momentary-2026-11-01/`; riwayat QA remote lengkap: `../evidence/remote-service-2026-10-31/`.

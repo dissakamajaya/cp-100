@@ -30,10 +30,10 @@ bool inRange(const Parameters& p, const Setup& s) {
 
 void examplePresets(Preset out[kPadCount]) {
   const Parameters examples[4] = {
-      {128.5f, 35, Wave::Sine, 0, Harmonics::Odd},
-      {196, 35, Wave::Triangle, 18, Harmonics::Odd},
-      {256, 30, Wave::Saw, 32, Harmonics::Both},
-      {384, 40, Wave::Sine, 58, Harmonics::Both},
+      {1096, 35, Wave::Sine, 0, Harmonics::Odd},
+      {1360, 35, Wave::Triangle, 18, Harmonics::Odd},
+      {2249, 30, Wave::Saw, 32, Harmonics::Both},
+      {2386, 40, Wave::Sine, 58, Harmonics::Both},
   };
   for (int i = 0; i < kPadCount; i++) out[i] = i < 4 ? Preset{true, examples[i]} : Preset{false, {}};
 }

@@ -6,11 +6,11 @@ Paket kelanjutan controller Chladni House of EXP. Snapshot 26 Oktober 2026 (Asia
 
 ## Flash firmware versi minimal
 
-Versi terbaru: **4 pad + SERVICE HP, tanpa display/LED eksternal**.
+Versi terbaru **v1.1.0**: empat pad momentary **maksimal 5 detik/tekan**, lepas langsung mute, tanpa autorepeat. Preset awal **1096 / 1360 / 2249 / 2386 Hz**. SERVICE HP, tanpa display/LED eksternal.
 
 - [Panduan flash dan wiring firmware](firmware/README.md)
-- [Paket ZIP siap flash + PDF](firmware/releases/CP-100-remote-v1.0.0.zip)
-- [PDF wiring Rev02: foto DevKit dan diagram kabel](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf)
+- [Paket ZIP siap flash + PDF](firmware/releases/CP-100-remote-v1.1.0.zip)
+- [PDF wiring Rev03: foto DevKit dan diagram kabel](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf)
 
 ```sh
 gh repo clone dissakamajaya/cp-100
@@ -19,7 +19,7 @@ pio run -d firmware -t upload
 pio device monitor -d firmware
 ```
 
-Gunakan port USB **UART** pada ESP32-S3 N16R8. Ketik `wifi` di monitor serial untuk password hotspot **ATMOS-CP-300-EXP**, lalu buka **http://192.168.4.1** lewat HP. Repo tetap privat; gunakan akun GitHub yang memiliki akses.
+Gunakan port USB **UART** pada ESP32-S3 N16R8. Hotspot **ATMOS-CP-300-EXP**, password **300300300** (pilihan pemilik). Ketik `wifi` di monitor serial untuk info koneksi, lalu buka **http://192.168.4.1** lewat HP. Repo tetap privat; gunakan akun GitHub yang memiliki akses.
 
 | Lokasi | Isi |
 |---|---|

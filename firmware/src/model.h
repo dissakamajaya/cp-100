@@ -32,7 +32,7 @@ struct Preset {
 
 constexpr int kPadCount = 4;
 constexpr float kMinHz = 20, kMaxHz = 4000;
-constexpr Parameters kDefaultParameters = {128.5f, 35, Wave::Sine, 0, Harmonics::Odd};
+constexpr Parameters kDefaultParameters = {1096, 35, Wave::Sine, 0, Harmonics::Odd};
 constexpr Setup kDefaultSetup = {20, 4000, false, LedColor::Alternate, false};
 
 struct State {

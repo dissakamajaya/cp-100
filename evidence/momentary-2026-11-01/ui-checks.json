@@ -1,0 +1,19 @@
+{
+  "transport": "local C++ control/protocol preview, fake NVS, no radio/DAC/GPIO",
+  "presets_hz": [
+    1096,
+    1360,
+    2249,
+    2386
+  ],
+  "native_pad_hold_6200ms_then_release_output": "mute",
+  "second_pad_click_frequency": 1360,
+  "momentary_hint_visible": true,
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "horizontal_overflow": false,
+  "disconnect_run_mute": true,
+  "note": "Exact 4999/5000ms and sample boundaries proved by host tests, not screenshot"
+}

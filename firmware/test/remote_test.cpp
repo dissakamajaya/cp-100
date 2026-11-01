@@ -48,6 +48,48 @@ void leasesAndPads() {
   cmd.parameters.frequencyHz = 123; CHECK(c.apply(cmd, 4450).ok); c.physicalUp(1); CHECK(c.state().muted);
   CHECK(apply(c, Action::Release, 4460).ok); CHECK(c.state().muted && c.state().mode == Mode::Run);
 }
+void momentaryLimits() {
+  const float expected[] = {1096, 1360, 2249, 2386};
+  for (int i=0;i<kPadCount;++i) {
+    auto c=fresh();
+    CHECK(c.state().presets[i].used && c.state().presets[i].parameters.frequencyHz==expected[i]);
+    c.physicalDown(i,100); CHECK(!c.state().muted && c.state().parameters.frequencyHz==expected[i]);
+    const auto press=c.padPressId(); CHECK(press!=0);
+    c.tick(5099); CHECK(!c.state().muted);
+    c.physicalDown(i,5099); CHECK(c.padPressId()==press); // duplicate does not extend
+    c.tick(5100); CHECK(c.state().muted && c.state().activePad==-1);
+    c.tick(20000);c.physicalDown(i,20001);CHECK(c.state().muted); // still physically held
+    c.physicalDown((i+1)%4,20002);CHECK(c.state().muted); // first held retains ownership
+    c.physicalUp(i);c.physicalDown(i,20003);CHECK(!c.state().muted && c.padPressId()!=press);
+    c.physicalUp(i);CHECK(c.state().muted); // release before five seconds
+    c.tick(30000);CHECK(c.state().muted); // no automatic repeat
+  }
+  // SERVICE and parameter edits cannot renew a physical press's deadline.
+  auto service=fresh();apply(service,Action::Claim,0);service.physicalDown(2,10);
+  for(uint32_t t=400;t<5000;t+=400)beat(service,t);
+  Command edit;edit.owner=42;edit.action=Action::Parameters;edit.parameters=service.state().parameters;
+  CHECK(service.apply(edit,5000).ok);service.tick(5009);CHECK(!service.state().muted);
+  service.tick(5010);CHECK(service.state().muted);
+  CHECK(!apply(service,Action::Test,5011).ok);service.physicalUp(2);
+  CHECK(apply(service,Action::Test,5012).ok);service.emergencyMute();
+  // Remote heartbeat/hold lease is separate from the absolute 5-second limit.
+  auto remote=fresh();apply(remote,Action::Claim,0);CHECK(apply(remote,Action::PadDown,10,1).ok);
+  for(uint32_t t=400;t<5000;t+=400)beat(remote,t,1);
+  remote.tick(5009);CHECK(!remote.state().muted);remote.tick(5010);CHECK(remote.state().muted);
+  beat(remote,5100,1);CHECK(!apply(remote,Action::PadDown,5200,1).ok && remote.state().muted);
+  CHECK(apply(remote,Action::PadUp,5300,1).ok);CHECK(apply(remote,Action::PadDown,5301,1).ok && !remote.state().muted);
+  CHECK(apply(remote,Action::PadUp,5302,1).ok && remote.state().muted);
+  // Unsigned millis wrap preserves the exact boundary and release/re-arm semantics.
+  auto wrapped=fresh();const uint32_t start=0xfffffff0u;wrapped.physicalDown(3,start);
+  wrapped.tick(start+4999);CHECK(!wrapped.state().muted);wrapped.tick(start+5000);CHECK(wrapped.state().muted);
+  wrapped.physicalUp(3);wrapped.physicalDown(3,start+5001);CHECK(!wrapped.state().muted);
+  // A custom persisted slot survives, and factory restore uses the four new defaults.
+  Preferences::data.clear();Preset custom[kPadCount],loaded[kPadCount];Setup setup;examplePresets(custom);
+  custom[0].parameters.frequencyHz=777;CHECK(storageSavePresets(custom));storageLoad(loaded,&setup);
+  CHECK(loaded[0].parameters.frequencyHz==777);Controller restored;restored.begin(loaded,setup,exampleGather());
+  apply(restored,Action::Claim,0);CHECK(apply(restored,Action::Factory,1).presets);
+  for(int i=0;i<kPadCount;++i)CHECK(restored.state().presets[i].parameters.frequencyHz==expected[i]);
+}
 void savesAndValidation() {
   auto c = fresh(); apply(c, Action::Claim, 0);
   Command cmd; cmd.owner = 42; cmd.action = Action::Parameters; cmd.parameters = {4000, 35, Wave::Saw, 99.9f, Harmonics::Even};
@@ -99,7 +141,7 @@ void gathers() {
   advance(c, 511, 2510); CHECK(fabs(c.state().parameters.frequencyHz-200) < .01 && c.state().parameters.levelPct == 30);
   advance(c, 2511, 5010); CHECK(c.state().parameters.levelPct == 10 && !c.state().muted);
   advance(c, 5011, 6010); CHECK(c.state().muted && c.snapshot(6010).playback == Playback::Idle);
-  CHECK(c.state().presets[0].parameters.frequencyHz == 128.5f);
+  CHECK(c.state().presets[0].parameters.frequencyHz == 1096);
   config.gather.steps[0].glideS = NAN; CHECK(!c.apply(config, 6020).ok && c.gather().steps[0].glideS == 1);
   apply(c, Action::GatherStart, 6030); c.physicalDown(1, 6040); CHECK(c.snapshot(6040).playback == Playback::Idle && c.state().activePad == 1);
   c.physicalUp(1); apply(c, Action::GatherStart, 6050); c.emergencyMute(); c.tick(6060); CHECK(c.state().muted && c.snapshot(6060).playback == Playback::Idle);
@@ -126,6 +168,8 @@ void protocol() {
   CHECK(decode(R"({"action":"import","file":{"schema":"chladni-08","version":4,"folding":"parity-fold-v2","presets":[null,null,null,null,null,null,null,null]}})"));
   CHECK(!decode(R"({"action":"import","file":{"schema":"chladni-08","version":4,"folding":"parity-fold-v2","presets":[null,null,null,null,null,null,null,{}]}})"));
   CHECK(decode(R"({"action":"setup","setup":{"minHz":20,"maxHz":4000}})"));
+  CHECK(encodeState(fresh().snapshot(0),0,0,0).find("password") == std::string::npos);
+  CHECK(encodeState(fresh().snapshot(0),0,0,0).find("\"padMaxHoldMs\":5000") != std::string::npos);
   CHECK(encodeState(fresh().snapshot(0),0,0,0).find("ledColor") == std::string::npos);
   CHECK(encodeState(fresh().snapshot(0),0,0,0).find("\"display\":false") != std::string::npos);
   CHECK(!decode(R"({"action":"setup","setup":{"minHz":300,"maxHz":200,"ledColor":"pink","ledPulse":false}})"));
@@ -138,7 +182,7 @@ void storage() {
   storageLoad(loaded,&setup);CHECK(loaded[0].parameters.frequencyHz==4000 && loaded[0].parameters.foldPct==18.1f);CHECK(setup.maxHz==2000 && setup.calibrated && setup.ledPulse);
   auto g=exampleGather();g.steps[0].frequencyHz=100;CHECK(storageSaveGather(g));CHECK(storageLoadGather().steps[0].frequencyHz==100);
   Preferences::failWrites=true;CHECK(!storageSavePresets(p));CHECK(!storageSaveSetup(setup));Preferences::failWrites=false;
-  Preferences::shortRead=true;storageLoad(loaded,&setup);CHECK(loaded[0].parameters.frequencyHz==128.5f && setup.maxHz==4000);Preferences::shortRead=false;
+  Preferences::shortRead=true;storageLoad(loaded,&setup);CHECK(loaded[0].parameters.frequencyHz==1096 && setup.maxHz==4000);Preferences::shortRead=false;
   // Construct the exact previous 8-slot raw layout with distinct integer fold values.
   struct LP { float hz;int32_t level;uint8_t wave,pad1[3];int32_t fold;uint8_t harm,pad2[3]; };
   struct L {uint8_t used,pad[3];LP p;};L old[8]={};static_assert(sizeof(old)==192,"legacy layout");
@@ -150,6 +194,6 @@ void storage() {
   storageLoad(loaded,&setup);CHECK(loaded[0].parameters.foldPct==18 && loaded[3].parameters.frequencyHz==103);CHECK(setup.minHz==50 && setup.maxHz==2000);CHECK(blob==before);
   CHECK(storageSavePresets(loaded));CHECK(Preferences::data["cp100/presets"][0]==2);
   storageLoad(loaded,&setup);CHECK(loaded[3].parameters.foldPct==21);
-  Preferences::data["cp100/presets"][0]=99;storageLoad(loaded,&setup);CHECK(loaded[0].parameters.frequencyHz==128.5f);
+  Preferences::data["cp100/presets"][0]=99;storageLoad(loaded,&setup);CHECK(loaded[0].parameters.frequencyHz==1096);
 }
-int main(){leasesAndPads();savesAndValidation();sequences();gathers();protocol();storage();printf("%d checks, %d failures\n",checks,failures);return failures?1:0;}
+int main(){leasesAndPads();momentaryLimits();savesAndValidation();sequences();gathers();protocol();storage();printf("%d checks, %d failures\n",checks,failures);return failures?1:0;}

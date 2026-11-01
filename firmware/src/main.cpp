@@ -17,6 +17,8 @@ SynthTarget targetFor(const State& s) {
   t.frequencyHz = p.frequencyHz; t.foldPct = p.foldPct;
   t.wave = p.wave; t.harmonics = p.harmonics; t.mean = cal.mean;
   t.level = s.muted ? 0 : p.levelPct / 100.f * cal.gain;
+  t.padPressId = controller.padPressId();
+  t.padMaxFrames = kPadMaxHoldMs * (kSampleRate / 1000);
   t.fastRelease = s.muted; return t;
 }
 void quiesceAudio() {

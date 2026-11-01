@@ -7,7 +7,7 @@
 | Kaca | Bulat Ø500 mm; didukung rangka casing |
 | Celah | Awal 30 mm; perlu verifikasi clearance fisik |
 | Casing | Acuan gambar 800×820×350 mm; bukan ukuran produksi tervalidasi |
-| Pengunjung | 4 pad tanam, 1×4 horizontal; tahan = bunyi, lepas = mute. Firmware remote sudah empat pad; simulator publik/PDF masih menunggu sinkronisasi. |
+| Pengunjung | 4 pad tanam, 1×4 horizontal; tahan = bunyi maksimal 5 detik/tekan, lepas = mute; harus lepas/tekan ulang setelah cutoff. Firmware remote sudah empat pad; simulator publik/PDF masih menunggu sinkronisasi. |
 | Prioritas | Satu pad aktif, pad pertama yang ditahan memiliki output |
 | Display / LED | Dihapus dari hardware aktif pada 1 November 2026; seluruh status di HP |
 | Servis | Aplikasi web HP via hotspot ESP32 `ATMOS-CP-300-EXP`, alamat `http://192.168.4.1`; menggantikan panel fisik servis |
@@ -16,6 +16,10 @@
 | Tombol | Di HP: SAVE per slot, TEST, MUTE/STOP, RUN/SERVICE; MUTE fisik GPIO16 opsional |
 | Preset | Simpan frekuensi, level, wave, fold, harmonik ke pad tujuan |
 | Sweep | Batas MIN/MAX tersimpan; nilai final menunggu uji pelat |
+
+## Pad momentary dan operator - 1 November 2026
+
+Batas setiap pad fisik/HP 5000 ms tanpa autorepeat, diperkuat cap DSP 240.000 sampel pada 48 kHz. Preset awal 1096/1360/2249/2386 Hz; parameter lain tetap. NVS/sweep lama dipertahankan dan factory restore di HP menerapkan empat default baru. Pengguna memilih password bersama untuk operator di service_config.h, menggantikan password acak NVS; token sesi HTTP tetap acak. Keputusan ini menggantikan bagian historis per-perangkat di bawah.
 
 ## Revisi firmware dan SERVICE HP — 31 Oktober 2026
 
@@ -31,7 +35,7 @@ Build, tes host dan UI lokal tidak membuktikan firmware sudah diuji di ESP32 nya
 
 Pengguna menegaskan panel servis fisik tidak diperlukan, sehingga display dan LED juga dihapus. Firmware aktif tidak menginisialisasi MAX7219/WS2812B/MCP23017/SPI/RMT; kontrol LED hilang dari UI/API. Buffer AHCT125 tidak dibutuhkan karena display/LED tidak digunakan. Rangkaian minimum: ESP32-S3 N16R8 + empat tombol NO + PCM5102 breakout + amplifier/shaker; MUTE GPIO16 opsional. Byte pengaturan LED lama tetap dibaca dalam migrasi NVS untuk kompatibilitas layout saja, tanpa output fisik.
 
-Wiring saat ini: `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` **Rev02** (tujuh halaman; foto DevKit dengan pin ditandai dan diagram kabel pad/PCM5102/daya) dan `firmware/README.md`. Bagian bertanggal 31 Oktober dan daftar komponen Rev08 di bawah adalah riwayat, bukan BOM revisi minimal.
+Wiring saat ini: `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` **Rev03** (tujuh halaman; foto DevKit dengan pin ditandai dan diagram kabel pad/PCM5102/daya) dan `firmware/README.md`. Bagian bertanggal 31 Oktober dan daftar komponen Rev08 di bawah adalah riwayat, bukan BOM revisi minimal.
 
 ## Acuan komponen
 

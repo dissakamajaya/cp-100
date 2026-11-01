@@ -118,7 +118,8 @@ std::string encodePresets(const Preset presets[kPadCount]) {
 std::string encodeState(const ControlSnapshot& s, float peak, float loadPct, uint32_t stalls) {
   DynamicJsonDocument doc(6144);
   doc["uptimeMs"] = s.uptimeMs;
-  doc["firmware"] = "cp100-remote-1.0.0-minimal";
+  doc["padMaxHoldMs"] = kPadMaxHoldMs;
+  doc["firmware"] = "cp100-remote-1.1.0-momentary";
   auto hardware = doc.createNestedObject("hardware"); hardware["display"] = false; hardware["leds"] = false; doc["ssid"] = "ATMOS-CP-300-EXP"; doc["address"] = "192.168.4.1";
   doc["mode"] = s.state.mode == Mode::Run ? "run" : "service";
   doc["muted"] = s.state.muted; doc["activePad"] = s.state.activePad; doc["sessionActive"] = s.owner != 0;
