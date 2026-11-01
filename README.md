@@ -10,7 +10,7 @@ Versi terbaru **v1.1.0**: empat pad momentary **maksimal 5 detik/tekan**, lepas 
 
 - [Panduan flash dan wiring firmware](firmware/README.md)
 - [Paket ZIP siap flash + PDF](firmware/releases/CP-100-remote-v1.1.0.zip)
-- [PDF wiring Rev03: foto DevKit dan diagram kabel](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf)
+- [PDF wiring Rev04: foto DevKit dan diagram kabel](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf)
 
 ```sh
 gh repo clone dissakamajaya/cp-100

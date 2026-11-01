@@ -1,8 +1,8 @@
 {
   "documentation": {
-    "revision": "Rev03",
+    "revision": "Rev04",
     "pdf": "CP-100-Wiring-4-Pad-WiFi.pdf",
-    "sha256": "ceead13b56bc9136de795f47e22dabe5a8a3bce4035fcde33631e768e1fffa7c"
+    "sha256": "48e7773ff620cd10c3e0436fb6cffce97ef8e2bb1272f67cd51904da64005195"
   },
   "release": "remote-v1.1.0",
   "date": "2026-11-01",

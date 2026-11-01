@@ -6,9 +6,11 @@ Untuk **ESP32-S3 N16R8 (16 MB flash / 8 MB OPI PSRAM)**. Empat pad; SERVICE lewa
 
 1. Unduh ZIP rilis lalu ekstrak. Atau clone repo dan masuk ke `firmware/releases/remote-v1.1.0`.
 2. Lepas amplifier/shaker saat flashing. Sambungkan kabel USB data ke port board **UART**. Hindari memasukkan daya USB dan 5 V eksternal ke board secara bersamaan.
-3. Buat virtual environment Python, lalu jalankan dari folder ini:
+3. Buat virtual environment Python, lalu jalankan dari folder ini. Di macOS `python` baru tersedia setelah venv aktif; gunakan `python3` untuk membuatnya. Windows: `.venv\Scripts\activate`.
 
 ```sh
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -r requirements.txt
 python flash.py --check
 python flash.py --port COM5
@@ -37,7 +39,11 @@ Jangan menulis `firmware.bin` sendirian ke 0x0. Tidak ada merged image berisi pa
 
 Buka monitor serial **115200** menggunakan PlatformIO (`pio device monitor -d firmware` dari root repo) atau aplikasi terminal serial. Password hotspot: **300300300**, dipilih pemilik untuk dibagikan ke operator. Password acak yang tersimpan dari firmware lama tidak digunakan; tidak perlu erase NVS. Ketik `wifi` untuk melihat info koneksi. Sambungkan HP ke **ATMOS-CP-300-EXP**, buka **http://192.168.4.1**, lalu Hubungkan kontrol. Awalnya mute. Password ini sengaja dibundel sesuai permintaan pemilik pada repo privat. Jangan menaruh token sesi HTTP atau credential layanan lain ke repo.
 
-PDF wiring **Rev03, tujuh halaman**, memuat foto DevKit dengan penanda pin, diagram kabel empat pad dan PCM5102. File berada di `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` pada repo dan ikut disertakan dalam ZIP rilis. GPIO pad: **1, 2, 4, 5**; DAC BCK/LRCK/DIN: **18, 21, 47**; MUTE fisik opsional: **16**. Kontrol display dan LED tidak diinisialisasi pada build ini.
+Bila halaman tidak terbuka, matikan data seluler HP sementara.
+
+**Sebelum uji suara:** jumper solder GY-PCM5102 1 (FLT) ke L, 2 (DEMP) ke L, 3 (XSMT) ke H, 4 (FMT) ke L, dan SCK ke GND; cocokkan dengan silkscreen modul. XSMT yang tidak HIGH membuat DAC diam tanpa error di serial. Selama USB tersambung, jangan sambungkan +5 V eksternal ke pin 5V DevKit; catu 5 V boleh ke VIN DAC dengan GND bersama.
+
+PDF wiring **Rev04, tujuh halaman**, memuat foto DevKit dengan penanda pin, diagram kabel empat pad dan PCM5102. File berada di `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` pada repo dan ikut disertakan dalam ZIP rilis. GPIO pad: **1, 2, 4, 5**; DAC BCK/LRCK/DIN: **18, 21, 47**; MUTE fisik opsional: **16**. Kontrol display dan LED tidak diinisialisasi pada build ini.
 
 ## Build dari source
 

@@ -40,7 +40,7 @@ Input pad manual, edit parameter, perubahan mode/setup, MUTE, atau sesi terputus
 
 ## Build dan upload
 
-**Paket siap flash:** [remote-v1.1.0](releases/remote-v1.1.0/README.md) atau [ZIP binary + PDF](releases/CP-100-remote-v1.1.0.zip). **PDF wiring terbaru:** [Rev03: foto DevKit dan diagram kabel, tanpa display/LED](../output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf). Paket binary berisi empat image terpisah dan checksum; tidak menulis padding ke NVS.
+**Paket siap flash:** [remote-v1.1.0](releases/remote-v1.1.0/README.md) atau [ZIP binary + PDF](releases/CP-100-remote-v1.1.0.zip). **PDF wiring terbaru:** [Rev04: foto DevKit dan diagram kabel, tanpa display/LED](../output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf). Paket binary berisi empat image terpisah dan checksum; tidak menulis padding ke NVS.
 
 PlatformIO, `espressif32@6.9.0` / Arduino 2.0.17, flash QIO 16 MB, PSRAM OPI. Satu dependency terpin: ArduinoJson 6.21.5. HTTP server memakai ESP-IDF bawaan. Asset HTML/CSS/JS lokal di `web/` dikompresi gzip dan di-embed otomatis oleh `tools/embed_web.py`; tidak perlu upload filesystem terpisah.
 
@@ -70,7 +70,7 @@ Audio berjalan di core 1 dengan prioritas di atas loop kontrol. Wi-Fi dan HTTP b
 | Pad 1–4 | GPIO1, GPIO2, GPIO4, GPIO5; masing-masing switch ke GND, pull-up 10k ke 3V3 |
 | MUTE fisik opsional | GPIO16 ke GND, pull-up 10k ke 3V3; kini hanya mematikan suara |
 | PCM5102 BCK / LCK / DIN | GPIO18 / GPIO21 / GPIO47 |
-| PCM5102 SCK | GND; FLT/DEMP/FMT LOW, XSMT HIGH; cocokkan jumper modul aktual |
+| PCM5102 SCK | GND; FLT/DEMP/FMT LOW, XSMT HIGH (GY-PCM5102: jumper 1L, 2L, 3H, 4L); cocokkan silkscreen modul aktual |
 
 Semua GND terhubung. Pin 6–9 tidak lagi dipakai pad. Encoder FREQ/LEVEL/FOLD, SAVE fisik, selector MODE/WAVE/HARMONICS dan MCP23017 lama tidak dibaca oleh aplikasi saat ini; jangan gunakan pinout PDF Rev08 delapan pad sebagai wiring revisi ini. Driver panel/display/LED lama disimpan untuk riwayat dan dikecualikan dari build. GPIO38-41 tidak digunakan untuk output display/LED. Pelat 600×600 mm, kaca Ø500 mm, enclosure pad 220×74×24 mm tetap.
 

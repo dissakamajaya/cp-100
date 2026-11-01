@@ -44,7 +44,7 @@ def arrow(d,x1,y1,x2,y2,label=None):
 def footer(c,doc):
     c.setFillColor(INK);c.setFont('Helvetica-Bold',8);c.drawString(40,H-30,'HOUSE OF EXP / ATMOS')
     c.setStrokeColor(LINE);c.line(40,43,W-40,43)
-    c.setFont('Helvetica',7.5);c.setFillColor(MUTED);c.drawString(40,29,'CP-100 | Rev03 | 4 pad + SERVICE HP | 01 NOV 2026 | tanpa display / LED eksternal')
+    c.setFont('Helvetica',7.5);c.setFillColor(MUTED);c.drawString(40,29,'CP-100 | Rev04 | 4 pad + SERVICE HP | 01 NOV 2026 | tanpa display / LED eksternal')
     c.drawRightString(W-40,29,f'{doc.page} / 7')
 
 title(1,'Wiring versi minimal')
@@ -81,7 +81,9 @@ flow.append(PageBreak())
 title(4,'Kabel DevKit ke PCM5102')
 p('Ikuti garis dari pin header ESP32 ke <b>nama terminal</b> pada PCM5102. Bentuk konektor di diagram disederhanakan; urutan pada modul lain bisa berbeda. Foto modul membantu mengenali label SCK/BCK/DIN/LRCK/GND/VIN. Garis bersilangan tanpa titik sambungan tidak saling terhubung.')
 flow.append(dac_wiring())
-flow.append(P('<b>SCK ke GND</b>; bukan ke GPIO18. <b>BCK</b> yang ke GPIO18. Atur FMT/DEMP/FLT ke LOW dan XSMT ke HIGH 3V3 sesuai jumper modul. VIN 5 V hanya untuk breakout dengan regulator yang mengizinkannya; IC telanjang memakai suplai sesuai datasheet.','SmallCP'))
+flow.append(P('<b>SCK ke GND</b>; bukan ke GPIO18. <b>BCK</b> yang ke GPIO18. VIN 5 V hanya untuk breakout dengan regulator yang mengizinkannya; IC telanjang memakai suplai sesuai datasheet.','SmallCP'))
+flow.append(P('<b>Wajib sebelum uji suara - jumper solder GY-PCM5102:</b> 1 (FLT) ke <b>L</b>, 2 (DEMP) ke <b>L</b>, 3 (XSMT) ke <b>H</b>, 4 (FMT) ke <b>L</b>. Cocokkan nomor dengan silkscreen modul. Bila XSMT tidak HIGH, DAC tetap diam walau firmware normal dan serial tidak menampilkan error.','SmallCP'))
+flow.append(P('<b>Saat USB tersambung (flash/bench):</b> jangan sambungkan kabel merah +5 V ke pin 5V DevKit. Catu 5 V tetap boleh ke VIN DAC dengan GND bersama. Kabel ke pin 5V hanya untuk operasi tanpa USB.','SmallCP'))
 flow.append(P('<b>Audio keluar:</b> L OUT DAC ke input LINE L/SIGNAL amplifier; AGND/GND DAC ke signal GND amplifier. Shaker ke output speaker amplifier. Lihat halaman 6 untuk detail daya dan output; output speaker bukan GND logika.','SmallCP'))
 flow.append(PageBreak())
 title(5,'Tabel pin dan rangkaian pad')
@@ -104,10 +106,10 @@ flow.append(PageBreak())
 title(6,'DAC, daya dan amplifier')
 sub('PCM5102: tiga sinyal I2S, tanpa level shifter')
 p('BCK, LCK dan DIN menerima logika 3,3 V dari ESP32. Firmware mengirim 48 kHz, slot 32-bit; kanal L dan R membawa sinyal mono yang sama. Untuk satu amplifier/shaker, pakai <b>satu</b> line output, misalnya L. Jangan menyatukan L dan R. [2]')
-table([['Pin / setting DAC','Hubungkan / pilih'],['BCK / LCK / DIN','GPIO18 / GPIO21 / GPIO47'],['SCK (MCLK)','GND; PLL internal memakai BCK. Jangan tertukar dengan BCK.'],['FMT / DEMP / FLT','LOW / LOW / LOW. FMT LOW memilih I2S.'],['XSMT','HIGH ke 3V3 untuk unmute. Jangan dibiarkan mengambang.'],['VIN pada breakout ber-regulator','5 V hanya bila spesifikasi modul mengizinkan; bare IC bukan input 5 V.'],['GND / AGND','Ground logika dan ground sinyal amplifier.'],['L line out','Ke input line L / signal amplifier; R boleh tidak dihubungkan.']],[178,WIDTH-178])
+table([['Pin / setting DAC','Hubungkan / pilih'],['BCK / LCK / DIN','GPIO18 / GPIO21 / GPIO47'],['SCK (MCLK)','GND; PLL internal memakai BCK. Jangan tertukar dengan BCK.'],['FMT / DEMP / FLT','LOW / LOW / LOW (jumper 4L / 2L / 1L). FMT LOW memilih I2S.'],['XSMT','HIGH untuk unmute (jumper 3H). Jangan dibiarkan mengambang.'],['VIN pada breakout ber-regulator','5 V hanya bila spesifikasi modul mengizinkan; bare IC bukan input 5 V.'],['GND / AGND','Ground logika dan ground sinyal amplifier.'],['L line out','Ke input line L / signal amplifier; R boleh tidak dihubungkan.']],[178,WIDTH-178])
 p('Nomor jumper H/L pada modul GY-PCM5102 dapat berbeda. Ikuti <b>nama sinyal</b> dan skematik modul. Data sheet IC menetapkan suplai sekitar 3,3 V; jangan menerapkan 5 V langsung ke pin suplai bare IC atau pin kontrolnya. [2]')
 sub('Dua cara memberi daya ESP32: pilih salah satu')
-p('<b>Saat flash/bench:</b> daya ESP32 dari port USB-to-UART. Jangan sekaligus memasukkan 5 V eksternal ke pin 5V board. DAC boleh memakai catu terpisah yang sesuai modul, dengan GND disambungkan. [1]')
+p('<b>Saat flash/bench:</b> daya ESP32 dari port USB-to-UART. Jangan sekaligus memasukkan 5 V eksternal ke pin 5V board; lepas kabel +5 V ke pin 5V selama USB tersambung. DAC boleh memakai catu terpisah yang sesuai modul, dengan GND disambungkan. [1]')
 p('<b>Saat operasi:</b> bila memakai 5 V eksternal ke pin 5V/GND DevKit, lepaskan daya USB atau gunakan solusi isolasi daya yang sesuai skematik board. Distribusikan catu logika dan amplifier melalui cabang masing-masing; jangan mengalirkan arus shaker lewat board ESP32. [1]')
 sub('Sambungan amplifier/shaker')
 p('DAC L -> input LINE/SIGNAL amplifier. DAC GND -> input signal ground amplifier. Shaker -> terminal output speaker pasangan kanal yang dipakai. Supply amplifier mengikuti marking dan polaritas unit aktual (YS-502MT harus dikonfirmasi); jangan menebak tegangan catu dari nama produknya.')
@@ -120,11 +122,13 @@ flow.append(Spacer(1,8))
 flow.append(P('gh repo clone dissakamajaya/cp-100<br/>cd cp-100<br/>pio run -d firmware -t upload<br/>pio device monitor -d firmware','CodeCP'))
 p('Sambungkan kabel data ke port berlabel <b>UART</b>. Bila autodetect gagal, tambahkan <font name="Courier">--upload-port COM5</font> atau port serial aktual. Bila perlu masuk download mode: tahan BOOT, tekan/lepas RESET, lalu lepas BOOT. [1]')
 sub('Pilihan B - paket binary dari repo')
-p('Unduh folder/ZIP <font name="Courier">firmware/releases/remote-v1.1.0</font>. Baca README di paket dan jalankan <font name="Courier">python flash.py --check</font> sebelum flash. File terpisah beserta offset disertakan; jangan menulis application-only <font name="Courier">firmware.bin</font> ke alamat 0x0.')
+p('Unduh folder/ZIP <font name="Courier">firmware/releases/remote-v1.1.0</font>. Dari folder itu, buat virtual environment lalu cek checksum sebelum flash. Di macOS gunakan <font name="Courier">python3</font> untuk membuat venv; setelah aktif, <font name="Courier">python</font> tersedia. File terpisah beserta offset disertakan; jangan menulis application-only <font name="Courier">firmware.bin</font> ke alamat 0x0.')
+flow.append(Spacer(1,8))
+flow.append(P('python3 -m venv .venv<br/>source .venv/bin/activate&nbsp;&nbsp;&nbsp;(Windows: .venv\\Scripts\\activate)<br/>python -m pip install -r requirements.txt<br/>python flash.py --check<br/>python flash.py --port /dev/cu.usbserial-XXXX','CodeCP'))
 sub('Urutan uji')
 for s in [
 '1. ESP32 saja: upload, buka serial 115200. Password hotspot bersama untuk operator: <b>300300300</b> (dipilih pemilik; menggantikan password acak firmware lama). Ketik <b>wifi</b> untuk memeriksa koneksi.',
-'2. HP: sambungkan ke <b>ATMOS-CP-300-EXP</b>, tetap tersambung meski tanpa internet. Buka <b>http://192.168.4.1</b> lalu Hubungkan kontrol. Boot dan masuk SERVICE harus mute.',
+'2. HP: sambungkan ke <b>ATMOS-CP-300-EXP</b>, tetap tersambung meski tanpa internet. Buka <b>http://192.168.4.1</b> lalu Hubungkan kontrol. Bila halaman tidak terbuka, matikan data seluler sementara. Boot dan masuk SERVICE harus mute.',
 '3. Pasang DAC dan cek sinyal lewat input line speaker aktif/alat ukur, level rendah. TEST dan MUTE harus bekerja. Berikutnya pasang empat pad; tahan maksimal 5 detik, lepas langsung mute. Lepas dan tekan ulang untuk mengulang.',
 '4. Simpan preset, matikan/nyalakan, lalu cek preset/sweep tetap tersimpan dan boot tetap mute. Tutup tab/putus Wi-Fi saat TEST: output servis harus mute paling lambat setelah lease 2,5 detik.',
 '5. Baru pasang amplifier dan shaker. Tentukan sweep/level serta langkah GATHER pada pelat nyata. Batas tersimpan lama tidak diperluas otomatis ke 4000 Hz.'
@@ -135,7 +139,7 @@ flow.append(P('[2] <link href="https://www.ti.com/lit/ds/symlink/pcm5102a.pdf" c
 flow.append(P('[3] <link href="https://elektroweb.pl/pl/esp32/1312-modul-esp32-s3-devkitc-1-wroom-1-n16r8-16mb-flash-wifi-bluetooth-usb-c.html" color="#367e75">Elektroweb: foto referensi DevKit N16R8</link>. [4] <link href="https://www.ebay.com/itm/314748193002" color="#367e75">Foto referensi GY-PCM5102</link>. Foto telah ada dalam bahan proyek; hak tetap pada pemilik, tidak berlisensi bebas.','SmallCP'))
 flow.append(P('Sumber pin proyek: firmware/include/pins.h; konfigurasi I2S: firmware/src/audio.cpp. Header J1/J3 dicocokkan dengan [1]. Pinout dan diagram tidak menggantikan pemeriksaan modul aktual; dokumen ini belum menjadi bukti uji perangkat fisik.','SmallCP'))
 
-doc=SimpleDocTemplate(str(OUT),pagesize=A4,rightMargin=40,leftMargin=40,topMargin=58,bottomMargin=58,title='CP-100 Wiring Rev03 - Foto DevKit dan Diagram Kabel',author='House of EXP',pageCompression=1)
+doc=SimpleDocTemplate(str(OUT),pagesize=A4,rightMargin=40,leftMargin=40,topMargin=58,bottomMargin=58,title='CP-100 Wiring Rev04 - Foto DevKit dan Diagram Kabel',author='House of EXP',pageCompression=1)
 doc.build(flow,onFirstPage=footer,onLaterPages=footer)
 # Keep an editable machine-readable wire list beside the PDF.
 pins=(ROOT/'firmware/include/pins.h').read_text()
