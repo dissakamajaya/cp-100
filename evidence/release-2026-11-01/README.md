@@ -1,6 +1,6 @@
 # Rilis minimal 1 November 2026
 
-Empat pad + SERVICE lewat HP; tanpa panel servis fisik, display atau LED eksternal. MUTE GPIO16 opsional. Target source/rilis: `firmware-remote-v1.0.0`, repository privat.
+Empat pad + SERVICE lewat HP; tanpa panel servis fisik, display atau LED eksternal. MUTE GPIO16 opsional. Source commit `74285937b2fbeeefb9bb8b75c385289c8ca334eb` telah di-push ke main dan tag `firmware-remote-v1.0.0`, repository privat. Rilis: https://github.com/dissakamajaya/cp-100/releases/tag/firmware-remote-v1.0.0. Ref main/tag serta digest SHA256 ZIP/PDF pada aset GitHub cocok dengan file lokal.
 
 ## Verifikasi
 

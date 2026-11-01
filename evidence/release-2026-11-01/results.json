@@ -20,5 +20,14 @@
   "zip_sha256": "23be12aed16b29d5e3558ae7461696a8b25811e0547bc4bf0ba4b51134c0d06c",
   "hardware_flashed": false,
   "hardware_tested": false,
-  "sites_deployed": false
+  "sites_deployed": false,
+  "github": {
+    "source_commit": "74285937b2fbeeefb9bb8b75c385289c8ca334eb",
+    "main_push_verified": true,
+    "tag_commit_verified": true,
+    "release_url": "https://github.com/dissakamajaya/cp-100/releases/tag/firmware-remote-v1.0.0",
+    "prerelease": true,
+    "private_repository": true,
+    "uploaded_zip_and_pdf_sha256_verified": true
+  }
 }
