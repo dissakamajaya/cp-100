@@ -16,10 +16,10 @@ for part,end in zip(parts,[0x8000,0x9000,0x10000,0x650000]):assert part['offset'
 files=sorted([p for d in ['src','include','web','tools'] for p in (ROOT/'firmware'/d).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.name!='web_assets.h'])+[ROOT/'firmware/platformio.ini']
 source={str(p.relative_to(ROOT/'firmware')):hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
 source_hash=hashlib.sha256(json.dumps(source,sort_keys=True).encode()).hexdigest()
-manifest={'release':'remote-v1.0.0','date':'2026-11-01','chip':'ESP32-S3','board':'N16R8','flash_size':'16MB','psram':'8MB OPI','hardware_tested':False,'display':False,'external_leds':False,'ssid':'ATMOS-CP-300-EXP','address':'192.168.4.1','nvs_region_written':False,'parts':parts,'source_sha256':source,'source_tree_sha256':source_hash}
+pdf=ROOT/'output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf';assert pdf.is_file()
+manifest={'documentation':{'revision':'Rev02','pdf':pdf.name,'sha256':hashlib.sha256(pdf.read_bytes()).hexdigest()},'release':'remote-v1.0.0','date':'2026-11-01','chip':'ESP32-S3','board':'N16R8','flash_size':'16MB','psram':'8MB OPI','hardware_tested':False,'display':False,'external_leds':False,'ssid':'ATMOS-CP-300-EXP','address':'192.168.4.1','nvs_region_written':False,'parts':parts,'source_sha256':source,'source_tree_sha256':source_hash}
 (release/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 (release/'SHA256SUMS').write_text(''.join(f'{p["sha256"]}  {p["file"]}\n' for p in parts))
-pdf=ROOT/'output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf';assert pdf.is_file()
 archive=ROOT/'firmware/releases/CP-100-remote-v1.0.0.zip'
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
     for p in sorted(release.iterdir()):

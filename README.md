@@ -10,7 +10,7 @@ Versi terbaru: **4 pad + SERVICE HP, tanpa display/LED eksternal**.
 
 - [Panduan flash dan wiring firmware](firmware/README.md)
 - [Paket ZIP siap flash + PDF](firmware/releases/CP-100-remote-v1.0.0.zip)
-- [PDF wiring empat pad](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf)
+- [PDF wiring Rev02: foto DevKit dan diagram kabel](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf)
 
 ```sh
 gh repo clone dissakamajaya/cp-100

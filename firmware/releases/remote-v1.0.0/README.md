@@ -31,7 +31,7 @@ Jangan menulis `firmware.bin` sendirian ke 0x0. Tidak ada merged image berisi pa
 
 Buka monitor serial **115200** menggunakan PlatformIO (`pio device monitor -d firmware` dari root repo) atau aplikasi terminal serial. Ketik `wifi` untuk melihat password per perangkat. Sambungkan HP ke **ATMOS-CP-300-EXP**, buka **http://192.168.4.1**, lalu Hubungkan kontrol. Awalnya mute. Jangan memasukkan password tersebut ke GitHub.
 
-PDF wiring berada di `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` pada repo dan ikut disertakan dalam ZIP rilis. GPIO pad: **1, 2, 4, 5**; DAC BCK/LRCK/DIN: **18, 21, 47**; MUTE fisik opsional: **16**. Kontrol display dan LED tidak diinisialisasi pada build ini.
+PDF wiring **Rev02, tujuh halaman**, memuat foto DevKit dengan penanda pin, diagram kabel empat pad dan PCM5102. File berada di `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` pada repo dan ikut disertakan dalam ZIP rilis. GPIO pad: **1, 2, 4, 5**; DAC BCK/LRCK/DIN: **18, 21, 47**; MUTE fisik opsional: **16**. Kontrol display dan LED tidak diinisialisasi pada build ini.
 
 ## Build dari source
 

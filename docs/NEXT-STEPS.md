@@ -4,6 +4,7 @@
 
 - [x] Hapus display/LED eksternal dan kontrol LED dari firmware aktif; SERVICE seluruhnya di HP.
 - [x] Buat PDF wiring empat pad + paket binary dengan checksum, offset dan flash helper.
+- [x] Rev02: foto DevKit berpenanda pin, diagram kabel pad/PCM5102/daya; render dan periksa semua tujuh halaman.
 - [ ] Uji hardware ESP32/empat pad/PCM5102/Wi-Fi; kalibrasi amplifier/shaker pada pelat nyata.
 - [ ] Sinkronkan simulator publik dan dokumen Rev08 lama dengan revisi minimal; tidak ada deployment situs pada rilis repo ini.
 

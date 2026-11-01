@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-01",
+  "wiring_revision": "Rev02",
+  "pdf_pages": 7,
+  "embedded_photos": 2,
+  "all_pages_rendered_and_visually_reviewed": true,
+  "header_map_matches_espressif_and_firmware": true,
+  "zip_pdf_matches_final": true,
+  "zip_crc": "pass",
+  "binary_checksums": "pass",
+  "firmware_binary_parts_unchanged": true,
+  "firmware_source_tree_unchanged": true,
+  "host_baseline": "DSP/state and 326 control/protocol/NVS checks passed with sanitizer",
+  "simulator_router_baseline": "44 pass",
+  "manifest_baseline": "86 pass",
+  "pdf_sha256": "89b94c83aaa212697ef493a585430d2093e7ae9c2facc89d272e24decbdbe860",
+  "zip_sha256": "13fde7f03c25055c227cbe73b48590325584f5add7491154f1c73dac69180b59",
+  "hardware_tested": false,
+  "physical_header_connections": [
+    {
+      "function": "Pad 1",
+      "gpio": 1,
+      "header": "J3",
+      "position_from_top": 4
+    },
+    {
+      "function": "Pad 2",
+      "gpio": 2,
+      "header": "J3",
+      "position_from_top": 5
+    },
+    {
+      "function": "Pad 3",
+      "gpio": 4,
+      "header": "J1",
+      "position_from_top": 4
+    },
+    {
+      "function": "Pad 4",
+      "gpio": 5,
+      "header": "J1",
+      "position_from_top": 5
+    },
+    {
+      "function": "MUTE opsional",
+      "gpio": 16,
+      "header": "J1",
+      "position_from_top": 9
+    },
+    {
+      "function": "DAC BCK",
+      "gpio": 18,
+      "header": "J1",
+      "position_from_top": 11
+    },
+    {
+      "function": "DAC LRCK",
+      "gpio": 21,
+      "header": "J3",
+      "position_from_top": 18
+    },
+    {
+      "function": "DAC DIN",
+      "gpio": 47,
+      "header": "J3",
+      "position_from_top": 17
+    }
+  ],
+  "photo_bounds_check": true
+}

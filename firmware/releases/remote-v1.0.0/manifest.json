@@ -1,4 +1,9 @@
 {
+  "documentation": {
+    "revision": "Rev02",
+    "pdf": "CP-100-Wiring-4-Pad-WiFi.pdf",
+    "sha256": "89b94c83aaa212697ef493a585430d2093e7ae9c2facc89d272e24decbdbe860"
+  },
   "release": "remote-v1.0.0",
   "date": "2026-11-01",
   "chip": "ESP32-S3",

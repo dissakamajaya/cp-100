@@ -31,7 +31,7 @@ Build, tes host dan UI lokal tidak membuktikan firmware sudah diuji di ESP32 nya
 
 Pengguna menegaskan panel servis fisik tidak diperlukan, sehingga display dan LED juga dihapus. Firmware aktif tidak menginisialisasi MAX7219/WS2812B/MCP23017/SPI/RMT; kontrol LED hilang dari UI/API. Buffer AHCT125 tidak dibutuhkan karena display/LED tidak digunakan. Rangkaian minimum: ESP32-S3 N16R8 + empat tombol NO + PCM5102 breakout + amplifier/shaker; MUTE GPIO16 opsional. Byte pengaturan LED lama tetap dibaca dalam migrasi NVS untuk kompatibilitas layout saja, tanpa output fisik.
 
-Wiring saat ini: `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` dan `firmware/README.md`. Bagian bertanggal 31 Oktober dan daftar komponen Rev08 di bawah adalah riwayat, bukan BOM revisi minimal.
+Wiring saat ini: `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` **Rev02** (tujuh halaman; foto DevKit dengan pin ditandai dan diagram kabel pad/PCM5102/daya) dan `firmware/README.md`. Bagian bertanggal 31 Oktober dan daftar komponen Rev08 di bawah adalah riwayat, bukan BOM revisi minimal.
 
 ## Acuan komponen
 

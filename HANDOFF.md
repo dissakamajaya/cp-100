@@ -1,5 +1,13 @@
 # Mulai di sini
 
+## PDF wiring Rev02 - foto DevKit dan diagram kabel (1 November 2026)
+
+Mengikuti koreksi pengguna, PDF terbaru kini **tujuh halaman**, termasuk foto DevKit N16R8 dengan lingkaran penanda pin/leader kabel (halaman 2), diagram header fisik ke empat pad/MUTE dan resistor pull-up (halaman 3), serta diagram DevKit ke PCM5102 berikut foto modul dan kedua terminal catu +5V/GND (halaman 4). J1/J3 dicocokkan dengan dokumentasi Espressif dan pin firmware. Foto referensi pemasok telah ada di bahan proyek; sumber/hak foto tetap dicantumkan, tidak berlisensi bebas.
+
+File `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` dan ZIP `firmware/releases/CP-100-remote-v1.0.0.zip` menggantikan versi empat halaman pada rilis awal. SHA256 PDF `89b94c83aaa212697ef493a585430d2093e7ae9c2facc89d272e24decbdbe860`; ZIP `13fde7f03c25055c227cbe73b48590325584f5add7491154f1c73dac69180b59`. Manifest ZIP sekarang mengikat hash PDF Rev02. **Seluruh binary/offset dan source firmware identik dengan v1.0.0**, tanpa perubahan firmware atau deployment situs.
+
+Semua tujuh halaman dirender dan diperiksa; dua foto tertanam, nomor halaman dan batas gambar valid, ZIP CRC/checksum lulus. Baseline host sanitizer 326 cek, simulator/router 44 tes dan manifest 86 aset lulus sebelum edit. Bukti: [evidence/wiring-rev02-2026-11-01](evidence/wiring-rev02-2026-11-01/README.md). Rilis dokumentasi/binary terkait: [Wiring Rev02](https://github.com/dissakamajaya/cp-100/releases/tag/firmware-remote-v1.0.0-wiring-rev02). Belum ada uji hardware. Rilis awal dan hash PDF/ZIP di bagian berikut adalah riwayat.
+
 ## Rilis firmware minimal — 1 November 2026
 
 Revisi terbaru mengikuti konfirmasi pengguna: **tidak ada panel servis fisik, display MAX7219, LED eksternal WS2812B, MCP23017, atau buffer AHCT125**. Hardware aktif: ESP32-S3 N16R8, empat pad NO GPIO1/2/4/5, PCM5102 BCK/LRCK/DIN GPIO18/21/47, amplifier/shaker. MUTE GPIO16 opsional. Status dan seluruh knob/adjustment tersedia di HP melalui hotspot **ATMOS-CP-300-EXP**, **http://192.168.4.1**. Driver lama dipertahankan sebagai riwayat dan dikecualikan dari build; byte LED lama hanya untuk kompatibilitas migrasi NVS.

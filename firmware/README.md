@@ -34,7 +34,7 @@ Input pad manual, edit parameter, perubahan mode/setup, MUTE, atau sesi terputus
 
 ## Build dan upload
 
-**Paket siap flash:** [remote-v1.0.0](releases/remote-v1.0.0/README.md) atau [ZIP binary + PDF](releases/CP-100-remote-v1.0.0.zip). **PDF wiring terbaru:** [empat pad, tanpa display/LED](../output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf). Paket binary berisi empat image terpisah dan checksum; tidak menulis padding ke NVS.
+**Paket siap flash:** [remote-v1.0.0](releases/remote-v1.0.0/README.md) atau [ZIP binary + PDF](releases/CP-100-remote-v1.0.0.zip). **PDF wiring terbaru:** [Rev02: foto DevKit dan diagram kabel, tanpa display/LED](../output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf). Paket binary berisi empat image terpisah dan checksum; tidak menulis padding ke NVS.
 
 PlatformIO, `espressif32@6.9.0` / Arduino 2.0.17, flash QIO 16 MB, PSRAM OPI. Satu dependency terpin: ArduinoJson 6.21.5. HTTP server memakai ESP-IDF bawaan. Asset HTML/CSS/JS lokal di `web/` dikompresi gzip dan di-embed otomatis oleh `tools/embed_web.py`; tidak perlu upload filesystem terpisah.
 
