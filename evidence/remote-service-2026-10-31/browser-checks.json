@@ -1,0 +1,49 @@
+{
+  "transport": "loopback HTTP preview using production C++ control engine; not radio/hardware",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "checks": [
+    {
+      "name": "4000 Hz, fractional FOLD and LEVEL applied through the production C++ engine",
+      "passed": true
+    },
+    {
+      "name": "save preset 1 persists current parameters through storage codec",
+      "passed": true
+    },
+    {
+      "name": "RUN disables service editing and TEST",
+      "passed": true
+    },
+    {
+      "name": "ordered sequencer starts at pad 1",
+      "passed": true
+    },
+    {
+      "name": "fixed MUTE stops playback",
+      "passed": true
+    },
+    {
+      "name": "editable GATHER routine saves and starts",
+      "passed": true
+    },
+    {
+      "name": "GATHER completes once and returns to MUTE",
+      "passed": true
+    },
+    {
+      "name": "sweep MAX 2000 and LED settings save",
+      "passed": true
+    },
+    {
+      "name": "390px layout has no horizontal overflow and shows three knobs / four pads",
+      "passed": true
+    },
+    {
+      "name": "finish service releases session and shows reconnect screen",
+      "passed": true
+    }
+  ]
+}

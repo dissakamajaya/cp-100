@@ -1,0 +1,7 @@
+{
+  "parts_sha256_pass": true,
+  "zip_crc_pass": true,
+  "corrupted_binary_rejected": true,
+  "zip_includes_pdf": true,
+  "hardware_flashed": false
+}

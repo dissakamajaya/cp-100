@@ -1,0 +1,3 @@
+{
+  "snapshot": "[1-2] RootWebArea: CP-100 Wiring Guide — House of EXP\n  [1-5] scrollable, html\n    [1-14] Iframe: CP-100 Wiring Guide\n      [0-1] RootWebArea: claude.ai\n        [0-3] scrollable, html\n          [0-50] div\n            [0-52] image\n            [0-53] div\n              [0-54] strong\n                [0-55] StaticText: claude.ai\n              [0-56] StaticText: refused to connect."
+}

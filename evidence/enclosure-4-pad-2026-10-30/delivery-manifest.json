@@ -1,0 +1,24 @@
+{
+  "enclosure/CP-100-4-pad-STLs.zip": {
+    "bytes": 53838,
+    "sha256": "504c6da9f4c6d3d3daf8c3a48e6d43ed738245d0556edf0fc45bbee04d8c0d2a"
+  },
+  "enclosure/stl/CP-100-pad-base.stl": {
+    "bytes": 175284,
+    "sha256": "2bd32c5b9bc3c5bfe413bf4cb7d76204db96a87eeabb54a568e7e921216c6d94"
+  },
+  "enclosure/stl/CP-100-pad-cap-x4.stl": {
+    "bytes": 30284,
+    "sha256": "37b8ec89e2d42b3427e357f7e00cde41c90a97b6d7f3f8cb2b7e8af1cdb6a35d"
+  },
+  "enclosure/stl/CP-100-pad-top.stl": {
+    "bytes": 98284,
+    "sha256": "456fe480dd332d9b3a862bb792ea71ca32dbd9474b2c23966bcfd2ad8a04987d"
+  },
+  "zip_entries": [
+    "README.md",
+    "stl/CP-100-pad-top.stl",
+    "stl/CP-100-pad-base.stl",
+    "stl/CP-100-pad-cap-x4.stl"
+  ]
+}

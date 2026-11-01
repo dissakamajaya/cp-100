@@ -1,0 +1,42 @@
+{
+  "enclosure/CP-100-4-pad-STLs.zip": {
+    "bytes": 203149,
+    "sha256": "1bd7c0fae1282e1e7953f66b4600673b1fe02facb4d2cb02537a359fb36c8a10"
+  },
+  "enclosure/README.md": {
+    "bytes": 2417,
+    "sha256": "88a7189ed233aa28c64a99e9c7cf103650a63568a4755407739779f4e5eecbc6"
+  },
+  "enclosure/stl/CP-100-pad-top.stl": {
+    "bytes": 98284,
+    "sha256": "ceddc698651d2a42b4e99196b67e1dce4b674796c6dcd5eb5e9f5139d72679b3"
+  },
+  "enclosure/stl/CP-100-pad-base.stl": {
+    "bytes": 175284,
+    "sha256": "1c0f1570960352153d9b2e9f67ae2999967a6ab527b0ff9991541db425e89316"
+  },
+  "enclosure/stl/CP-100-pad-cap-x4.stl": {
+    "bytes": 30284,
+    "sha256": "37b8ec89e2d42b3427e357f7e00cde41c90a97b6d7f3f8cb2b7e8af1cdb6a35d"
+  },
+  "enclosure/print-ready/CP-100-4-pad-horizontal-PRINT.stl": {
+    "bytes": 394284,
+    "sha256": "3b672d1e46ba5973d81a135c0269b71026b55dbcddaaefd0214ef4571deb921c"
+  },
+  "enclosure/print-ready/CP-100-four-caps-PRINT.stl": {
+    "bytes": 120884,
+    "sha256": "8004c87b98468da0492eadb15cf4655d2c9cfd9820e87ef794b2ee8c05707ac7"
+  },
+  "enclosure/print-ready/CP-100-housing-PRINT.stl": {
+    "bytes": 273484,
+    "sha256": "2afa916cfb4305bf68618bf4d9467c7e77eba7443eaa0155ad9d6b3b6f0be1e3"
+  },
+  "enclosure/print-ready/README.md": {
+    "bytes": 1492,
+    "sha256": "5f1ca87610776b96ed781aafe21c9fc8d02cf2d3d342d496e5d12ea0ba481c75"
+  },
+  "enclosure/print-ready/manifest.json": {
+    "bytes": 484,
+    "sha256": "f0b9d5225e388def18a5c8498914a374b65aba4d47a4d91a5541ce70ab3971e2"
+  }
+}

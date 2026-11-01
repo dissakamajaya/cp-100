@@ -1,0 +1,32 @@
+[
+  {
+    "filename": "CP-100-4-pad-horizontal-PRINT.stl",
+    "shells": 6,
+    "dimensionsMM": [
+      220,
+      208,
+      21
+    ],
+    "triangles": 7884
+  },
+  {
+    "filename": "CP-100-housing-PRINT.stl",
+    "shells": 2,
+    "dimensionsMM": [
+      220,
+      156,
+      21
+    ],
+    "triangles": 5468
+  },
+  {
+    "filename": "CP-100-four-caps-PRINT.stl",
+    "shells": 4,
+    "dimensionsMM": [
+      188,
+      44,
+      7.599999999999998
+    ],
+    "triangles": 2416
+  }
+]

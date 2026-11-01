@@ -1,0 +1,5 @@
+.pio/
+src/web_assets.h
+test/sim/build*/
+test/sim/out/
+test/sim/ref/*.new

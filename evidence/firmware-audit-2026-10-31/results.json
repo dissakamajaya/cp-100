@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-31 Asia/Jakarta",
+  "git_head": "0f4a0d5",
+  "scope": "Current local firmware, including untracked files; no source modification, upload, or live hardware test.",
+  "clean_build": "PASS",
+  "compiler_warnings": 0,
+  "ram_bytes": 23448,
+  "flash_bytes": 367725,
+  "firmware_bin_sha256": "f52699be3acccbf21091a3b565b8e33dd359f781dfce93dfdd2aede4f481e5fa",
+  "host_test": "PASS: all checks passed",
+  "simulator_router_tests": {
+    "passed": 44,
+    "failed": 0
+  },
+  "manifest_assets_passed": 86,
+  "board_simulation": "BLOCKED: script not executable; sh invocation reaches macOS ld unsupported GNU --wrap option; ASan/UBSan not run",
+  "esp32_serial_device_detected": false,
+  "reference_files": [
+    {
+      "source": "simulator/dist/app.js",
+      "reference": "firmware/test/sim/ref/app.js",
+      "matches": false,
+      "source_sha256": "ab2a59b0b808df56a1c1c29e004400a07e47044806fb70c2cb7151e63e4278f1",
+      "reference_sha256": "69d8855963cf70a70c5ce9e36444590ea830a2db44a02956635ce4e7e8e100e7"
+    },
+    {
+      "source": "simulator/dist/dsp.js",
+      "reference": "firmware/test/sim/ref/dsp.mjs",
+      "matches": false,
+      "source_sha256": "9419b0d5c6f0083775827144f68bd4aeba968c77645b4056c5e895f17f4417ca",
+      "reference_sha256": "f1ebfc31832658720e3c8b84967c3472b69875dc36a2763cf03e0f78d92baf11"
+    },
+    {
+      "source": "simulator/dist/model.js",
+      "reference": "firmware/test/sim/ref/model.mjs",
+      "matches": false,
+      "source_sha256": "d33407658abe00665a32390fe7ac816c2361e0b5374c1a2d850ef30c8882ab71",
+      "reference_sha256": "216f5f1dc215def2bf9257f7faa570887843c24586a75db29c6d0e5789e3827f"
+    }
+  ],
+  "calibration_comparison": {
+    "entries": 909,
+    "max_mean_absolute_error": 5.55111514e-17,
+    "max_gain_absolute_error": 0.0
+  },
+  "firmware_source_sha256": {
+    "firmware/src/audio.cpp": "4baff565e9c0c1c7b92b46de3b54e8acbb0baad8e6794be3feff6a6469e24507",
+    "firmware/src/audio.h": "2113d920e1c04a0c9fe3f4cfdac99223e3b9968d95b60646d616af534f708cd6",
+    "firmware/src/calibration_table.h": "e4d368a9ec02751e08927481240f62f0367dc669d90ef58eab6010cbfed8c626",
+    "firmware/src/display.cpp": "af2c86e63111eedb3ae77cdc21b86fb3e8b1ca6a82ad68ccdb62d369d5785490",
+    "firmware/src/display.h": "1f043dfedc6e4628430d89cfbe4d7b26cbd26743ed23d889b0ecce84dced4b50",
+    "firmware/src/dsp.cpp": "095f8f251275b8a2071726153a560ef138f3bd9180daf87913760579a886d3d3",
+    "firmware/src/dsp.h": "96ccd8be476db4ba246310ad5e5a0847b01a0b8c69a03ab7bfb03fb27525fe6b",
+    "firmware/src/encoder.h": "3dc0f172572d5ddb358c1f35c2fdee64f77b8c634192aee6199355e633da358f",
+    "firmware/src/inputs.cpp": "332217ad8543412854522deba87957d88ab6bcc7f6b01e74adb6ff6be7163f9f",
+    "firmware/src/inputs.h": "3b6e67393191b25ecdc5a2a09b71e8ba09048511484600db3158790ad1c49ed7",
+    "firmware/src/leds.cpp": "93ef91f54edfc6acdce5a5419b13ca4732e422eeb54c10c6a376dfe70d1f20c9",
+    "firmware/src/leds.h": "6c961d43f84745d0ac7fa3747af5950121c532b8200e983c523e08c3f32e02e3",
+    "firmware/src/main.cpp": "8bf9faff6f8b686eb7d7fd086933838976b412fd27dc478b12da997ff4da2f05",
+    "firmware/src/model.cpp": "641c4d4b7e844e5b793f1f8d08ad09d433890d522a67ed71c78680e346a74b04",
+    "firmware/src/model.h": "3bd0610723cc1a652da5aef2a68ec72754dbbeb382338a7a700c167f088a5c74",
+    "firmware/src/panel.cpp": "ec19e6c1869b698898e5c4ba612d21c45c9a5f77311eee65bc50ba7ba9607726",
+    "firmware/src/panel.h": "c702a946902323bab77a753b00e73a64c375039e4e0d61e29003ae87861706bf",
+    "firmware/src/storage.cpp": "1849872d4e4a025f98b4c98af6a3b279b772b489c9defafad62888ade63cc325",
+    "firmware/src/storage.h": "9051a9525d22b6446e27e48485ce2be2b05aa8f462db2232e40a092d929694d8",
+    "firmware/include/pins.h": "12164be9033aa14ce07ad37f2ba037e8a8ccce252acf42361a7ea0e3857c9547",
+    "firmware/platformio.ini": "0f16b879e447bfba50ed67b38357ec66f25c2de990cc1e6866e6f581086410ad"
+  }
+}

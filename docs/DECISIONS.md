@@ -7,15 +7,31 @@
 | Kaca | Bulat Ø500 mm; didukung rangka casing |
 | Celah | Awal 30 mm; perlu verifikasi clearance fisik |
 | Casing | Acuan gambar 800×820×350 mm; bukan ukuran produksi tervalidasi |
-| Pengunjung | 8 pad tanam, 4×2; tahan = bunyi, lepas = mute |
+| Pengunjung | 4 pad tanam, 1×4 horizontal; tahan = bunyi, lepas = mute. Firmware remote sudah empat pad; simulator publik/PDF masih menunggu sinkronisasi. |
 | Prioritas | Satu pad aktif, pad pertama yang ditahan memiliki output |
-| RGB | Standby putih; aktif pink/tosca; pulsa visual opsional |
-| Servis | Tersembunyi, pintu belakang berkunci |
-| Kontrol | 3 knob: FREQ, LEVEL, FOLD |
-| Selector | WAVE SINE/SAW/TRIANGLE; HARMONICS ODD/EVEN/ODD+EVEN |
-| Tombol | SAVE dan TEST/MUTE; mode RUN/SERVICE |
+| Display / LED | Dihapus dari hardware aktif pada 1 November 2026; seluruh status di HP |
+| Servis | Aplikasi web HP via hotspot ESP32 `ATMOS-CP-300-EXP`, alamat `http://192.168.4.1`; menggantikan panel fisik servis |
+| Kontrol | 3 knob virtual + input angka: FREQ 20–4000 Hz / 0,1 Hz, LEVEL 0–100%, FOLD 0–100% / 0,1% |
+| Selector | Di HP: WAVE SINE/SAW/TRIANGLE; HARMONICS ODD/EVEN/ODD+EVEN |
+| Tombol | Di HP: SAVE per slot, TEST, MUTE/STOP, RUN/SERVICE; MUTE fisik GPIO16 opsional |
 | Preset | Simpan frekuensi, level, wave, fold, harmonik ke pad tujuan |
 | Sweep | Batas MIN/MAX tersimpan; nilai final menunggu uji pelat |
+
+## Revisi firmware dan SERVICE HP — 31 Oktober 2026
+
+Pengguna meminta firmware mengikuti spesifikasi terkini dan mengganti SERVICE menjadi remote lewat HP yang tersambung langsung ke hotspot ESP32. Nama hotspot dipilih pengguna: **ATMOS-CP-300-EXP**. Alamat lokal **192.168.4.1**, password acak per perangkat disimpan di NVS dan dibaca operator lewat serial `wifi`. UI lengkap tersimpan di ESP32; tanpa internet atau aplikasi terpasang.
+
+Firmware kini empat pad, FREQ sampai 4000 Hz, FOLD 0,1%, sequence empat slot/3 detik urut atau acak, serta GATHER manual dengan editor langkah tersimpan. Ini menggantikan status historis “firmware tidak diubah” pada bagian bertanggal sebelumnya. GATHER tetap tidak otomatis saat idle. Batas sweep tersimpan dari firmware lama tidak diperluas otomatis; empat slot pertama dimigrasi tanpa menulis ulang saat boot.
+
+Satu sesi kontrol aktif; timeout 2,5 detik kembali RUN/mute, hold remote timeout 1,2 detik, tidak ada auto-resume. Remote TEST/sequence/GATHER tidak merebut pad fisik yang sedang ditahan. Audio tetap di ESP32/PCM5102, bukan di HP. Encoder/selector/SAVE/MCP23017 panel lama tidak diinisialisasi. Driver lama disimpan sebagai riwayat; wiring terbaru ada di `firmware/README.md`.
+
+Build, tes host dan UI lokal tidak membuktikan firmware sudah diuji di ESP32 nyata. PDF, diagram dan simulator publik masih perlu sinkronisasi terpisah.
+
+## Revisi hardware minimal — 1 November 2026
+
+Pengguna menegaskan panel servis fisik tidak diperlukan, sehingga display dan LED juga dihapus. Firmware aktif tidak menginisialisasi MAX7219/WS2812B/MCP23017/SPI/RMT; kontrol LED hilang dari UI/API. Buffer AHCT125 tidak dibutuhkan karena display/LED tidak digunakan. Rangkaian minimum: ESP32-S3 N16R8 + empat tombol NO + PCM5102 breakout + amplifier/shaker; MUTE GPIO16 opsional. Byte pengaturan LED lama tetap dibaca dalam migrasi NVS untuk kompatibilitas layout saja, tanpa output fisik.
+
+Wiring saat ini: `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf` dan `firmware/README.md`. Bagian bertanggal 31 Oktober dan daftar komponen Rev08 di bawah adalah riwayat, bukan BOM revisi minimal.
 
 ## Acuan komponen
 
@@ -24,6 +40,8 @@ ESP32-S3 DevKitC-1 N16R8, PCM5102 I²S DAC, MAX7219 quad 32×8, YS-502MT amplifi
 Komponen belum dibeli pada keputusan blueprint. Cocokkan datasheet, unit aktual, terminal fisik, tegangan dan polaritas amplifier sebelum fabrikasi/solder. Ukuran MAX7219 acuan 128×32×14 mm tidak membuktikan semua modul pasar identik.
 
 ## Mekanik blueprint
+
+**Revisi terbaru, 30 Oktober 2026:** pengguna meminta model 3D controller menjadi 4 pad dari 8. Model di `enclosure/model.mjs` kini default 1×4 horizontal, casing 220×74×24 mm, face pad 40×40 mm, pitch 48 mm, PCB referensi custom 198×52 mm. STL lama 8 pad disimpan di `enclosure/stl/legacy-8-pad/`. Servis tetap terpisah/tersembunyi; pelat 600×600 mm dan kaca Ø500 mm tetap. Ukuran Rev08 di bawah adalah riwayat dan belum diperbarui dalam PDF. Belum ada uji cetak/hardware.
 
 Panel pengunjung 220×122×2 mm; servis 260×180×2 mm. Pad cap 40×40 mm, jendela 41×41/R2; frame, cap, spring, PCB carrier dan stopper masih custom. Box pad target 24 mm dalam celah 30 mm menyisakan sekitar 6 mm sebelum memperhitungkan pasir dan gerak pelat.
 

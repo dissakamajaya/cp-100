@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "file": "CP-100-pad-top.stl",
+      "dimensions": [
+        220,
+        74,
+        7
+      ],
+      "count": 1,
+      "status": "NoError",
+      "solids": 1
+    },
+    {
+      "file": "CP-100-pad-base.stl",
+      "dimensions": [
+        220,
+        74,
+        21
+      ],
+      "count": 1,
+      "status": "NoError",
+      "solids": 1
+    },
+    {
+      "file": "CP-100-pad-cap-x4.stl",
+      "dimensions": [
+        44,
+        44,
+        7.599999999999998
+      ],
+      "count": 4,
+      "status": "NoError",
+      "solids": 1
+    },
+    {
+      "file": "CP-100-svc-panel.stl",
+      "dimensions": [
+        140,
+        90,
+        7
+      ],
+      "count": 1,
+      "status": "NoError",
+      "solids": 1
+    },
+    {
+      "file": "CP-100-svc-box.stl",
+      "dimensions": [
+        140,
+        90,
+        42
+      ],
+      "count": 1,
+      "status": "NoError",
+      "solids": 1
+    },
+    {
+      "file": "CP-100-svc-knob-x3.stl",
+      "dimensions": [
+        22,
+        22,
+        16
+      ],
+      "count": 3,
+      "status": "NoError",
+      "solids": 1
+    },
+    {
+      "file": "CP-100-svc-button-x2.stl",
+      "dimensions": [
+        15,
+        15,
+        12.5
+      ],
+      "count": 2,
+      "status": "NoError",
+      "solids": 1
+    }
+  ],
+  "capsWithoutCollisions": 4,
+  "legacyEightPadAvailable": true,
+  "serviceGeometryUnchanged": true
+}

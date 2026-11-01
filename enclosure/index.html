@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CP-100 Enclosures</title>
+<style>
+  :root { --bg: #111317; --panel: #1b1e24; --text: #e7e9ee; --muted: #8a909c; --accent: #ff5c8a; --line: #2c3039; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 13px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; overflow: hidden; }
+  #view { position: fixed; inset: 0; }
+  aside { position: fixed; top: 12px; left: 12px; width: 300px; max-height: calc(100vh - 24px); overflow: auto; background: color-mix(in srgb, var(--panel) 92%, transparent); border: 1px solid var(--line); border-radius: 10px; padding: 14px; backdrop-filter: blur(10px); }
+  h1 { font-size: 15px; margin: 0 0 2px; }
+  .sub { color: var(--muted); margin-bottom: 12px; }
+  h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 14px 0 6px; }
+  .btns { display: flex; gap: 6px; flex-wrap: wrap; }
+  button { background: var(--line); color: var(--text); border: 0; border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer; }
+  button.on { background: var(--accent); color: #111; }
+  label.part { display: grid; grid-template-columns: 16px 12px 1fr auto; gap: 6px; align-items: center; padding: 4px 0; cursor: pointer; }
+  .sw { width: 12px; height: 12px; border-radius: 3px; border: 1px solid #0006; }
+  .count { color: var(--muted); }
+  .note { color: var(--muted); font-size: 11.5px; margin: -2px 0 6px 34px; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .status { position: fixed; bottom: 12px; right: 12px; color: var(--muted); }
+  @media (max-width: 600px) { aside { width: auto; right: 12px; max-height: 45vh; } }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "./node_modules/three/build/three.module.js",
+  "three/addons/": "./node_modules/three/examples/jsm/",
+  "manifold-3d": "./node_modules/manifold-3d/manifold.js"
+} }
+</script>
+</head>
+<body>
+<div id="view"></div>
+<aside>
+  <h1>CP-100 enclosures</h1>
+  <div class="sub">Pad: 4 pads · 1×4 horizontal · 220×74×24 mm. Service: compact OLED layout. Preview v7. Drag to orbit, scroll to zoom, right-drag to pan.</div>
+  <h2>Show</h2>
+  <div class="btns" id="groups">
+    <button data-g="all" class="on">Both</button>
+    <button data-g="Pad controller">Pad controller</button>
+    <button data-g="Service controller">Service controller</button>
+  </div>
+  <h2>Explode</h2>
+  <input type="range" id="explode" min="0" max="1" step="0.01" value="0.35">
+  <h2>View</h2>
+  <div class="btns">
+    <button id="xray">X-ray</button>
+    <button id="refs" class="on">Components</button>
+    <button data-cam="iso">Iso</button>
+    <button data-cam="front">Front</button>
+    <button data-cam="rear">Rear</button>
+    <button data-cam="back">Underside</button>
+  </div>
+  <div id="parts"></div>
+</aside>
+<div class="status" id="status">Building geometry…</div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import Module from 'manifold-3d';
+import { build, placed } from './model.mjs';
+
+const wasm = await Module();
+wasm.setup();
+const parts = build(wasm);
+const groupOffset = { 'Pad controller': new THREE.Vector3(0, 0, 0), 'Service controller': new THREE.Vector3(250, 0, 0) };
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+document.getElementById('view').append(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#111317');
+const camera = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 1, 5000);
+camera.up.set(0, 0, 1);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight('#ffffff', '#30343c', 1.6));
+const sun = new THREE.DirectionalLight('#ffffff', 2.2);
+sun.position.set(-300, -400, 600);
+scene.add(sun);
+const fill = new THREE.DirectionalLight('#ffffff', 0.6);
+fill.position.set(400, 300, -200);
+scene.add(fill);
+const grid = new THREE.GridHelper(1200, 120, '#2c3039', '#1c1f25');
+grid.rotation.x = Math.PI / 2;
+grid.position.z = -0.5;
+scene.add(grid);
+
+function toGeometry(m) {
+  const mesh = m.getMesh();
+  const g = new THREE.BufferGeometry();
+  const pos = new Float32Array((mesh.vertProperties.length / mesh.numProp) * 3);
+  for (let i = 0, j = 0; i < mesh.vertProperties.length; i += mesh.numProp) {
+    pos[j++] = mesh.vertProperties[i]; pos[j++] = mesh.vertProperties[i + 1]; pos[j++] = mesh.vertProperties[i + 2];
+  }
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setIndex(new THREE.BufferAttribute(mesh.triVerts, 1));
+  return g;
+}
+
+const entries = parts.map((part) => {
+  const mat = new THREE.MeshStandardMaterial({ color: part.color, roughness: 0.55, metalness: 0.05, transparent: !!part.opacity, opacity: part.opacity ?? 1 });
+  const obj = new THREE.Group();
+  for (const m of placed(part)) {
+    const g = toGeometry(m).toNonIndexed();
+    g.computeVertexNormals();
+    const mesh = new THREE.Mesh(g, mat);
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(g, 30), new THREE.LineBasicMaterial({ color: '#000000', transparent: true, opacity: 0.35 }));
+    obj.add(mesh, edges);
+  }
+  scene.add(obj);
+  return { part, obj, mat, visible: true };
+});
+
+const state = { group: 'all', explode: 0.35, xray: false, refs: true };
+function update() {
+  for (const e of entries) {
+    const inGroup = state.group === 'all' || state.group === e.part.group;
+    e.obj.visible = inGroup && e.visible && (state.refs || !e.part.ref);
+    const off = state.group === 'all' ? groupOffset[e.part.group] : new THREE.Vector3();
+    e.obj.position.copy(off).add(new THREE.Vector3(...e.part.explode).multiplyScalar(state.explode * 2));
+    e.mat.transparent = state.xray || !!e.part.opacity;
+    e.mat.opacity = state.xray ? 0.35 : e.part.opacity ?? 1;
+    e.mat.depthWrite = !state.xray;
+  }
+}
+
+function frame(view = 'iso') {
+  const box = new THREE.Box3();
+  entries.forEach((e) => e.obj.visible && box.expandByObject(e.obj));
+  const c = box.getCenter(new THREE.Vector3()), r = box.getSize(new THREE.Vector3()).length();
+  const dir = { iso: [0.55, -1, 0.9], front: [0, -0.001, 1], rear: [0.35, 1, 0.45], back: [0.3, -0.6, -1] }[view];
+  camera.position.copy(c).add(new THREE.Vector3(...dir).normalize().multiplyScalar(r * 1.6));
+  controls.target.copy(c);
+}
+
+const list = document.getElementById('parts');
+let lastGroup = '';
+for (const e of entries) {
+  if (e.part.group !== lastGroup) list.insertAdjacentHTML('beforeend', `<h2>${(lastGroup = e.part.group)}</h2>`);
+  const row = document.createElement('div');
+  row.innerHTML = `<label class="part"><input type="checkbox" checked><span class="sw" style="background:${e.part.color}"></span><span>${e.part.name}</span><span class="count">${e.part.ref ? 'bought' : '×' + e.part.count}</span></label><div class="note">${e.part.note}</div>`;
+  row.querySelector('input').onchange = (ev) => { e.visible = ev.target.checked; update(); };
+  list.append(row);
+}
+document.querySelectorAll('#groups button').forEach((b) => (b.onclick = () => {
+  document.querySelectorAll('#groups button').forEach((x) => x.classList.toggle('on', x === b));
+  state.group = b.dataset.g; update(); frame();
+}));
+document.getElementById('explode').oninput = (ev) => { state.explode = +ev.target.value; update(); };
+document.getElementById('xray').onclick = (ev) => { state.xray = !state.xray; ev.target.classList.toggle('on', state.xray); update(); };
+document.getElementById('refs').onclick = (ev) => { state.refs = !state.refs; ev.target.classList.toggle('on', state.refs); update(); };
+document.querySelectorAll('[data-cam]').forEach((b) => (b.onclick = () => frame(b.dataset.cam)));
+// Keep the model centred in the space right of the sidebar.
+function resize() {
+  const shift = innerWidth > 600 ? 162 : 0;
+  camera.aspect = innerWidth / innerHeight;
+  camera.setViewOffset(innerWidth, innerHeight, -shift, 0, innerWidth, innerHeight);
+  renderer.setSize(innerWidth, innerHeight);
+}
+addEventListener('resize', resize);
+resize();
+
+update();
+frame();
+document.getElementById('status').textContent = `${parts.filter((p) => !p.ref).length} printed parts`;
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+</script>
+</body>
+</html>

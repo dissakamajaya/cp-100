@@ -1,0 +1,76 @@
+{
+  "release": "remote-v1.0.0",
+  "date": "2026-11-01",
+  "chip": "ESP32-S3",
+  "board": "N16R8",
+  "flash_size": "16MB",
+  "psram": "8MB OPI",
+  "hardware_tested": false,
+  "display": false,
+  "external_leds": false,
+  "ssid": "ATMOS-CP-300-EXP",
+  "address": "192.168.4.1",
+  "nvs_region_written": false,
+  "parts": [
+    {
+      "file": "bootloader.bin",
+      "offset": 0,
+      "size": 15104,
+      "sha256": "2a71d69b471e20c2bac7fb469f3c6a807b3ebee780e348e5889db0da849ca363"
+    },
+    {
+      "file": "partitions.bin",
+      "offset": 32768,
+      "size": 3072,
+      "sha256": "bd0f7954aca2ef7d925ee21aaa1f3dc8822d1d6ce5cbbd26a135e5886bfff6ce"
+    },
+    {
+      "file": "boot_app0.bin",
+      "offset": 57344,
+      "size": 8192,
+      "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0"
+    },
+    {
+      "file": "firmware.bin",
+      "offset": 65536,
+      "size": 862704,
+      "sha256": "e7e5ebea8409a758d1a9fe68e8a33ba2e8170bc0f563cb18ebb5fea20df91dfb"
+    }
+  ],
+  "source_sha256": {
+    "include/pins.h": "ca64009d992ab7e652247b5a546d6173304ef36f1697cfc391ba32b5ca22e3b2",
+    "src/audio.cpp": "30757bc093b6cc9ae1cc351e92b24a4d6548d4290d9fe7dd9e520fc8e8ee45ce",
+    "src/audio.h": "4b573b90fb41088f27b2dd8824cdd34cdf1e00d49478a68c13578a15fb1a2c45",
+    "src/calibration_table.h": "88a7667e92174ba4474e64ca3d7169fd4902e2ece45d17c716be7efd8412b467",
+    "src/controller.cpp": "e7dcf7602cdc188ccf2fe55a3f04a3158a9e982786767f6b72df24f127843102",
+    "src/controller.h": "2e7918b274831a53cf44edbc536aa64b712946b755e38caf25a408e23694befa",
+    "src/display.cpp": "af2c86e63111eedb3ae77cdc21b86fb3e8b1ca6a82ad68ccdb62d369d5785490",
+    "src/display.h": "1f043dfedc6e4628430d89cfbe4d7b26cbd26743ed23d889b0ecce84dced4b50",
+    "src/dsp.cpp": "d7336d0fa959ce0b574b73d46e4fb3373e5d3c7f180252d01a914bda721ca962",
+    "src/dsp.h": "d341e9ca134bc8fb2600858c9242fc9c1d8cdf56d6e4121f03263184fa70e9f5",
+    "src/encoder.h": "3dc0f172572d5ddb358c1f35c2fdee64f77b8c634192aee6199355e633da358f",
+    "src/inputs.cpp": "b66ef0ebd85e242b9593c8a971b3b1ef82b7e1cdb8ca512f88036a84f8ee6ced",
+    "src/inputs.h": "5d1d8d7c3085215977e99d26473bf5dc8d5fe7ba5f2d10c81b7ac397db72a191",
+    "src/leds.cpp": "93ef91f54edfc6acdce5a5419b13ca4732e422eeb54c10c6a376dfe70d1f20c9",
+    "src/leds.h": "a9c83b5a4f4e5e44e87445a7991b8c1a93ad5fc510248e106b0e9baf57288fcf",
+    "src/main.cpp": "031ea038376814b1a375cb729dca0c3daa0d6b30e4166d60f086773d3a450ee8",
+    "src/model.cpp": "7b27b6c2b73daba9b45bfb850b29b2cd5d1cd8547308a165393db753e8468ccf",
+    "src/model.h": "699ded4c70adbeeefb005740a048343cad5cd9529e48af7d9eb0147cbb67a76a",
+    "src/panel.cpp": "ec19e6c1869b698898e5c4ba612d21c45c9a5f77311eee65bc50ba7ba9607726",
+    "src/panel.h": "c702a946902323bab77a753b00e73a64c375039e4e0d61e29003ae87861706bf",
+    "src/protocol.cpp": "3f58d868cdbc981834506cb70974e5df8375c13ad5410f903d75f2125b508e7f",
+    "src/protocol.h": "1787fb72b4164d3c3e5eaec290792fe27ef41c5f1a9109e2fa32018d8b801026",
+    "src/remote.cpp": "f13ce47f6a7ae0097bf09c709f310a32af96d437232237fb5dacc1c2f9b7fbe9",
+    "src/remote.h": "e9c191dcc846877ab614d27d05e56ba879cb55d8a707c17ef21986fc3ebd6804",
+    "src/storage.cpp": "6ee9e6bbc5bb8ca534026effe62fa495f00d48243af25486687152ab9c60846c",
+    "src/storage.h": "7b817ff5a6ce80b221437fb5272d7c20b48d7f30bc02fcf7d2ff05c4c718d724",
+    "tools/embed_web.py": "e589555b3837c2aba96c6e046766cec50f2993cb3ce47f0b82f34503c60e1cf0",
+    "tools/gen_calibration.mjs": "3c3b2af860de83640b5969ca6095c8261ea66e770e524f2a438e993fd04e229c",
+    "tools/pre_build.py": "43fb0456e7d98fad0511c09d9594ebaca96001f925f129d7697909f0bb88ab82",
+    "web/app.js": "f3f990d224b71247076801f280dac3614f6ebee89f8dc45d1bc35cd339952b64",
+    "web/index.html": "d84024637fbe13cd58d2dc07a7222fb715d6003f4c4929600735dc23937f8687",
+    "web/style.css": "af23fa43b6056edf55948eacc0bc9d316c3eea81c6d2006056b158739d4a0f4a",
+    "platformio.ini": "040fcd05e91b2c6476819b8e4c125d6ae64982edac8518918ee4c35ee8a7afdb"
+  },
+  "source_tree_sha256": "5839b909700bb4f27c089064a890a7244593d41c6aa3fecd347539630d343ec7"
+}

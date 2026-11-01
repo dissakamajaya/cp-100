@@ -1,0 +1,24 @@
+{
+  "release": "firmware-remote-v1.0.0",
+  "host_control_protocol_nvs_checks": 326,
+  "host_failures": 0,
+  "sanitizers": [
+    "address",
+    "undefined",
+    "float-cast-overflow"
+  ],
+  "calibration_entries": 9009,
+  "dsp_render_release_combinations": 72,
+  "platformio": "pass; no warnings",
+  "ram_bytes": 46724,
+  "application_flash_bytes": 862341,
+  "simulator_router_tests": 44,
+  "manifest_assets": 86,
+  "pdf_pages": 4,
+  "pdf_visual_review": "pass; all four rendered pages inspected",
+  "pdf_sha256": "13ffe855b3736387762167c856e33982961b7c4912e8f3b067f6fa14fd68eb29",
+  "zip_sha256": "23be12aed16b29d5e3558ae7461696a8b25811e0547bc4bf0ba4b51134c0d06c",
+  "hardware_flashed": false,
+  "hardware_tested": false,
+  "sites_deployed": false
+}

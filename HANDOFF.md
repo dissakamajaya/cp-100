@@ -1,5 +1,37 @@
 # Mulai di sini
 
+## Rilis firmware minimal — 1 November 2026
+
+Revisi terbaru mengikuti konfirmasi pengguna: **tidak ada panel servis fisik, display MAX7219, LED eksternal WS2812B, MCP23017, atau buffer AHCT125**. Hardware aktif: ESP32-S3 N16R8, empat pad NO GPIO1/2/4/5, PCM5102 BCK/LRCK/DIN GPIO18/21/47, amplifier/shaker. MUTE GPIO16 opsional. Status dan seluruh knob/adjustment tersedia di HP melalui hotspot **ATMOS-CP-300-EXP**, **http://192.168.4.1**. Driver lama dipertahankan sebagai riwayat dan dikecualikan dari build; byte LED lama hanya untuk kompatibilitas migrasi NVS.
+
+Build terpin lulus tanpa warning: RAM **46.724 byte**, flash aplikasi **862.341 byte**. Tes DSP/state dan **326 cek kontrol/protokol/NVS** lulus dengan sanitizer; simulator/router **44/44**, manifest **86 aset**. Pemeriksaan UI terakhir membuktikan empat pad, pengaturan sweep tanpa LED, TEST/MUTE, layout HP 390×844 tanpa overflow dan keluar servis ke RUN/mute. Ini preview mesin C++ lokal, bukan pengujian Wi-Fi/audio fisik.
+
+**Paket siap flash:** `firmware/releases/CP-100-remote-v1.0.0.zip`, empat image dengan offset dan SHA256, helper memvalidasi checksum sebelum upload. Region NVS tidak ditulis. Source/petunjuk: `firmware/README.md`. **PDF wiring terbaru:** `output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf`, empat halaman telah dirender dan diperiksa. SHA256 PDF `13ffe855b3736387762167c856e33982961b7c4912e8f3b067f6fa14fd68eb29`; ZIP `23be12aed16b29d5e3558ae7461696a8b25811e0547bc4bf0ba4b51134c0d06c`.
+
+Bukti terbaru: [evidence/release-2026-11-01/README.md](evidence/release-2026-11-01/README.md). Target rilis GitHub: `firmware-remote-v1.0.0` (prerelease, repo privat). **Belum di-flash atau diuji pada ESP32 fisik.** Simulator publik dan blueprint Rev08 lama belum disinkronkan; rilis repo ini tidak menerbitkan Sites. Bagian bertanggal sebelumnya di bawah merupakan riwayat dan tidak menggantikan revisi minimal ini. Stagehand tidak lagi diwajibkan sesuai instruksi pengguna.
+
+## Riwayat firmware empat pad + SERVICE HP — sebelum penghapusan display/LED
+
+Permintaan pengguna 31 Oktober: perbarui firmware mengikuti spesifikasi terbaru dan pindahkan SERVICE ke HP melalui hotspot ESP32. SSID dipilih pengguna: **ATMOS-CP-300-EXP**, alamat **http://192.168.4.1**. Source di `firmware/` kini empat pad, FREQ 20–4000 Hz / 0,1 Hz, FOLD 0,1%, knob/selector virtual lengkap, preset/impor/ekspor, setup/LED, sequence empat slot/3 detik urut/acak, dan GATHER manual tersimpan. Aset UI offline di-embed dalam firmware. Encoder/selector/SAVE/MCP23017 lama tidak lagi dibaca; pad dan MUTE fisik GPIO16 tetap ada. Password dibuat per perangkat di NVS dan dibaca operator melalui serial `wifi`; tidak disimpan dalam source/API.
+
+Migrasi NVS mempertahankan slot 1–4 dan batas sweep lama. Boot mute, satu sesi kontrol, timeout sesi 2,5 detik kembali RUN/mute, hold remote 1,2 detik; MUTE membatalkan playback dan antrean kontrol. Build terakhir tanpa warning: RAM **47.732 byte**, flash aplikasi **884.429 byte**. Tes DSP/state (9.009 entri kalibrasi, 72 kombinasi extended-range) dan **323 cek kontrol/protokol/NVS** lulus dengan ASan/UBSan; **13 cek UI** pada preview C++ lokal lulus; simulator/router **44/44**, manifest **86 aset** lulus. Tidak ada perangkat serial USB terdeteksi; **belum di-upload atau diuji di hardware**. Belum di-commit/push/deploy. Perubahan pengguna yang sudah ada dipertahankan.
+
+Petunjuk operator, build/upload dan wiring terkini: [firmware/README.md](firmware/README.md). Command, hash, screenshot dan batas bukti: [evidence/remote-service-2026-10-31/README.md](evidence/remote-service-2026-10-31/README.md). Suite lama `firmware/test/sim/` tetap sebagai riwayat delapan pad; runner aktif portable ialah `sh firmware/test/run-host.sh --asan`. Status audit dan instruksi delapan pad pada bagian bertanggal sebelumnya adalah riwayat. Simulator publik/PDF/diagram belum disinkronkan; jangan memakai pinout Rev08 sebagai wiring empat pad + SERVICE HP.
+
+## Pemeriksaan firmware — 31 Oktober 2026
+
+Clean build ESP32-S3 dan tes host DSP/state lulus; build tanpa warning (RAM 23.448 byte, flash 367.725 byte). Tes simulator/router 44/44 dan manifest 86 aset lulus. Firmware masih delapan pad, batas 2000 Hz dan FOLD integer; sinkronisasi empat pad tetap tertunda. Sequencer/GATHER masih khusus simulator sesuai keputusan sebelumnya. Runner papan simulasi terhambat permission executable lalu opsi linker GNU `--wrap` yang tidak didukung macOS; ASan/UBSan belum berjalan. Ketiga referensi tes berbeda dari simulator terbaru, dan dokumentasi gain browser 0,12 sudah tertinggal. Tidak ditemukan port serial ESP32; tidak ada upload atau uji hardware. Source firmware tidak diubah. Detail, command, hash dan batas bukti: [laporan pemeriksaan](evidence/firmware-audit-2026-10-31/README.md) dan [results.json](evidence/firmware-audit-2026-10-31/results.json).
+
+## Revisi terbaru — controller empat pad, 30 Oktober 2026
+
+PNG untuk vendor: `enclosure/print-ready/CP-100-4-pad-vendor-preview.png` (2400×1800), render langsung STL enam part dengan dimensi layout dan assembly. Diverifikasi melalui Stagehand; bukti `evidence/enclosure-4-pad-row-2026-10-30/vendor-preview-results.json`.
+
+Permintaan file STL siap cetak: `enclosure/print-ready/CP-100-4-pad-horizontal-PRINT.stl` berisi enam part terpisah (top, base, empat cap) di Z=0, footprint 220×208 mm. File housing dan empat cap terpisah juga tersedia untuk material/warna berbeda. Generator `enclosure/export-print-plate.mjs`; verifikasi binary STL `evidence/enclosure-4-pad-row-2026-10-30/verify-print-stl.py` dan hasil `print-stl-results.json`. Tetap perlu slicing sesuai printer dan uji fisik.
+
+Pengguna meminta menemukan model 3D pad controller dan mengurangi 8 pad menjadi 4, lalu memilih satu baris horizontal (1×4), menggantikan asumsi awal 2×2. Model lokal ditemukan di `enclosure/` dan direvisi ke **1×4 horizontal**, dengan casing **220×74×24 mm**, face pad 40×40 mm dan pitch 48 mm. Source parametric `enclosure/model.mjs`, preview `enclosure/index.html`, STL serta paket `enclosure/CP-100-4-pad-STLs.zip` tersedia. Model/STL lama 8 pad dipertahankan; lihat `enclosure/README.md`. Servis terpisah tidak berubah. Keputusan empat pad ini menggantikan jumlah pad mekanik pada instruksi historis di bawah.
+
+Firmware, simulator dan PDF belum disinkronkan ke 4 pad. Belum diuji cetak atau pada hardware. Bukti pemeriksaan geometri, preview Stagehand dan tes/manifest ada di `evidence/enclosure-4-pad-row-2026-10-30/README.md`.
+
 ## Tujuan pekerjaan ini
 
 Pengguna meminta satu repo GitHub dan folder lokal agar agent lain bisa melanjutkan progress CP-100. Paket ini mengonsolidasikan file yang relevan; pekerjaan desain dan publikasi yang tertunda tetap dicatat sebagai pekerjaan berikutnya.
@@ -10,7 +42,8 @@ Pengguna meminta satu repo GitHub dan folder lokal agar agent lain bisa melanjut
 - Simulator memiliki 8 pad momentary 4×2, audio DSP, sand preview, RUN/SERVICE, preset, RGB, dan batas sweep. 23 tes simulator dan 6 tes router lulus saat packaging.
 - `outputs/CP-100-Rev08-Blueprint-dan-Wiring.pdf` tersedia (14 halaman), dengan template potong A3 1:1, SVG, DXF, CSV dan ZIP.
 - PDF Rev08 yang ditemukan masih memakai `reference-render.png` pada cover dan judul “Referensi casing dari klien”. Kedua gambar masih asli. Ini belum memenuhi koreksi terakhir pengguna.
-- Tidak ditemukan source firmware ESP32 (.ino/PlatformIO/ESP-IDF), Gerber, ataupun CAD produksi dalam bahan terpilih. Simulator bukan firmware perangkat.
+- Tidak ditemukan Gerber ataupun CAD produksi dalam bahan terpilih. Simulator bukan firmware perangkat.
+- `firmware/` (26 Oktober 2026): PlatformIO + Arduino untuk ESP32-S3 N16R8, pin Rev08. Semua kontrol Rev08 sudah ada: 8 pad, SAVE, MUTE/TEST, encoder FREQ/LEVEL, panel MCP23017 (MODE, WAVE, HARMONICS, FOLD), 8 WS2812B, editor sweep (tahan FREQ 2 dtk), display MAX7219, audio PCM5102, preset NVS, konsol serial. Verifikasi: tes paritas host dengan `dsp.js`/`model.js`; papan simulasi `firmware/test/sim/run.sh` (218 cek lulus, juga di bawah ASan/UBSan); build ESP32-S3 tanpa warning; boot dan sesi konsol lengkap di emulator QEMU esp32s3; review independen. **Belum diuji pada hardware nyata**; ikuti langkah uji di `firmware/README.md`.
 - Bukti historis menyatakan Rev07 dan route domain telah lolos QA. Publikasi Rev08 belum terbukti selesai. File `simulator/dist/CP-100-Guide.pdf` sudah berisi Rev08 lokal; jangan menyamakan file itu dengan versi live.
 
 ## Instruksi pengguna terakhir yang belum selesai

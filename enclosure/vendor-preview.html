@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>CP-100 — STL vendor preview</title>
+<script>window.renderErrors=[];addEventListener("error",e=>window.renderErrors.push(e.message));addEventListener("unhandledrejection",e=>window.renderErrors.push(String(e.reason)));</script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f4f2;color:#202725;font-family:Arial,Helvetica,sans-serif}header{height:225px;padding:60px 100px 0;display:flex;justify-content:space-between;border-bottom:2px solid #d7dcd7}h1{font-size:62px;letter-spacing:-2px;margin:0 0 16px}p{margin:0;font-size:28px;color:#5e6963}.tag{text-align:right;font-size:23px;line-height:1.7;letter-spacing:2px}#render{position:relative;height:1220px}canvas{display:block}.dim{position:absolute;font-size:29px;font-weight:700;background:#f3f4f2;padding:7px 15px;border-radius:5px;transform:translate(-50%,-50%);white-space:nowrap}footer{height:355px;padding:32px 100px 45px;border-top:2px solid #d7dcd7}.specs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:60px}.label{font-size:21px;letter-spacing:2px;color:#66736b;margin-bottom:15px}.value{font-size:39px;font-weight:600;letter-spacing:-1px}.note{font-size:23px;color:#69726c;margin-top:38px;line-height:1.5}
+</style><script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script></head>
+<body><header><div><h1>CP-100 / FOUR-PAD CONTROLLER</h1><p>STL print layout · Four pads in one horizontal row</p></div><div class="tag">VENDOR PREVIEW<br>30 OCTOBER 2026<br>ALL DIMENSIONS IN mm</div></header>
+<main id="render"><span class="dim" id="width">220 mm</span><span class="dim" id="depth">208 mm</span></main>
+<footer><div class="specs"><div><div class="label">PARTS TO PRINT</div><div class="value">1 top + 1 base + 4 caps</div></div><div><div class="label">PRINT LAYOUT / W × D × H</div><div class="value">220 × 208 × 21 mm</div></div><div><div class="label">ASSEMBLED ENCLOSURE</div><div class="value">220 × 74 × 24 mm</div></div></div><div class="note">Actual STL geometry shown in print orientation. Housing: black finish; pad caps: translucent finish.<br>Allow extra bed space for brim/skirt. Prototype — confirm component fit before final production.</div></footer>
+<script type="module">
+import * as THREE from 'three';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+const width=2400,height=1220;
+const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+renderer.setSize(width,height);renderer.setPixelRatio(1);
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.setClearColor('#f3f4f2');document.getElementById('render').prepend(renderer.domElement);
+const scene=new THREE.Scene();
+scene.add(new THREE.HemisphereLight('#ffffff','#bcc3b8',2.3));
+const light=new THREE.DirectionalLight('#ffffff',3.2);light.position.set(-100,-140,350);light.castShadow=true;
+light.shadow.mapSize.set(4096,4096);Object.assign(light.shadow.camera,{left:-350,right:350,top:350,bottom:-350,near:1,far:800});light.shadow.bias=-0.0002;light.shadow.normalBias=0.08;scene.add(light);
+const fill=new THREE.DirectionalLight('#ffffff',1.2);fill.position.set(300,200,180);scene.add(fill);
+const geometry=await new STLLoader().loadAsync('./print-ready/CP-100-4-pad-horizontal-PRINT.stl');
+geometry.computeBoundingBox();
+const pos=geometry.attributes.position,colors=[];
+const dark=new THREE.Color('#424a46'),cream=new THREE.Color('#e5dfc8');
+for(let i=0;i<pos.count;i++){const c=pos.getY(i)>163?cream:dark;colors.push(c.r,c.g,c.b)}
+geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+const mesh=new THREE.Mesh(geometry,new THREE.MeshStandardMaterial({vertexColors:true,roughness:0.72,metalness:0}));mesh.castShadow=true;mesh.receiveShadow=true;scene.add(mesh);
+const edges=new THREE.LineSegments(new THREE.EdgesGeometry(geometry,35),new THREE.LineBasicMaterial({color:'#17261d',transparent:true,opacity:0.22}));scene.add(edges);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(1500,1500),new THREE.ShadowMaterial({opacity:0.12}));ground.position.set(110,104,-0.06);ground.receiveShadow=true;scene.add(ground);
+const lineMat=new THREE.LineBasicMaterial({color:'#88978d'});
+function line(points){scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points.map(p=>new THREE.Vector3(...p))),lineMat))}
+line([[0,-5,0],[0,-25,0]]);line([[220,-5,0],[220,-25,0]]);line([[0,-18,0],[220,-18,0]]);
+line([[-5,0,0],[-25,0,0]]);line([[-5,208,0],[-25,208,0]]);line([[-18,0,0],[-18,208,0]]);
+for(const [x,y] of [[0,-18],[220,-18],[-18,0],[-18,208]])line([[x-2.5,y-2.5,0],[x+2.5,y+2.5,0]]);
+const aspect=width/height,camera=new THREE.OrthographicCamera(-190*aspect,190*aspect,190,-190,1,1500);camera.up.set(0,0,1);camera.position.set(355,-310,480);camera.lookAt(100,94,0);camera.updateMatrixWorld();
+camera.zoom=1.14;camera.updateProjectionMatrix();
+function label(id,point){const p=new THREE.Vector3(...point).project(camera);const el=document.getElementById(id);el.style.left=`${(p.x+1)*width/2}px`;el.style.top=`${(1-p.y)*height/2}px`}
+label('width',[110,-18,0]);label('depth',[-18,104,0]);
+renderer.render(scene,camera);
+window.previewReady={triangles:pos.count/3,size:geometry.boundingBox.getSize(new THREE.Vector3()).toArray()};
+</script></body></html>

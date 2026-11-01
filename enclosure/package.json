@@ -1,0 +1,13 @@
+{
+  "name": "cp-100-enclosure",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "stl": "node export-stl.mjs"
+  },
+  "dependencies": {
+    "manifold-3d": "3.5.4",
+    "three": "0.186.1"
+  }
+}

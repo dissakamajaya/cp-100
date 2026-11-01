@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-01",
+  "preview": "C++ controller/protocol with in-memory NVS, no radio or DAC",
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "checks": {
+    "connect_service_muted": true,
+    "four_pads": true,
+    "led_fields_absent": true,
+    "setup_bounds_only_saved": true,
+    "frequency_256_7": true,
+    "test_output_active": true,
+    "panic_mute": true,
+    "mobile_no_horizontal_overflow": true,
+    "restore_max_4000": true,
+    "disconnect_run_mute": true
+  },
+  "hardware_tested": false
+}

@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-01",
+  "transport": "local preview / production C++ control engine; no physical ESP32",
+  "checks": [
+    {
+      "name": "native pointer drag updates frequency from 128.5 to 228.5 Hz",
+      "passed": true
+    },
+    {
+      "name": "rapid edit / TEST / MUTE ends muted without stale restart",
+      "passed": true
+    },
+    {
+      "name": "320px narrow mobile layout has no horizontal overflow",
+      "passed": true
+    }
+  ]
+}

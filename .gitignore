@@ -6,8 +6,12 @@
 .wrangler/
 .venv/
 node_modules/
+.pio/
 __pycache__/
 *.pyc
 .DS_Store
 # New scratch files; selected legacy builder inputs under work/ are tracked
 scratch/
+
+# PDF render intermediates
+tmp/pdfs/

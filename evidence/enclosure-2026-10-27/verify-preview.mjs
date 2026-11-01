@@ -1,0 +1,37 @@
+const dir = '/Users/0xtx/Documents/GitHub/cp-100/evidence/enclosure-2026-10-27';
+export default async ({ page, saveScreenshot }) => {
+  const errors = [];
+  page.on?.('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  await page.goto('http://127.0.0.1:5180/');
+  await page.setViewportSize(1440, 900);
+  const status = await page.evaluate(async () => {
+    const end = Date.now() + 20000;
+    while (!/printed parts/.test(document.getElementById('status').textContent) && Date.now() < end) await new Promise((r) => setTimeout(r, 100));
+    return document.getElementById('status').textContent;
+  });
+  await page.evaluate(() => new Promise((r) => setTimeout(r, 500)));
+  await saveScreenshot(`${dir}/preview-both.png`);
+  await page.locator('[data-g="Service controller"]').click();
+  await page.evaluate(() => new Promise((r) => setTimeout(r, 500)));
+  await saveScreenshot(`${dir}/preview-service.png`);
+  await page.locator('#explode').fill('0');
+  await page.locator('[data-cam="front"]').click();
+  await page.evaluate(() => new Promise((r) => setTimeout(r, 500)));
+  await saveScreenshot(`${dir}/preview-service-front.png`);
+  await page.locator('[data-cam="rear"]').click();
+  await page.evaluate(() => new Promise((r) => setTimeout(r, 500)));
+  await saveScreenshot(`${dir}/preview-service-rear.png`);
+  await page.locator('#explode').fill('0.35');
+  await page.locator('[data-cam="iso"]').click();
+  await page.locator('[data-g="Pad controller"]').click();
+  await page.evaluate(() => new Promise((r) => setTimeout(r, 500)));
+  await saveScreenshot(`${dir}/preview-pad.png`);
+  await page.locator('[data-cam="back"]').click();
+  await page.evaluate(() => new Promise((r) => setTimeout(r, 500)));
+  await saveScreenshot(`${dir}/preview-pad-underside.png`);
+  await page.locator('[data-g="Service controller"]').click();
+  await page.locator('#xray').click();
+  await page.evaluate(() => new Promise((r) => setTimeout(r, 500)));
+  await saveScreenshot(`${dir}/preview-service-xray.png`);
+  return { status, errors };
+};

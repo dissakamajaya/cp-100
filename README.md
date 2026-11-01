@@ -2,10 +2,28 @@
 
 Paket kelanjutan controller Chladni House of EXP. Snapshot 26 Oktober 2026 (Asia/Jakarta), dikumpulkan dari chat sumber dan file lokal. Mulai dari [HANDOFF.md](HANDOFF.md), lalu [NEXT-STEPS.md](docs/NEXT-STEPS.md).
 
-**Status:** simulator dan blueprint Rev08 tersedia. Gambar casing di PDF Rev08 masih belum mengikuti revisi terakhir pengguna. Firmware ESP32, PCB produksi, dan uji perangkat fisik belum tersedia dalam paket ini. Publikasi Rev08 belum terverifikasi pada handoff ini.
+**Status:** simulator dan blueprint Rev08 tersedia. Gambar casing di PDF Rev08 masih belum mengikuti revisi terakhir pengguna. Firmware ESP32 di `firmware/` sudah mengikuti empat pad dan SERVICE lewat HP via hotspot **ATMOS-CP-300-EXP**, alamat **192.168.4.1**, lengkap dengan knob/adjustment, preset, sequencer dan GATHER. Build/tes host/UI lokal tersedia; belum diuji pada hardware. Lihat [petunjuk firmware](firmware/README.md). PCB produksi dan uji perangkat fisik belum tersedia dalam paket ini. Publikasi Rev08 belum terverifikasi pada handoff ini.
+
+## Flash firmware versi minimal
+
+Versi terbaru: **4 pad + SERVICE HP, tanpa display/LED eksternal**.
+
+- [Panduan flash dan wiring firmware](firmware/README.md)
+- [Paket ZIP siap flash + PDF](firmware/releases/CP-100-remote-v1.0.0.zip)
+- [PDF wiring empat pad](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf)
+
+```sh
+gh repo clone dissakamajaya/cp-100
+cd cp-100
+pio run -d firmware -t upload
+pio device monitor -d firmware
+```
+
+Gunakan port USB **UART** pada ESP32-S3 N16R8. Ketik `wifi` di monitor serial untuk password hotspot **ATMOS-CP-300-EXP**, lalu buka **http://192.168.4.1** lewat HP. Repo tetap privat; gunakan akun GitHub yang memiliki akses.
 
 | Lokasi | Isi |
 |---|---|
+| `firmware/` | Firmware ESP32-S3 (PlatformIO), port model/DSP simulator; lihat `firmware/README.md` |
 | `simulator/` | Source simulator terbaru dari checkout Sites, `dist/` dan 23 tes |
 | `domain-router/` | Worker route custom domain dan 6 tes |
 | `outputs/` | PDF Rev07/Rev08, pinout, blueprint SVG/DXF/CSV/A3, ZIP, cover pilihan |
@@ -22,7 +40,7 @@ node --test simulator/tests/*.test.js domain-router/worker.test.mjs
 python3 -m http.server 8080 --bind 127.0.0.1 --directory simulator/dist
 ```
 
-Buka `http://127.0.0.1:8080`. Browser meminta interaksi pengguna untuk mengaktifkan audio. Semua otomasi browser harus melalui Stagehand; lihat [AGENTS.md](AGENTS.md).
+Buka `http://127.0.0.1:8080`. Browser meminta interaksi pengguna untuk mengaktifkan audio. Gunakan tool browser yang tersedia untuk QA; Stagehand tidak lagi diwajibkan. Lihat [AGENTS.md](AGENTS.md).
 
 ## PDF
 

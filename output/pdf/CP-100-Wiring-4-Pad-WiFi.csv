@@ -1,0 +1,10 @@
+Dari ESP32,Ke komponen,Fungsi
+GPIO1,Pad 1 -> GND,Tahan = preset bunyi
+GPIO2,Pad 2 -> GND,Tahan = preset bunyi
+GPIO4,Pad 3 -> GND,Tahan = preset bunyi
+GPIO5,Pad 4 -> GND,Tahan = preset bunyi
+GPIO16 (opsional),MUTE -> GND,Hanya mute; tidak menjadi TEST
+GPIO18,PCM5102 BCK / BCLK,Bit clock I2S
+GPIO21,PCM5102 LCK / LRCK,Clock kanal I2S
+GPIO47,PCM5102 DIN,Data I2S dari ESP32
+GND,Pad + DAC GND,Referensi ground bersama

@@ -1,0 +1,15 @@
+{
+  "image": "enclosure/print-ready/CP-100-4-pad-vendor-preview.png",
+  "width": 2400,
+  "height": 1800,
+  "pngSha256": "83b65c794dedaa13ed99333b324eeae338da6dcc2a38965b4f9beb510193cb3f",
+  "sourceSTL": "enclosure/print-ready/CP-100-4-pad-horizontal-PRINT.stl",
+  "stlSha256": "3b672d1e46ba5973d81a135c0269b71026b55dbcddaaefd0214ef4571deb921c",
+  "triangles": 7884,
+  "dimensionsMM": [
+    220,
+    208,
+    21
+  ],
+  "visuallyReviewed": true
+}
