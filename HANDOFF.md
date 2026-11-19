@@ -1,5 +1,9 @@
 # Mulai di sini
 
+## Tech sheet CP-300 (19 November 2026)
+
+Tech sheet klien full English, 11 halaman A4 landscape: `output/pdf/CP-300-Technical-Sheet.pdf`. Source `techsheet/index.html` + `techsheet/assets/`. Build: Chrome headless `--print-to-pdf`. Isi as-built (casing silinder Ø500, pelat 200×200, controller di lid, satu adaptor 5 V), memuat SSID/password hotspot atas permintaan pemilik. Detail: `docs/DECISIONS.md` bagian as-built CP-300. Semua 11 halaman dirender dan dicek visual.
+
 ## PDF wiring Rev04 - jumper DAC, daya bench, langkah flash (1 November 2026)
 
 Review sebelum flash pertama. Firmware tidak berubah: clean build ulang tanpa warning (RAM **46.732 byte**, flash **862.405 byte**) menghasilkan `bootloader.bin`, `partitions.bin` dan `firmware.bin` **identik byte** dengan paket v1.1.0. Host ASan **419 cek**, simulator/router **44/44**, manifest **86 aset** lulus.

@@ -6,7 +6,7 @@ Sebelum mengedit, periksa branch/status Git dan hasil tes. Jangan revert perubah
 
 ## Browser automation
 
-Sesuai instruksi pengguna 31 Oktober 2026, Stagehand tidak lagi diwajibkan. Gunakan tool browser yang tersedia untuk QA dan simpan bukti. Native service connectors/CLI boleh digunakan untuk operasi non-browser GitHub/Sites/Cloudflare.
+Gunakan Helium browser untuk QA dan simpan bukti. Jika Helium tidak tersedia, laporkan blocker dan jangan ganti backend browser. Native service connectors/CLI boleh digunakan untuk operasi non-browser GitHub/Sites/Cloudflare.
 
 ## Verification
 
