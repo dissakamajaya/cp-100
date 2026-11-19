@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CP-300 Technical Sheet</title>
+<style>
+@page { size: 297mm 210mm; margin: 0; }
+:root { --paper:#f4f3ef; --ink:#1b2929; --teal:#367e75; --muted:#5d6b66; --line:#cfd5cf; --band:#e9e8e2; --pink:#e7b9c4; }
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; background:var(--paper); color:var(--ink); }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 9.6pt; line-height: 1.42; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width:297mm; height:210mm; padding:11mm 15mm 0 15mm; position:relative; page-break-after:always; overflow:hidden; background:var(--paper); }
+.page:last-child { page-break-after:auto; }
+header { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:0.3mm solid var(--line); padding-bottom:2.2mm; }
+header .tag { font-weight:700; font-size:8pt; letter-spacing:0.02em; padding-top:2mm; }
+header img { height:11mm; }
+footer { position:absolute; left:15mm; right:15mm; bottom:8mm; display:flex; justify-content:space-between; border-top:0.3mm solid var(--line); padding-top:2mm; font-family: Menlo, "SF Mono", monospace; font-size:6.8pt; letter-spacing:0.06em; color:var(--muted); }
+h1 { font-size:24pt; line-height:1.1; margin:6mm 0 1.5mm; letter-spacing:-0.01em; }
+.kicker { font-family: Menlo, monospace; font-size:7pt; letter-spacing:0.12em; color:var(--muted); text-transform:uppercase; margin-bottom:5mm; }
+h3 { font-size:10.5pt; color:var(--teal); margin:0 0 2mm; }
+p { margin:0 0 2.6mm; }
+.cols { display:grid; gap:9mm; }
+.c2 { grid-template-columns: 1fr 1fr; }
+.c37 { grid-template-columns: 1.25fr 1fr; }
+.c73 { grid-template-columns: 1fr 1.25fr; }
+.c3 { grid-template-columns: 1fr 1fr 1fr; }
+table { width:100%; border-collapse:collapse; font-size:8.4pt; }
+th { background:var(--ink); color:#fff; text-align:left; font-weight:700; padding:1.7mm 2.6mm; }
+td { padding:1.5mm 2.6mm; vertical-align:top; border-bottom:0.25mm solid var(--line); }
+tr:nth-child(even) td { background:var(--band); }
+td.k { font-weight:700; white-space:nowrap; }
+.mono { font-family: Menlo, monospace; }
+.stat .lbl { font-family: Menlo, monospace; font-size:6.8pt; letter-spacing:0.12em; color:var(--muted); text-transform:uppercase; }
+.stat .val { font-size:17pt; font-weight:700; margin:1mm 0 5mm; letter-spacing:-0.01em; }
+.note { font-size:7.8pt; color:var(--muted); }
+.box { background:#fff; border:0.3mm solid var(--line); border-radius:2mm; padding:4mm 5mm; }
+.wifi { background:var(--ink); color:#fff; border-radius:2mm; padding:5mm 6mm; }
+.wifi .lbl { font-family: Menlo, monospace; font-size:6.8pt; letter-spacing:0.12em; color:#a9c3bd; text-transform:uppercase; }
+.wifi .val { font-family: Menlo, monospace; font-size:15pt; font-weight:700; margin:0.8mm 0 4mm; }
+ol { margin:0; padding-left:5mm; }
+ol li { margin-bottom:1.8mm; }
+ul { margin:0 0 2mm; padding-left:4.5mm; }
+ul li { margin-bottom:1.2mm; }
+svg { overflow: visible; }
+svg text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+svg .dim { font-family: Menlo, monospace; font-size:9px; fill:var(--muted); }
+figure { margin:0; }
+figcaption { font-size:7.6pt; color:var(--muted); margin-top:1.5mm; }
+.chip { display:inline-block; font-family:Menlo, monospace; font-size:7pt; border:0.3mm solid var(--teal); color:var(--teal); border-radius:1mm; padding:0.3mm 1.4mm; margin-right:1mm; }
+</style>
+</head>
+<body>
+
+<!-- 01 COVER -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt="EXP Research"></header>
+  <h1 style="font-size:30pt;margin-top:8mm">CP-300 / Technical Sheet</h1>
+  <div class="kicker">Chladni plate installation &middot; Rev.01</div>
+  <div class="cols c37" style="margin-top:2mm">
+    <svg viewBox="0 0 520 330" width="100%" height="118mm" aria-label="CP-300 installation overview">
+      <defs><linearGradient id="cyl" x1="0" x2="1"><stop offset="0" stop-color="#b9bdb8"/><stop offset=".42" stop-color="#f4f4f2"/><stop offset="1" stop-color="#a9ada8"/></linearGradient>
+      <radialGradient id="lid" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#f1f1ee"/><stop offset="1" stop-color="#cfd1cd"/></radialGradient></defs>
+      <ellipse cx="260" cy="300" rx="215" ry="28" fill="#000" opacity=".07"/>
+      <path d="M60 120 L60 270 A200 46 0 0 0 460 270 L460 120 Z" fill="url(#cyl)" stroke="#9aa19a"/>
+      <ellipse cx="260" cy="120" rx="200" ry="46" fill="url(#lid)" stroke="#9aa19a"/>
+      <path d="M60 128 A200 46 0 0 0 460 128" fill="none" stroke="#b5b9b4"/>
+      <ellipse cx="300" cy="104" rx="66" ry="16" fill="#c7cbc6" stroke="#8d948e"/>
+      <ellipse cx="300" cy="105" rx="60" ry="14" fill="#151718"/>
+      <g fill="none" stroke="#d9c9a3" stroke-width="1.6" opacity=".95"><ellipse cx="300" cy="105" rx="9" ry="2.6"/><path d="M252 100 Q276 108 300 99 Q324 108 348 100"/><path d="M254 111 Q278 103 300 112 Q322 103 346 111"/></g>
+      <g transform="translate(122 136)">
+        <path d="M0 22 L118 22 L148 0 L30 0 Z" fill="#1f2123"/>
+        <path d="M0 22 L118 22 L118 30 L0 30 Z" fill="#111213"/>
+        <path d="M118 22 L148 0 L148 8 L118 30 Z" fill="#0b0c0d"/>
+        <g fill="#eef0ec"><path d="M14 18 L36 18 L43 5 L21 5Z"/><path d="M42 18 L64 18 L71 5 L49 5Z"/><path d="M70 18 L92 18 L99 5 L77 5Z"/><path d="M98 18 L120 18 L127 5 L105 5Z"/></g>
+      </g>
+      <text x="380" y="52" font-size="11" fill="#1b2929">&#216;200 acrylic window</text>
+      <line x1="376" y1="56" x2="346" y2="92" stroke="#367e75"/>
+      <text x="40" y="66" font-size="11" fill="#1b2929">4-pad controller on lid</text>
+      <line x1="110" y1="70" x2="170" y2="138" stroke="#367e75"/>
+      <text x="400" y="215" font-size="11" fill="#1b2929">Casing &#216;500 &times; 262</text>
+    </svg>
+    <div style="padding-top:4mm">
+      <div class="stat"><div class="lbl">Casing</div><div class="val">&#216;500 &times; 262 mm</div></div>
+      <div class="stat"><div class="lbl">Vibrating plate</div><div class="val">200 &times; 200 &times; 1 mm</div></div>
+      <div class="stat"><div class="lbl">Visitor controls</div><div class="val">4 momentary pads</div></div>
+      <div class="stat"><div class="lbl">Tuning</div><div class="val">Phone via local Wi-Fi</div></div>
+      <div class="stat"><div class="lbl">Power</div><div class="val">1 outlet &rarr; 5 V DC</div></div>
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01 / NOVEMBER 2026</span><span>EXP RESEARCH &times; 3HUNDRED &middot; 01 / 11</span></footer>
+</section>
+
+<!-- 02 OVERVIEW -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>System overview</h1>
+  <div class="cols c73">
+    <div>
+      <h3>How it works</h3>
+      <p>Sand sits on a 200 &times; 200 mm aluminium plate under an acrylic window. Holding a pad plays a tone through a transducer under the plate. At resonance, sand moves off the vibrating areas and collects on the still lines, forming a Chladni figure.</p>
+      <p>Tones are generated on the ESP32. No computer or internet on site. Tuning is done from a phone over the controller's own Wi-Fi.</p>
+      <h3 style="margin-top:4mm">Behaviour</h3>
+      <ul>
+        <li>Hold to play, release to mute. Max 5 s per press.</li>
+        <li>One pad at a time; first pad held wins.</li>
+        <li>Boots muted.</li>
+        <li>20&ndash;4000 Hz, 0.1 Hz steps. Presets kept after power off.</li>
+      </ul>
+    </div>
+    <div>
+      <svg viewBox="0 0 470 400" width="100%" aria-label="Signal chain">
+        <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#367e75"/></marker></defs>
+        <g font-size="11">
+          <rect x="10" y="20" width="130" height="54" rx="6" fill="#fff" stroke="#cfd5cf"/><text x="22" y="42" font-weight="700">Visitor pads &times;4</text><text x="22" y="60" fill="#5d6b66" font-size="9.5">tactile switches</text>
+          <rect x="10" y="110" width="130" height="54" rx="6" fill="#fff" stroke="#cfd5cf"/><text x="22" y="132" font-weight="700">Operator phone</text><text x="22" y="150" fill="#5d6b66" font-size="9.5">browser, 192.168.4.1</text>
+          <rect x="190" y="50" width="130" height="84" rx="6" fill="#1b2929"/><text x="202" y="74" font-weight="700" fill="#fff">ESP32-S3</text><text x="202" y="92" fill="#a9c3bd" font-size="9.5">tone synthesis</text><text x="202" y="107" fill="#a9c3bd" font-size="9.5">preset storage</text><text x="202" y="122" fill="#a9c3bd" font-size="9.5">Wi-Fi hotspot</text>
+          <line x1="140" y1="47" x2="188" y2="72" stroke="#367e75" stroke-width="1.6" marker-end="url(#ar)"/>
+          <line x1="140" y1="137" x2="188" y2="112" stroke="#367e75" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+          <text x="146" y="160" font-size="9" fill="#367e75">2.4 GHz Wi-Fi</text>
+          <rect x="190" y="180" width="130" height="50" rx="6" fill="#fff" stroke="#cfd5cf"/><text x="202" y="201" font-weight="700">GY-PCM5102</text><text x="202" y="218" fill="#5d6b66" font-size="9.5">I&#178;S DAC, line out</text>
+          <line x1="255" y1="134" x2="255" y2="178" stroke="#367e75" stroke-width="1.6" marker-end="url(#ar)"/><text x="262" y="160" font-size="9" fill="#367e75">I&#178;S 48 kHz</text>
+          <rect x="190" y="266" width="130" height="50" rx="6" fill="#fff" stroke="#cfd5cf"/><text x="202" y="287" font-weight="700">5 V amplifier</text><text x="202" y="304" fill="#5d6b66" font-size="9.5">one channel used</text>
+          <line x1="255" y1="230" x2="255" y2="264" stroke="#367e75" stroke-width="1.6" marker-end="url(#ar)"/>
+          <rect x="350" y="266" width="112" height="50" rx="6" fill="#fff" stroke="#cfd5cf"/><text x="360" y="287" font-weight="700">Transducer</text><text x="360" y="304" fill="#5d6b66" font-size="9.5">ConductR driver</text>
+          <line x1="320" y1="291" x2="348" y2="291" stroke="#367e75" stroke-width="1.6" marker-end="url(#ar)"/>
+          <rect x="350" y="180" width="112" height="50" rx="6" fill="#e9e8e2" stroke="#cfd5cf"/><text x="360" y="201" font-weight="700">Plate + sand</text><text x="360" y="218" fill="#5d6b66" font-size="9.5">Chladni figure</text>
+          <line x1="406" y1="266" x2="406" y2="232" stroke="#367e75" stroke-width="1.6" marker-end="url(#ar)"/>
+          <rect x="10" y="340" width="452" height="44" rx="6" fill="#f0d8de" stroke="#e7b9c4"/>
+          <text x="22" y="360" font-weight="700">Power: 1 mains outlet &rarr; 5 V DC adaptor</text>
+          <text x="22" y="376" font-size="9.5" fill="#5d6b66">feeds ESP32, DAC and amplifier from one supply, common ground</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>02 / 11</span></footer>
+</section>
+
+<!-- 03 INSTALLATION UNIT -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Installation unit</h1>
+  <div class="cols c2">
+    <svg viewBox="0 0 440 420" width="100%" height="140mm" aria-label="Exploded casing">
+      <g stroke="#1b2929" stroke-width="1.1" fill="#fff">
+        <!-- lid -->
+        <path d="M70 52 L70 62 A150 30 0 0 0 370 62 L370 52" fill="#eceae4"/>
+        <ellipse cx="220" cy="52" rx="150" ry="30"/>
+        <ellipse cx="220" cy="48" rx="56" ry="11" fill="#cfe2de"/>
+        <!-- plate -->
+        <path d="M220 118 L292 132 L220 146 L148 132 Z" fill="#2b2e30"/>
+        <circle cx="220" cy="132" r="1.6" fill="#fff" stroke="none"/>
+        <!-- transducer -->
+        <ellipse cx="220" cy="156" rx="14" ry="4" fill="#9aa19a"/>
+        <!-- body -->
+        <path d="M70 200 L70 290 A150 30 0 0 0 370 290 L370 200" fill="#f7f7f4"/>
+        <ellipse cx="220" cy="200" rx="150" ry="30"/>
+        <ellipse cx="220" cy="200" rx="143" ry="27" fill="none"/>
+        <!-- inner box + base -->
+        <path d="M70 370 L70 380 A150 30 0 0 0 370 380 L370 370" fill="#eceae4"/>
+        <ellipse cx="220" cy="370" rx="150" ry="30" fill="#f7f7f4"/>
+        <path d="M180 312 L180 368 L220 378 L260 368 L260 312" fill="#e2e1db"/>
+        <path d="M180 312 L220 302 L260 312 L220 322 Z" fill="#fff"/>
+        <path d="M220 322 L220 378" fill="none"/>
+      </g>
+      <g stroke="#9aa19a" stroke-dasharray="3 3"><line x1="220" y1="64" x2="220" y2="116"/><line x1="220" y1="160" x2="220" y2="300"/></g>
+      <g font-size="11" fill="#1b2929">
+        <g fill="#367e75"><circle cx="400" cy="50" r="9"/><circle cx="400" cy="128" r="9"/><circle cx="400" cy="160" r="9"/><circle cx="400" cy="232" r="9"/><circle cx="400" cy="320" r="9"/><circle cx="400" cy="372" r="9"/><circle cx="42" cy="46" r="9"/></g>
+        <g fill="#fff" font-weight="700" text-anchor="middle" font-size="10"><text x="400" y="54">5</text><text x="400" y="132">4</text><text x="400" y="164">7</text><text x="400" y="236">3</text><text x="400" y="324">2</text><text x="400" y="376">1</text><text x="42" y="50">6</text></g>
+        <g stroke="#367e75"><line x1="391" y1="50" x2="370" y2="52"/><line x1="391" y1="128" x2="292" y2="132"/><line x1="391" y1="160" x2="236" y2="157"/><line x1="391" y1="232" x2="370" y2="240"/><line x1="391" y1="320" x2="260" y2="330"/><line x1="391" y1="372" x2="370" y2="374"/><line x1="51" y1="46" x2="166" y2="48"/></g>
+      </g>
+    </svg>
+    <div>
+      <table>
+        <tr><th style="width:8mm">#</th><th>Part</th><th>Spec</th></tr>
+        <tr><td class="k">1</td><td class="k">Base plate</td><td>&#216;500 &times; 12</td></tr>
+        <tr><td class="k">2</td><td class="k">Inner support box</td><td>Square column on the base; plate sits on top, under the window</td></tr>
+        <tr><td class="k">3</td><td class="k">Body casing</td><td>&#216;500 OD, 12 wall, 238 H</td></tr>
+        <tr><td class="k">4</td><td class="k">Vibrating plate</td><td>Aluminium 200 &times; 200 &times; 1, black powder coat, &#216;5 centre hole</td></tr>
+        <tr><td class="k">5</td><td class="k">Lid</td><td>&#216;500 &times; 12, &#216;476 &times; 20 spigot into body, &#216;200 opening with 5 mm acrylic seat</td></tr>
+        <tr><td class="k">6</td><td class="k">Acrylic window</td><td>Round, sits on lid seat, clear of the plate</td></tr>
+        <tr><td class="k">7</td><td class="k">Transducer</td><td>Taped to plate underside, centre</td></tr>
+        <tr><td class="k">&mdash;</td><td class="k">Visitor controller</td><td>On the lid, beside the window</td></tr>
+      </table>
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>03 / 11</span></footer>
+</section>
+
+<!-- 04 DIMENSIONS -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Dimensions</h1>
+  <div class="cols c3" style="gap:6mm">
+    <figure>
+      <svg viewBox="0 0 260 280" width="100%">
+        <circle cx="130" cy="130" r="110" fill="#fff" stroke="#1b2929" stroke-width="1.2"/>
+        <circle cx="130" cy="130" r="105" fill="none" stroke="#1b2929" stroke-dasharray="4 3"/>
+        <rect x="86" y="68" width="88" height="88" fill="none" stroke="#5d6b66" stroke-dasharray="4 3"/>
+        <circle cx="130" cy="112" r="44" fill="#cfe2de" stroke="#1b2929"/>
+        <line x1="130" y1="64" x2="130" y2="160" stroke="#9aa19a" stroke-dasharray="6 2 1 2"/><line x1="82" y1="112" x2="178" y2="112" stroke="#9aa19a" stroke-dasharray="6 2 1 2"/>
+        <g stroke="#5d6b66" stroke-width=".8"><line x1="20" y1="256" x2="240" y2="256"/><line x1="20" y1="250" x2="20" y2="262"/><line x1="240" y1="250" x2="240" y2="262"/>
+          
+          <line x1="250" y1="112" x2="250" y2="240"/><line x1="244" y1="112" x2="256" y2="112"/><line x1="174" y1="112" x2="250" y2="112" stroke-dasharray="2 2"/><line x1="244" y1="240" x2="256" y2="240"/></g>
+        <text class="dim" x="130" y="270" text-anchor="middle">&#216;500</text>
+        <text class="dim" x="130" y="146" text-anchor="middle">&#216;200</text>
+        <text class="dim" x="246" y="176" text-anchor="middle" transform="rotate(-90 246 176)">290</text>
+        <text class="dim" x="86" y="168">plate 200 &times; 200</text>
+      </svg>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 260 280" width="100%">
+        <rect x="20" y="80" width="220" height="6" fill="#eceae4" stroke="#1b2929"/>
+        <rect x="20" y="86" width="220" height="104" fill="#fff" stroke="#1b2929"/>
+        <rect x="20" y="190" width="220" height="6" fill="#eceae4" stroke="#1b2929"/>
+        <g stroke="#5d6b66" stroke-width=".8"><line x1="250" y1="80" x2="250" y2="196"/><line x1="244" y1="80" x2="256" y2="80"/><line x1="244" y1="196" x2="256" y2="196"/>
+          <line x1="12" y1="86" x2="12" y2="190"/><line x1="6" y1="86" x2="18" y2="86"/><line x1="6" y1="190" x2="18" y2="190"/>
+          <line x1="20" y1="214" x2="240" y2="214"/><line x1="20" y1="208" x2="20" y2="220"/><line x1="240" y1="208" x2="240" y2="220"/></g>
+        <text class="dim" x="254" y="142" transform="rotate(-90 254 142)" text-anchor="middle">262</text>
+        <text class="dim" x="9" y="138" transform="rotate(-90 9 138)" text-anchor="middle">238</text>
+        <text class="dim" x="130" y="228" text-anchor="middle">&#216;500</text>
+        <text class="dim" x="130" y="74" text-anchor="middle">lid 12</text>
+        <text class="dim" x="130" y="208" text-anchor="middle">base 12</text>
+      </svg>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 260 280" width="100%">
+        <defs><pattern id="h" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#1b2929" stroke-width="1"/></pattern></defs>
+        <rect x="20" y="80" width="220" height="6" fill="url(#h)" stroke="#1b2929"/>
+        <rect x="20" y="86" width="6" height="104" fill="url(#h)" stroke="#1b2929"/>
+        <rect x="234" y="86" width="6" height="104" fill="url(#h)" stroke="#1b2929"/>
+        <rect x="20" y="190" width="220" height="6" fill="url(#h)" stroke="#1b2929"/>
+        <rect x="26" y="86" width="5" height="9" fill="url(#h)" stroke="#1b2929"/><rect x="229" y="86" width="5" height="9" fill="url(#h)" stroke="#1b2929"/>
+        <rect x="86" y="88" width="6" height="102" fill="url(#h)" stroke="#1b2929"/><rect x="168" y="88" width="6" height="102" fill="url(#h)" stroke="#1b2929"/>
+        <rect x="86" y="79" width="88" height="3" fill="#9fc6c0" stroke="#1b2929"/>
+        <rect x="88" y="87" width="84" height="1.5" fill="#1b2929"/>
+        <rect x="122" y="89" width="16" height="5" fill="#9aa19a"/>
+        <g font-size="9" fill="#1b2929">
+          <text x="70" y="40">acrylic window on 5 mm seat</text><line x1="120" y1="44" x2="120" y2="79" stroke="#367e75"/>
+          <text x="186" y="120">plate 1 mm</text><line x1="184" y1="117" x2="160" y2="88" stroke="#367e75"/>
+          <text x="186" y="140">transducer</text><line x1="184" y1="137" x2="138" y2="93" stroke="#367e75"/>
+          <text x="96" y="230">inner support box</text><line x1="120" y1="222" x2="92" y2="180" stroke="#367e75"/>
+        </g>
+      </svg>
+    </figure>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>04 / 11</span></footer>
+</section>
+
+<!-- 05 PLATE, TRANSDUCER, SAND -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Plate, transducer and sand</h1>
+  <div class="cols c3">
+    <div>
+      <h3>Vibrating plate</h3>
+      <table>
+        <tr><td class="k">Material</td><td>Aluminium sheet</td></tr>
+        <tr><td class="k">Size</td><td>200 &times; 200 mm</td></tr>
+        <tr><td class="k">Thickness</td><td>1 mm</td></tr>
+        <tr><td class="k">Finish</td><td>Black powder coat</td></tr>
+        <tr><td class="k">Centre hole</td><td>&#216;5 mm</td></tr>
+        <tr><td class="k">Support</td><td>Inner support box, level</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Transducer</h3>
+      <table>
+        <tr><td class="k">Source unit</td><td>TWS The ConductR FM Speaker</td></tr>
+        <tr><td class="k">Modification</td><td>Internal amp, battery and board removed; driver only</td></tr>
+        <tr><td class="k">Drive</td><td>External 5 V amp</td></tr>
+        <tr><td class="k">Mounting</td><td>Tape, plate underside, centre</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Sand</h3>
+      <table>
+        <tr><td class="k">Type</td><td>Beach sand</td></tr>
+        <tr><td class="k">Preparation</td><td>Sieved, dry</td></tr>
+        <tr><td class="k">Dose</td><td>5 g per pour</td></tr>
+        <tr><td class="k">Application</td><td>Spread evenly</td></tr>
+      </table>
+    </div>
+  </div>
+  
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>05 / 11</span></footer>
+</section>
+
+<!-- 06 CONTROLLER -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Visitor controller</h1>
+  <div class="cols c2">
+    <div>
+      <svg viewBox="0 0 470 190" width="100%" aria-label="Controller front view">
+        <rect x="15" y="20" width="440" height="148" rx="6" fill="#202226"/>
+        <g fill="#e8ebe6"><rect x="50" y="53" width="80" height="80" rx="3"/><rect x="146" y="53" width="80" height="80" rx="3"/><rect x="242" y="53" width="80" height="80" rx="3"/><rect x="338" y="53" width="80" height="80" rx="3"/></g>
+        <g fill="#5d6b66" font-size="14" font-weight="700"><text x="58" y="72">1</text><text x="154" y="72">2</text><text x="250" y="72">3</text><text x="346" y="72">4</text></g>
+        <g fill="#4a4d50"><circle cx="29" cy="34" r="3.4"/><circle cx="441" cy="34" r="3.4"/><circle cx="29" cy="154" r="3.4"/><circle cx="441" cy="154" r="3.4"/></g>
+        <g stroke="#5d6b66" stroke-width=".8"><line x1="15" y1="182" x2="455" y2="182"/><line x1="15" y1="176" x2="15" y2="188"/><line x1="455" y1="176" x2="455" y2="188"/>
+          <line x1="90" y1="10" x2="186" y2="10"/><line x1="90" y1="4" x2="90" y2="16"/><line x1="186" y1="4" x2="186" y2="16"/></g>
+        <text class="dim" x="235" y="178" text-anchor="middle">220</text>
+        <text class="dim" x="138" y="8" text-anchor="middle">48 pitch</text>
+        <text class="dim" x="466" y="94">74</text>
+      </svg>
+      <figure style="margin-top:4mm"><img src="assets/controller-exploded.png" style="width:100%;height:58mm;object-fit:cover;border-radius:2mm"></figure>
+    </div>
+    <div>
+      <table>
+        <tr><th>Item</th><th>Spec</th></tr>
+        <tr><td class="k">Envelope</td><td>220 &times; 74 &times; 24 mm (W &times; D &times; H)</td></tr>
+        <tr><td class="k">Housing</td><td>3D printed, black. Top + base, 4 &times; M3</td></tr>
+        <tr><td class="k">Pads</td><td>4 &times; 40 &times; 40 mm, white</td></tr>
+        <tr><td class="k">Layout</td><td>1 row &times; 4, 48 mm pitch</td></tr>
+        <tr><td class="k">Switches</td><td>6 &times; 6 mm tactile</td></tr>
+        <tr><td class="k">Electronics</td><td>ESP32-S3 inside</td></tr>
+        <tr><td class="k">Placement</td><td>On the lid</td></tr>
+        <tr><td class="k">Cable</td><td>Rear slot into the casing</td></tr>
+        
+      </table>
+      
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>06 / 11</span></footer>
+</section>
+
+<!-- 07 ELECTRONICS -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Electronics and wiring</h1>
+  <div class="cols" style="grid-template-columns: 52mm 1fr 1fr; gap:7mm">
+    <figure><img src="assets/esp32-devkit.jpg" style="width:100%;border-radius:2mm"></figure>
+    <div>
+      <h3>Pin map</h3>
+      <table>
+        <tr><th>ESP32-S3</th><th>To</th><th>Function</th></tr>
+        <tr><td class="mono">GPIO1</td><td>Pad 1 &rarr; GND</td><td>10k pull-up</td></tr>
+        <tr><td class="mono">GPIO2</td><td>Pad 2 &rarr; GND</td><td>10k pull-up</td></tr>
+        <tr><td class="mono">GPIO4</td><td>Pad 3 &rarr; GND</td><td>10k pull-up</td></tr>
+        <tr><td class="mono">GPIO5</td><td>Pad 4 &rarr; GND</td><td>10k pull-up</td></tr>
+        <tr><td class="mono">GPIO18</td><td>PCM5102 BCK</td><td>I&#178;S bit clock</td></tr>
+        <tr><td class="mono">GPIO21</td><td>PCM5102 LCK</td><td>I&#178;S word clock</td></tr>
+        <tr><td class="mono">GPIO47</td><td>PCM5102 DIN</td><td>I&#178;S data</td></tr>
+        <tr><td class="mono">GPIO16</td><td>MUTE &rarr; GND</td><td>Optional</td></tr>
+        <tr><td class="mono">5V / GND</td><td>5 V supply</td><td>Common ground</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>GY-PCM5102 settings</h3>
+      <table>
+        <tr><td class="k">SCK</td><td>GND</td></tr>
+        <tr><td class="k">Jumpers</td><td>1 FLT = L, 2 DEMP = L, 3 XSMT = H, 4 FMT = L</td></tr>
+        <tr><td class="k">VIN</td><td>5 V</td></tr>
+        <tr><td class="k">Output</td><td>L out &rarr; amp in</td></tr>
+      </table>
+      <h3 style="margin-top:4mm">Power</h3>
+      <ul>
+        <li>One 5 V adaptor feeds ESP32, DAC and amp. Common ground.</li>
+        <li>Amp: 5 V class-D, one channel to the transducer.</li>
+        <li>Don't plug USB while on 5 V. USB is for flashing only.</li>
+      </ul>
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>07 / 11</span></footer>
+</section>
+
+<!-- 08 TUNING WEB APP -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Tuning web app</h1>
+  <div class="cols" style="grid-template-columns: 82mm 1fr; gap:9mm">
+    <div>
+      <div class="wifi">
+        <div class="lbl">Wi-Fi network (SSID)</div><div class="val">ATMOS-CP-300-EXP</div>
+        <div class="lbl">Password</div><div class="val">300300300</div>
+        <div class="lbl">Web app address</div><div class="val" style="margin-bottom:0">http://192.168.4.1</div>
+      </div>
+      <h3 style="margin-top:4mm">Page won't open</h3>
+      <ul>
+        <li>"No internet" warning: stay connected.</li>
+        <li>Turn off mobile data.</li>
+        <li>One phone at a time.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Tuning</h3>
+      <ol>
+        <li>Power on. Unit boots muted.</li>
+        <li>Join the Wi-Fi, open <b>http://192.168.4.1</b>, tap <b>Hubungkan kontrol</b>.</li>
+        <li>Pour 5 g of sand.</li>
+        <li>Set FREQ, LEVEL, FOLD, WAVE, HARMONICS. Press <b>TEST SUARA</b> to hear it on the plate.</li>
+        <li>Press <b>SIMPAN 1&ndash;4</b> to save to a pad.</li>
+        <li>Press <b>Selesai servis</b> when done. Pads work without the phone.</li>
+      </ol>
+      <p style="margin-top:4mm"><b>MUTE / STOP</b> is always on screen. If the phone disconnects, the unit mutes after 2.5 s.</p>
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>08 / 11</span></footer>
+</section>
+
+<!-- 09 CONTROLS + PRESETS -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Controls and presets</h1>
+  <div class="cols" style="grid-template-columns: 1.5fr 1fr; gap:8mm">
+    <table>
+      <tr><th style="width:40mm">Control</th><th style="width:48mm">Range</th><th>Function</th></tr>
+      <tr><td class="k">FREQ</td><td>20&ndash;4000 Hz, 0.1 Hz</td><td>Tone frequency</td></tr>
+      <tr><td class="k">LEVEL</td><td>0&ndash;100 %</td><td>Output level</td></tr>
+      <tr><td class="k">FOLD</td><td>0&ndash;100 %, 0.1 %</td><td>Adds overtones</td></tr>
+      <tr><td class="k">WAVE</td><td>Sine / Saw / Triangle</td><td>Waveform</td></tr>
+      <tr><td class="k">HARMONICS</td><td>Odd / Even / Odd+Even</td><td>Overtone set</td></tr>
+      <tr><td class="k">TEST SUARA</td><td>&mdash;</td><td>Play current sound</td></tr>
+      <tr><td class="k">SIMPAN 1&ndash;4</td><td>&mdash;</td><td>Save to pad</td></tr>
+      <tr><td class="k">SWEEP MIN / MAX</td><td>Hz</td><td>Allowed frequency range</td></tr>
+      <tr><td class="k">PLAY SEQUENCE</td><td>4 slots, 3 s each</td><td>Auto-play pads, in order or random</td></tr>
+      <tr><td class="k">GATHER</td><td>1&ndash;16 steps, max 300 s</td><td>Pulls sand back to the centre</td></tr>
+      <tr><td class="k">Preset import/export</td><td>JSON</td><td>Backup presets</td></tr>
+      <tr><td class="k">Preset awal</td><td>&mdash;</td><td>Restore defaults</td></tr>
+      <tr><td class="k">MUTE / STOP</td><td>&mdash;</td><td>Stop all sound</td></tr>
+    </table>
+    <div>
+      <h3>Installed presets</h3>
+      <table>
+        <tr><th>Pad</th><th>Frequency</th></tr>
+        <tr><td class="k">1</td><td class="mono">1096 Hz</td></tr>
+        <tr><td class="k">2</td><td class="mono">1360 Hz</td></tr>
+        <tr><td class="k">3</td><td class="mono">2249 Hz</td></tr>
+        <tr><td class="k">4</td><td class="mono">2386 Hz</td></tr>
+      </table>
+      
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>09 / 11</span></footer>
+</section>
+
+<!-- 10 SITE + OPERATION -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Site requirements and operation</h1>
+  <div class="cols c3" style="gap:7mm">
+    <div>
+      <h3>Site requirements</h3>
+      <table>
+        <tr><td class="k">Footprint</td><td>&#216;500 mm</td></tr>
+        <tr><td class="k">Surface</td><td>Level, stable</td></tr>
+        <tr><td class="k">Power</td><td>1 outlet, 5 V adaptor</td></tr>
+        <tr><td class="k">Airflow</td><td>Away from AC vents and fans</td></tr>
+        
+        <tr><td class="k">Wi-Fi</td><td>2.4 GHz. One SSID per unit</td></tr>
+        <tr><td class="k">Internet</td><td>Not needed</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Daily</h3>
+      <ol>
+        <li>Plug in. Unit boots muted.</li>
+        <li>Pour 5 g of sand.</li>
+        <li>Test each pad.</li>
+        <li>Run GATHER when sand drifts to the edge.</li>
+        <li>Top up 5 g when figures fade.</li>
+        <li>Unplug at close. Wipe the acrylic.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Troubleshooting</h3>
+      <table>
+        <tr><th>Symptom</th><th>Check</th></tr>
+        <tr><td>No sound at all</td><td>Power, XSMT jumper, transducer tape</td></tr>
+        <tr><td>Weak or blurred figure</td><td>Less sand, dry sand, raise LEVEL</td></tr>
+        <tr><td>Sand gathers on one side</td><td>Level casing, centre driver, GATHER</td></tr>
+        <tr><td>Tone stops while held</td><td>5 s limit, press again</td></tr>
+        <tr><td>Pad 3/4 silent</td><td>SWEEP MAX below 2386 Hz</td></tr>
+        <tr><td>Web app won't load</td><td>Mobile data off, check SSID</td></tr>
+        
+      </table>
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>10 / 11</span></footer>
+</section>
+
+<!-- 11 BOM + CREDITS -->
+<section class="page">
+  <header><div class="tag">CP-300</div><img src="assets/logo.png" alt=""></header>
+  <h1>Bill of materials</h1>
+  <div class="cols" style="grid-template-columns: 1.6fr 1fr; gap:8mm">
+    <table>
+      <tr><th style="width:10mm">Qty</th><th>Item</th><th>Notes</th></tr>
+      <tr><td>1</td><td class="k">Cylindrical casing set</td><td>Base, body, lid, inner box</td></tr>
+      <tr><td>1</td><td class="k">Acrylic window</td><td>&#216;200</td></tr>
+      <tr><td>1</td><td class="k">Aluminium plate</td><td>200 &times; 200 &times; 1 mm, black powder coat, &#216;5 centre hole</td></tr>
+      <tr><td>1</td><td class="k">Resonance driver</td><td>TWS The ConductR FM Speaker, stripped</td></tr>
+      <tr><td>1</td><td class="k">Mounting tape</td><td></td></tr>
+      <tr><td>1</td><td class="k">ESP32-S3 DevKitC-1 N16R8</td><td></td></tr>
+      <tr><td>1</td><td class="k">GY-PCM5102</td><td>I&#178;S DAC</td></tr>
+      <tr><td>1</td><td class="k">5 V class-D amplifier</td><td></td></tr>
+      <tr><td>1</td><td class="k">5 V DC adaptor</td><td>3 A</td></tr>
+      <tr><td>4</td><td class="k">Tactile switch 6 &times; 6 mm</td><td></td></tr>
+      <tr><td>4</td><td class="k">Resistor 10 k&Omega;</td><td>Pad pull-ups</td></tr>
+      <tr><td>1</td><td class="k">Controller housing</td><td>3D printed</td></tr>
+      <tr><td>&mdash;</td><td class="k">Sand</td><td>Beach sand, sieved</td></tr>
+    </table>
+    <div>
+      <h3>Firmware</h3>
+      <table>
+        <tr><td class="k">Release</td><td class="mono">remote-v1.1.0</td></tr>
+        <tr><td class="k">Platform</td><td>PlatformIO, ESP32 Arduino 2.0.17</td></tr>
+        
+        <tr><td class="k">Web app</td><td>Built into firmware</td></tr>
+      </table>
+      <div class="box" style="margin-top:6mm">
+        <h3>Credits</h3>
+        <p style="margin:0 0 2mm"><b>EXP Research &times; 3HUNDRED</b></p>
+        <p style="margin:0">Electronics, firmware, app: EXP Research<br>Casing: 3HUNDRED</p>
+      </div>
+    </div>
+  </div>
+  <footer><span>CP-300 / TECHNICAL SHEET / REV.01</span><span>11 / 11</span></footer>
+</section>
+
+</body>
+</html>

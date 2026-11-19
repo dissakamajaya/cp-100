@@ -62,3 +62,7 @@ Pengguna meminta tombol Play untuk sequence pad 1–8 setiap 3 detik dan opsi ac
 ## GATHER / kumpulkan pasir — 28 Oktober 2026
 
 Masalah di pelat: pasir kadang lari ke samping. Pengguna meminta sequence untuk mengumpulkan pasir kembali ke tengah (tumpukan acak, bukan pola). Diputuskan: rutin terpisah dari 8 pad, hanya di PANEL SERVIS simulator, sine saja, sekali jalan dengan glide antar langkah lalu fade dan mute. Frekuensi harus dicari di pelat nyata (simulasi pasir hanya ilustratif). Periksa dulu kerataan pelat dan posisi klem di tengah speaker. Firmware menyusul setelah rutin terbukti di pelat (kandidat: jalan otomatis saat idle).
+
+## As-built CP-300 dan tech sheet — 19 November 2026
+
+Unit terpasang (Atmos Jakarta & Surabaya) berbeda dari blueprint Rev08: casing silinder Ø500 × 262 mm (3HUNDRED R1), pelat aluminium 200×200×1 mm powder coat hitam di inner box, jendela akrilik Ø200, controller 4 pad di atas lid. Transducer: driver TWS The ConductR FM Speaker (amp/baterai internal dicabut), ditempel tape di tengah bawah pelat. Rantai: ESP32-S3 → GY-PCM5102 → amp 5 V eksternal. Satu adaptor 5 V untuk semua. Pasir pantai disaring, 5 g per tuang. Nama produk di dokumen klien: CP-300, kredit EXP Research × 3HUNDRED. Tech sheet (EN): `techsheet/index.html` → `output/pdf/CP-300-Technical-Sheet.pdf` (Chrome headless print).
