@@ -1,64 +1,36 @@
-# CP-100 — agent handoff
+# CP-100 / CP-300 — Chladni Plate Controller
 
-Paket kelanjutan controller Chladni House of EXP. Snapshot 26 Oktober 2026 (Asia/Jakarta), dikumpulkan dari chat sumber dan file lokal. Mulai dari [HANDOFF.md](HANDOFF.md), lalu [NEXT-STEPS.md](docs/NEXT-STEPS.md).
+Controller Chladni plate dari **EXP Research**. ESP32-S3 menghasilkan sinyal audio untuk menggetarkan pelat melalui DAC PCM5102, amplifier, dan transducer. Pengunjung memainkan empat pad horizontal. Operator mengatur suara dan preset dari HP melalui web SERVICE lokal.
 
-**Status:** simulator dan blueprint Rev08 tersedia. Gambar casing di PDF Rev08 masih belum mengikuti revisi terakhir pengguna. Firmware ESP32 di `firmware/` sudah mengikuti empat pad dan SERVICE lewat HP via hotspot **ATMOS-CP-300-EXP**, alamat **192.168.4.1**, lengkap dengan knob/adjustment, preset, sequencer dan GATHER. Build/tes host/UI lokal tersedia; belum diuji pada hardware. Lihat [petunjuk firmware](firmware/README.md). PCB produksi dan uji perangkat fisik belum tersedia dalam paket ini. Publikasi Rev08 belum terverifikasi pada handoff ini.
+| Varian | Mekanik | Status dokumentasi |
+|---|---|---|
+| CP-100 | Pelat 600 × 600 mm dan kaca bulat Ø500 mm | Acuan desain. Gambar casing pada blueprint Rev08 masih menunggu koreksi. |
+| CP-300 | Casing silinder Ø500 × 262 mm, pelat aluminium 200 × 200 × 1 mm, jendela akrilik Ø200 mm dan controller di lid | Konfigurasi instalasi Atmos Jakarta dan Surabaya, EXP Research × 3HUNDRED. |
 
-## Flash firmware versi minimal
+## Firmware v1.1.0
 
-Versi terbaru **v1.1.0**: empat pad momentary **maksimal 5 detik/tekan**, lepas langsung mute, tanpa autorepeat. Preset awal **1096 / 1360 / 2249 / 2386 Hz**. SERVICE HP, tanpa display/LED eksternal.
+- Empat pad momentary dengan preset awal **1096 / 1360 / 2249 / 2386 Hz**. Satu pad aktif pada satu waktu. Melepas pad langsung memicu mute. Setiap penekanan dibatasi 5 detik, lalu pad harus dilepas sebelum dapat dimainkan kembali.
+- SERVICE tersedia di [192.168.4.1](http://192.168.4.1) saat HP tersambung ke hotspot **ATMOS-CP-300-EXP**. Gunakan password operator dari pemilik unit. UI berjalan langsung di ESP32 dan mencakup penyetelan frekuensi, level, waveform, harmonik, fold, preset, TEST/MUTE, sequencer, dan GATHER.
+- Seluruh tampilan dan pengaturan servis ada di HP. Hardware aktif memakai empat pad, ESP32-S3, DAC, amplifier, dan transducer. MUTE fisik bersifat opsional.
 
-- [Panduan flash dan wiring firmware](firmware/README.md)
-- [Paket ZIP siap flash + PDF](firmware/releases/CP-100-remote-v1.1.0.zip)
-- [PDF wiring Rev04: foto DevKit dan diagram kabel](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf)
-
-```sh
-gh repo clone dissakamajaya/cp-100
-cd cp-100
-pio run -d firmware -t upload
-pio device monitor -d firmware
-```
-
-Gunakan port USB **UART** pada ESP32-S3 N16R8. Hotspot **ATMOS-CP-300-EXP**, password **300300300** (pilihan pemilik). Ketik `wifi` di monitor serial untuk info koneksi, lalu buka **http://192.168.4.1** lewat HP. Repo tetap privat; gunakan akun GitHub yang memiliki akses.
-
-| Lokasi | Isi |
+| Kebutuhan | Tautan |
 |---|---|
-| `firmware/` | Firmware ESP32-S3 (PlatformIO), port model/DSP simulator; lihat `firmware/README.md` |
-| `simulator/` | Source simulator terbaru dari checkout Sites, `dist/` dan 23 tes |
-| `domain-router/` | Worker route custom domain dan 6 tes |
-| `outputs/` | PDF Rev07/Rev08, pinout, blueprint SVG/DXF/CSV/A3, ZIP, cover pilihan |
-| `work/` | Builder PDF Rev08, bahan gambar, foto komponen dan sumber dimensinya |
-| `docs/` | Keputusan, daftar kerja berikut, sumber, dan manifest file |
-| `evidence/` | Hasil verifikasi handoff dan bukti QA historis |
+| Build, flash, pinout, dan konfigurasi operator | [Panduan firmware](firmware/README.md) |
+| Paket siap flash dan checksum | [GitHub prerelease v1.1.0](https://github.com/dissakamajaya/cp-100/releases/tag/firmware-remote-v1.1.0) |
+| Diagram pad, DAC dan daya | [PDF wiring Rev04](output/pdf/CP-100-Wiring-4-Pad-WiFi.pdf) |
+| Model 3D controller empat pad | [Enclosure](enclosure/README.md) |
+| Blueprint dan PDF CP-100 Rev08 | [Arsip desain](outputs/) |
+| Keputusan dan kelanjutan | [Keputusan desain](docs/DECISIONS.md) · [Daftar pekerjaan](docs/NEXT-STEPS.md) · [Handoff](HANDOFF.md) |
 
-## Jalankan
+## Build dan verifikasi
 
-Node.js 20+ dan Python 3.10+ dianjurkan. Simulator tidak memerlukan paket npm.
+Gunakan PlatformIO untuk ESP32-S3, Node.js 20+ untuk tes web, dan Python 3.10+ untuk manifest dan server simulator lokal.
 
 ```sh
+sh firmware/test/run-host.sh --asan
+pio run -d firmware
 node --test simulator/tests/*.test.js domain-router/worker.test.mjs
-python3 -m http.server 8080 --bind 127.0.0.1 --directory simulator/dist
+python3 scripts/verify_manifest.py
 ```
 
-Buka `http://127.0.0.1:8080`. Browser meminta interaksi pengguna untuk mengaktifkan audio. Gunakan tool browser yang tersedia untuk QA; Stagehand tidak lagi diwajibkan. Lihat [AGENTS.md](AGENTS.md).
-
-## PDF
-
-```sh
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-pdf.txt
-.venv/bin/python work/build_rev8.py
-```
-
-Builder menimpa file Rev08 di `outputs/`; commit/salin snapshot sebelum rebuild. Versi ini masih menggunakan Arial, Arial Bold, dan Andale Mono dari `/System/Library/Fonts/Supplemental/` pada macOS. Untuk OS lain, sediakan font kompatibel dan sesuaikan pemetaan font pada `work/build_rev5_concise.py`. Jangan memasukkan font berlisensi ke repo tanpa izin. Builder memakai tiga halaman wiring dari PDF Rev07 yang disertakan.
-
-Rebuild saja belum menyelesaikan koreksi gambar/cover. Lanjutkan sesuai [HANDOFF.md](HANDOFF.md).
-
-## Tautan
-
-- Simulator historis: https://houseofexp.com/research/cp-100/
-- PDF historis: https://houseofexp.com/research/cp-100/CP-100-Guide.pdf
-- Chat Codex: `codex://threads/01a15d32-d71c-77e1-bce0-aead509b9348`
-- Diskusi awal: https://chatgpt.com/share/6adedb0c-ff7c-83ec-8d88-d171cdc78917
-
-Tautan publik dicatat sebagai referensi; status live belum diuji ulang dalam pekerjaan packaging ini. Foto pihak ketiga tetap memiliki hak pemilik masing-masing; sumber tercantum dalam manifest foto dan PDF.
+Untuk mencoba simulator, jalankan `python3 -m http.server 8080 --bind 127.0.0.1 --directory simulator/dist`, lalu buka [simulator lokal](http://127.0.0.1:8080) dan aktifkan audio. Simulator memuat UI generasi sebelumnya. Hasil tes host dan simulasi mencakup perangkat lunak. Verifikasi GPIO, Wi-Fi, dan audio I²S firmware v1.1.0 pada ESP32 fisik masih tercatat sebagai pekerjaan lanjutan.

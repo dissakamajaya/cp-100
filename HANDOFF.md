@@ -1,5 +1,9 @@
 # Mulai di sini
 
+## Pembaruan dokumentasi repo — 23 November 2026
+
+README merangkum firmware empat pad v1.1.0, SERVICE via HP, wiring Rev04, serta perbedaan desain CP-100 dan instalasi CP-300. Deskripsi About diperbarui dan diverifikasi di Helium. Verifikasi lokal: ASan 419 cek, simulator/router 44 tes, dan manifest 86 aset lulus. PlatformIO terhalang akses ke direktori core pada sesi ini.
+
 ## PDF wiring Rev04 - jumper DAC, daya bench, langkah flash (1 November 2026)
 
 Review sebelum flash pertama. Firmware tidak berubah: clean build ulang tanpa warning (RAM **46.732 byte**, flash **862.405 byte**) menghasilkan `bootloader.bin`, `partitions.bin` dan `firmware.bin` **identik byte** dengan paket v1.1.0. Host ASan **419 cek**, simulator/router **44/44**, manifest **86 aset** lulus.
