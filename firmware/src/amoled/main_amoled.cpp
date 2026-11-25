@@ -108,7 +108,7 @@ void editParameters(const HitResult& h) {
   const Setup& s = controller.state().setup;
   if (h.hit == Hit::Freq) p.frequencyHz = constrain(roundf((p.frequencyHz + h.value) * 10) / 10, s.minHz, s.maxHz);
   else if (h.hit == Hit::LevelBar) p.levelPct = int(h.value);
-  else if (h.hit == Hit::Harmonics) p.harmonics = h.index == 1 ? Harmonics::Even : h.index == 2 ? Harmonics::Both : Harmonics::Odd;
+  else if (h.hit == Hit::FoldBar) p.foldPct = h.value;
   p.wave = Wave::Sine;
   local(Action::Parameters, -1, &p);
 }
@@ -116,7 +116,7 @@ void servicePress(const HitResult& h) {
   switch (h.hit) {
     case Hit::Done: leaveService(); break;
     case Hit::Tab: stopTest(); loadPad(h.index); break;
-    case Hit::Freq: case Hit::LevelBar: case Hit::Harmonics: editParameters(h); break;
+    case Hit::Freq: case Hit::LevelBar: case Hit::FoldBar: editParameters(h); break;
     case Hit::Test: if (local(Action::Test).ok) { view.testing = true; testAt = millis(); } break;
     case Hit::Save: stopTest(); local(Action::Save, view.pad); break;
     default: break;
@@ -124,7 +124,7 @@ void servicePress(const HitResult& h) {
 }
 
 // RUN: touch behaves like the physical pads (press = down, lift or slide off = up).
-// SERVICE: buttons act on press; FREQ steps repeat while held; LEVEL follows the finger.
+// SERVICE: buttons act on press; FREQ steps repeat while held; sliders follow the finger.
 bool pollTouch() {
   static uint32_t lastPoll = 0, downAt = 0, repeatAt = 0;
   static bool wasDown = false;
@@ -155,9 +155,11 @@ bool pollTouch() {
     servicePress(pressed);
   } else if (t.down && view.service) {
     if (pressed.hit == Hit::Freq && int32_t(now - repeatAt) >= 0) { repeatAt = now + kRepeatMs; editParameters(pressed); }
-    if (pressed.hit == Hit::LevelBar) {
+    if (pressed.hit == Hit::LevelBar || pressed.hit == Hit::FoldBar) {
       const HitResult h = screenHit(t.x, t.y, true);
-      if (h.hit == Hit::LevelBar && int(h.value) != controller.state().parameters.levelPct) editParameters(h);
+      const auto& p = controller.state().parameters;
+      const float current = h.hit == Hit::LevelBar ? p.levelPct : p.foldPct;
+      if (h.hit == pressed.hit && h.value != current) editParameters(h);
     }
   } else if (!t.down && wasDown) {
     if (pressed.hit == Hit::Test) stopTest();

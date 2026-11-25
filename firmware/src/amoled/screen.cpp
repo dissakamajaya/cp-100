@@ -34,7 +34,7 @@ constexpr int kStepY = 196, kStepH = 52, kStepW = (kScreenW - 2 * kMargin - 5 * 
 constexpr float kSteps[6] = {-10, -1, -0.1f, 0.1f, 1, 10};
 constexpr const char* kStepLabels[6] = {"-10", "-1", "-0.1", "+0.1", "+1", "+10"};
 constexpr Box kLevelBar = {kMargin, 284, kScreenW - 2 * kMargin, 40};
-constexpr int kWaveY = 338, kWaveH = 50, kWaveW = (kScreenW - 2 * kMargin - 2 * 10) / 3;
+constexpr Box kFoldBar = {kMargin, 352, kScreenW - 2 * kMargin, 40};
 constexpr Box kTest = {kMargin, 402, 214, 62};
 constexpr Box kSave = {kScreenW - kMargin - 214, 402, 214, 62};
 
@@ -45,7 +45,9 @@ bool dimmed = false;
 
 Box tabBox(int i) { return {kMargin + i * (kTabW + 10), kTabY, kTabW, kTabH}; }
 Box stepBox(int i) { return {kMargin + i * (kStepW + 8), kStepY, kStepW, kStepH}; }
-Box waveBox(int i) { return {kMargin + i * (kWaveW + 10), kWaveY, kWaveW, kWaveH}; }
+// Label above, track inside the box, filled to fraction 0..1.
+void slider(const Box& b, const char* label, float fraction);
+float sliderValue(const Box& b, int x) { return constrain(roundf(100.f * (x - b.x - 2) / (b.w - 4)), 0, 100); }
 void padRect(int i, int* x, int* y) {
   *x = kMargin + (i % 2) * (kPadW + kGap);
   *y = kTop + (i / 2) * (kPadH + kGap);
@@ -78,6 +80,13 @@ void chip(const char* s, int right, int y, uint16_t fg, uint16_t bg, int* width)
   canvas->fillRoundRect(right - cw, y, cw, 30, 15, bg);
   text(s, right - cw + 12 - bx, y + 21, &FreeSans9pt7b, fg);
   *width = cw;
+}
+void slider(const Box& b, const char* label, float fraction) {
+  text(label, b.x, b.y - 8, &FreeSans9pt7b, kMuted);
+  canvas->fillRoundRect(b.x, b.y + 8, b.w, b.h - 16, 12, kPanel);
+  canvas->drawRoundRect(b.x, b.y + 8, b.w, b.h - 16, 12, kLine);
+  const int fillW = int((b.w - 4) * fraction);
+  if (fillW > 0) canvas->fillRoundRect(b.x + 2, b.y + 10, fillW, b.h - 20, 10, kTosca);
 }
 const char* waveLabel(Wave w) { return w == Wave::Saw ? "SAW" : w == Wave::Triangle ? "TRI" : "SINE"; }
 const char* harmLabel(Harmonics h) { return h == Harmonics::Even ? "EVEN" : h == Harmonics::Both ? "ODD+EVEN" : "ODD"; }
@@ -145,16 +154,10 @@ void drawService(const ControlSnapshot& snap, const LocalView& v) {
   text(buf, kScreenW / 2 + 20, kFreqY + 42, &FreeSansBold18pt7b, kInk, 1);
   for (int i = 0; i < 6; ++i) button(stepBox(i), kStepLabels[i], false, kInk);
 
-  const Box& b = kLevelBar;
   snprintf(buf, sizeof buf, "LEVEL %d%%", p.levelPct);
-  text(buf, b.x, b.y - 8, &FreeSans9pt7b, kMuted);
-  canvas->fillRoundRect(b.x, b.y + 8, b.w, b.h - 16, 12, kPanel);
-  canvas->drawRoundRect(b.x, b.y + 8, b.w, b.h - 16, 12, kLine);
-  const int fillW = (b.w - 4) * p.levelPct / 100;
-  if (fillW > 0) canvas->fillRoundRect(b.x + 2, b.y + 10, fillW, b.h - 20, 10, kTosca);
-
-  const Harmonics harms[3] = {Harmonics::Odd, Harmonics::Even, Harmonics::Both};
-  for (int i = 0; i < 3; ++i) button(waveBox(i), harmLabel(harms[i]), p.harmonics == harms[i], kInk);
+  slider(kLevelBar, buf, p.levelPct / 100.f);
+  snprintf(buf, sizeof buf, "FOLD %.1f%%", p.foldPct);
+  slider(kFoldBar, buf, p.foldPct / 100.f);
 
   button(kTest, v.testing ? "BUNYI..." : "TAHAN TEST", v.testing, kTosca, &FreeSansBold12pt7b);
   snprintf(buf, sizeof buf, "SIMPAN PAD %d", v.pad + 1);
@@ -186,11 +189,9 @@ HitResult screenHit(int x, int y, bool service) {
   for (int i = 0; i < kPadCount; ++i) if (tabBox(i).has(x, y)) { r.hit = Hit::Tab; r.index = i; return r; }
   for (int i = 0; i < 6; ++i) if (stepBox(i).has(x, y)) { r.hit = Hit::Freq; r.index = i; r.value = kSteps[i]; return r; }
   if (kLevelBar.has(x, y)) {
-    r.hit = Hit::LevelBar;
-    r.value = constrain(roundf(100.f * (x - kLevelBar.x - 2) / (kLevelBar.w - 4)), 0, 100);
-    return r;
+    r.hit = Hit::LevelBar; r.value = sliderValue(kLevelBar, x); return r;
   }
-  for (int i = 0; i < 3; ++i) if (waveBox(i).has(x, y)) { r.hit = Hit::Harmonics; r.index = i; return r; }
+  if (kFoldBar.has(x, y)) { r.hit = Hit::FoldBar; r.value = sliderValue(kFoldBar, x); return r; }
   if (kTest.has(x, y)) { r.hit = Hit::Test; return r; }
   if (kSave.has(x, y)) { r.hit = Hit::Save; return r; }
   return r;
@@ -200,9 +201,9 @@ void screenUpdate(const ControlSnapshot& snap, const LocalView& v, uint32_t now,
   const State& s = snap.state;
   const auto& e = s.parameters;
   char sig[sizeof shown];
-  int n = snprintf(sig, sizeof sig, "%d%d%d%d%d%d%d%d%p|%d%d%.1f%.1f|%.1f%d%d%d", v.service, v.pad, v.testing, v.pressed,
+  int n = snprintf(sig, sizeof sig, "%d%d%d%d%d%d%d%d%p|%d%d%.1f%.1f|%.1f%d%d%.1f", v.service, v.pad, v.testing, v.pressed,
                    int(s.mode), s.muted, s.activePad, int(snap.playback), v.toast, snap.owner != 0, snap.owner == kLocalOwner,
-                   s.setup.minHz, s.setup.maxHz, e.frequencyHz, e.levelPct, int(e.wave), int(e.harmonics));
+                   s.setup.minHz, s.setup.maxHz, e.frequencyHz, e.levelPct, int(e.wave), e.foldPct);
   for (int i = 0; i < kPadCount && n < int(sizeof sig) - 24; ++i) {
     const auto& p = s.presets[i].parameters;
     n += snprintf(sig + n, sizeof sig - n, "|%d%.1f%d%d%d", s.presets[i].used, p.frequencyHz, int(p.wave), int(p.harmonics), p.levelPct);

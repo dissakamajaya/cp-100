@@ -5,7 +5,7 @@
 constexpr uint32_t kLocalOwner = 0x10CA1u;  // session id of the on-screen editor
 
 enum class Hit : uint8_t {
-  None, Title, Done, Tab, Freq, LevelBar, Harmonics, Test, Save
+  None, Title, Done, Tab, Freq, LevelBar, FoldBar, Test, Save
 };
 struct HitResult { Hit hit = Hit::None; int index = 0; float value = 0; };
 
