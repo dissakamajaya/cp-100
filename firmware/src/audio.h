@@ -10,7 +10,11 @@ constexpr int kSampleRate = 48000;
 // Hardware trim stays at 0.5 (about 0.18 full-scale digital RMS at LEVEL 100).
 // The current browser preview has no 0.12 attenuation. Commission the physical
 // amplifier/shaker separately; do not infer a safe output from browser loudness.
+#ifdef CP100_AMOLED
+constexpr float kOutputTrim = 1.0f;  // onboard speaker preview: full digital scale
+#else
 constexpr float kOutputTrim = 0.5f;
+#endif
 
 struct AudioStats {
   float peak;          // last block's peak, 0..1 before trim

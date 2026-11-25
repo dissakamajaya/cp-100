@@ -6,9 +6,9 @@
 #include "board.h"
 
 namespace {
-// DAC volume register 0x32: 0xBF = 0 dB, 0.5 dB per step. The onboard
-// speaker is a preview only; -12 dB keeps LEVEL 100 from clipping the amp.
-constexpr uint8_t kDacVolume = 0xBF - 24;
+// DAC volume register 0x32: 0xBF = 0 dB, 0.5 dB per step. Above 0 dB the
+// calibrated waves (peak near full scale at LEVEL 100) would clip.
+constexpr uint8_t kDacVolume = 0xBF;
 
 bool write(uint8_t reg, uint8_t value) {
   for (int attempt = 0; attempt < 3; ++attempt) {
