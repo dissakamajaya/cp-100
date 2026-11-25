@@ -4,7 +4,12 @@
 #include <driver/i2s.h>
 #include <atomic>
 
+#ifdef CP100_AMOLED
+#include "amoled/board.h"
+#include "amoled/codec.h"
+#else
 #include "pins.h"
+#endif
 
 namespace {
 constexpr i2s_port_t kPort = I2S_NUM_0;
@@ -68,7 +73,12 @@ void audioBegin() {
   config.bits_per_chan = I2S_BITS_PER_CHAN_32BIT;
 
   i2s_pin_config_t pins = {};
+#ifdef CP100_AMOLED
+  config.fixed_mclk = kSampleRate * 256;  // ES8311 runs from MCLK (12.288 MHz)
+  pins.mck_io_num = PIN_I2S_MCLK;
+#else
   pins.mck_io_num = I2S_PIN_NO_CHANGE;  // PCM5102 SCK tied to GND: internal PLL from BCK
+#endif
   pins.bck_io_num = PIN_I2S_BCK;
   pins.ws_io_num = PIN_I2S_LRCK;
   pins.data_out_num = PIN_I2S_DOUT;
@@ -77,6 +87,9 @@ void audioBegin() {
   ESP_ERROR_CHECK(i2s_driver_install(kPort, &config, 0, nullptr));
   ESP_ERROR_CHECK(i2s_set_pin(kPort, &pins));
   i2s_zero_dma_buffer(kPort);
+#ifdef CP100_AMOLED
+  if (!codecBegin()) Serial.println("ES8311 codec not responding; speaker stays silent.");
+#endif
   // Wi-Fi and HTTP run on core 0; audio runs on core 1 above the control loop.
   // DMA backpressure yields regularly to the control/idle tasks.
   xTaskCreatePinnedToCore(audioTask, "audio", 4096, nullptr, configMAX_PRIORITIES - 5, nullptr, 1);
