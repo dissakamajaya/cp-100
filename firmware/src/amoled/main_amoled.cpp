@@ -85,7 +85,10 @@ ControlResult local(Action action, int index = -1, const Parameters* p = nullptr
 void loadPad(int i) {
   view.pad = i;
   const Preset& preset = controller.state().presets[i];
-  if (preset.used) local(Action::Parameters, -1, &preset.parameters);
+  if (!preset.used) return;
+  Parameters p = preset.parameters;
+  p.wave = Wave::Sine;  // the on-screen editor is sine-only
+  local(Action::Parameters, -1, &p);
 }
 void enterService() {
   if (!local(Action::Claim).ok) return;  // phone holds the session
@@ -105,14 +108,15 @@ void editParameters(const HitResult& h) {
   const Setup& s = controller.state().setup;
   if (h.hit == Hit::Freq) p.frequencyHz = constrain(roundf((p.frequencyHz + h.value) * 10) / 10, s.minHz, s.maxHz);
   else if (h.hit == Hit::LevelBar) p.levelPct = int(h.value);
-  else if (h.hit == Hit::Wave) p.wave = h.index == 1 ? Wave::Saw : h.index == 2 ? Wave::Triangle : Wave::Sine;
+  else if (h.hit == Hit::Harmonics) p.harmonics = h.index == 1 ? Harmonics::Even : h.index == 2 ? Harmonics::Both : Harmonics::Odd;
+  p.wave = Wave::Sine;
   local(Action::Parameters, -1, &p);
 }
 void servicePress(const HitResult& h) {
   switch (h.hit) {
     case Hit::Done: leaveService(); break;
     case Hit::Tab: stopTest(); loadPad(h.index); break;
-    case Hit::Freq: case Hit::LevelBar: case Hit::Wave: editParameters(h); break;
+    case Hit::Freq: case Hit::LevelBar: case Hit::Harmonics: editParameters(h); break;
     case Hit::Test: if (local(Action::Test).ok) { view.testing = true; testAt = millis(); } break;
     case Hit::Save: stopTest(); local(Action::Save, view.pad); break;
     default: break;

@@ -153,8 +153,8 @@ void drawService(const ControlSnapshot& snap, const LocalView& v) {
   const int fillW = (b.w - 4) * p.levelPct / 100;
   if (fillW > 0) canvas->fillRoundRect(b.x + 2, b.y + 10, fillW, b.h - 20, 10, kTosca);
 
-  const Wave waves[3] = {Wave::Sine, Wave::Saw, Wave::Triangle};
-  for (int i = 0; i < 3; ++i) button(waveBox(i), waveLabel(waves[i]), p.wave == waves[i], kInk);
+  const Harmonics harms[3] = {Harmonics::Odd, Harmonics::Even, Harmonics::Both};
+  for (int i = 0; i < 3; ++i) button(waveBox(i), harmLabel(harms[i]), p.harmonics == harms[i], kInk);
 
   button(kTest, v.testing ? "BUNYI..." : "TAHAN TEST", v.testing, kTosca, &FreeSansBold12pt7b);
   snprintf(buf, sizeof buf, "SIMPAN PAD %d", v.pad + 1);
@@ -190,7 +190,7 @@ HitResult screenHit(int x, int y, bool service) {
     r.value = constrain(roundf(100.f * (x - kLevelBar.x - 2) / (kLevelBar.w - 4)), 0, 100);
     return r;
   }
-  for (int i = 0; i < 3; ++i) if (waveBox(i).has(x, y)) { r.hit = Hit::Wave; r.index = i; return r; }
+  for (int i = 0; i < 3; ++i) if (waveBox(i).has(x, y)) { r.hit = Hit::Harmonics; r.index = i; return r; }
   if (kTest.has(x, y)) { r.hit = Hit::Test; return r; }
   if (kSave.has(x, y)) { r.hit = Hit::Save; return r; }
   return r;
@@ -200,9 +200,9 @@ void screenUpdate(const ControlSnapshot& snap, const LocalView& v, uint32_t now,
   const State& s = snap.state;
   const auto& e = s.parameters;
   char sig[sizeof shown];
-  int n = snprintf(sig, sizeof sig, "%d%d%d%d%d%d%d%d%p|%d%d%.1f%.1f|%.1f%d%d", v.service, v.pad, v.testing, v.pressed,
+  int n = snprintf(sig, sizeof sig, "%d%d%d%d%d%d%d%d%p|%d%d%.1f%.1f|%.1f%d%d%d", v.service, v.pad, v.testing, v.pressed,
                    int(s.mode), s.muted, s.activePad, int(snap.playback), v.toast, snap.owner != 0, snap.owner == kLocalOwner,
-                   s.setup.minHz, s.setup.maxHz, e.frequencyHz, e.levelPct, int(e.wave));
+                   s.setup.minHz, s.setup.maxHz, e.frequencyHz, e.levelPct, int(e.wave), int(e.harmonics));
   for (int i = 0; i < kPadCount && n < int(sizeof sig) - 24; ++i) {
     const auto& p = s.presets[i].parameters;
     n += snprintf(sig + n, sizeof sig - n, "|%d%.1f%d%d%d", s.presets[i].used, p.frequencyHz, int(p.wave), int(p.harmonics), p.levelPct);
