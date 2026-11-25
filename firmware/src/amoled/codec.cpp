@@ -6,9 +6,10 @@
 #include "board.h"
 
 namespace {
-// DAC volume register 0x32: 0xBF = 0 dB, 0.5 dB per step. Above 0 dB the
-// calibrated waves (peak near full scale at LEVEL 100) would clip.
-constexpr uint8_t kDacVolume = 0xBF;
+// DAC volume register 0x32: 0xBF = 0 dB, 0.5 dB per step. +6 dB drives an
+// 8-ohm vibration generator harder: a calibrated sine (0.36 RMS) peaks near
+// full scale at LEVEL 100; heavy FOLD settings may clip slightly.
+constexpr uint8_t kDacVolume = 0xBF + 12;
 
 bool write(uint8_t reg, uint8_t value) {
   for (int attempt = 0; attempt < 3; ++attempt) {
