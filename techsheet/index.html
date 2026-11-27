@@ -57,27 +57,33 @@ figcaption { font-size:7.6pt; color:var(--muted); margin-top:1.5mm; }
   <h1 style="font-size:30pt;margin-top:8mm">CP-300 / Technical Sheet</h1>
   <div class="kicker">Chladni plate installation &middot; Rev.01</div>
   <div class="cols c37" style="margin-top:2mm">
-    <svg viewBox="0 0 520 330" width="100%" height="118mm" aria-label="CP-300 installation overview">
-      <defs><linearGradient id="cyl" x1="0" x2="1"><stop offset="0" stop-color="#b9bdb8"/><stop offset=".42" stop-color="#f4f4f2"/><stop offset="1" stop-color="#a9ada8"/></linearGradient>
-      <radialGradient id="lid" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#f1f1ee"/><stop offset="1" stop-color="#cfd1cd"/></radialGradient></defs>
-      <ellipse cx="260" cy="300" rx="215" ry="28" fill="#000" opacity=".07"/>
-      <path d="M60 120 L60 270 A200 46 0 0 0 460 270 L460 120 Z" fill="url(#cyl)" stroke="#9aa19a"/>
+    <svg viewBox="0 0 520 380" width="100%" height="122mm" aria-label="CP-300 installation">
+      <defs>
+        <linearGradient id="cyl" x1="0" x2="1"><stop offset="0" stop-color="#b9bdb8"/><stop offset=".42" stop-color="#f4f4f2"/><stop offset="1" stop-color="#a9ada8"/></linearGradient>
+        <radialGradient id="lid" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#f4f4f1"/><stop offset="1" stop-color="#d3d5d1"/></radialGradient>
+        <clipPath id="win"><ellipse cx="260" cy="111" rx="74" ry="16"/></clipPath>
+      </defs>
+      <ellipse cx="260" cy="338" rx="215" ry="30" fill="#000" opacity=".07"/>
+      <path d="M60 120 L60 320 A200 46 0 0 0 460 320 L460 120 Z" fill="url(#cyl)" stroke="#9aa19a"/>
       <ellipse cx="260" cy="120" rx="200" ry="46" fill="url(#lid)" stroke="#9aa19a"/>
-      <path d="M60 128 A200 46 0 0 0 460 128" fill="none" stroke="#b5b9b4"/>
-      <ellipse cx="300" cy="104" rx="66" ry="16" fill="#c7cbc6" stroke="#8d948e"/>
-      <ellipse cx="300" cy="105" rx="60" ry="14" fill="#151718"/>
-      <g fill="none" stroke="#d9c9a3" stroke-width="1.6" opacity=".95"><ellipse cx="300" cy="105" rx="9" ry="2.6"/><path d="M252 100 Q276 108 300 99 Q324 108 348 100"/><path d="M254 111 Q278 103 300 112 Q322 103 346 111"/></g>
-      <g transform="translate(122 136)">
-        <path d="M0 22 L118 22 L148 0 L30 0 Z" fill="#1f2123"/>
-        <path d="M0 22 L118 22 L118 30 L0 30 Z" fill="#111213"/>
-        <path d="M118 22 L148 0 L148 8 L118 30 Z" fill="#0b0c0d"/>
-        <g fill="#eef0ec"><path d="M14 18 L36 18 L43 5 L21 5Z"/><path d="M42 18 L64 18 L71 5 L49 5Z"/><path d="M70 18 L92 18 L99 5 L77 5Z"/><path d="M98 18 L120 18 L127 5 L105 5Z"/></g>
+      <ellipse cx="260" cy="113" rx="80" ry="18.4" fill="#c4c8c3" stroke="#8d948e"/>
+      <ellipse cx="260" cy="111" rx="74" ry="16" fill="#151718"/>
+      <g clip-path="url(#win)" fill="none" stroke="#d9c9a3" stroke-width="1.5">
+        <ellipse cx="260" cy="111" rx="7" ry="1.8"/>
+        <path d="M186 104 Q223 116 260 104 Q297 116 334 104"/>
+        <path d="M186 118 Q223 106 260 118 Q297 106 334 118"/>
+        <path d="M222 95 Q214 111 222 127"/><path d="M298 95 Q306 111 298 127"/>
       </g>
-      <text x="380" y="52" font-size="11" fill="#1b2929">&#216;200 acrylic window</text>
-      <line x1="376" y1="56" x2="346" y2="92" stroke="#367e75"/>
-      <text x="40" y="66" font-size="11" fill="#1b2929">4-pad controller on lid</text>
-      <line x1="110" y1="70" x2="170" y2="138" stroke="#367e75"/>
-      <text x="400" y="215" font-size="11" fill="#1b2929">Casing &#216;500 &times; 262</text>
+      <rect x="172" y="148.6" width="176" height="7" fill="#0e0f10"/>
+      <rect x="172" y="135" width="176" height="13.6" fill="#232527"/>
+      <g fill="#eef0ec">
+        <rect x="186.4" y="137.2" width="32" height="9.2"/><rect x="224.8" y="137.2" width="32" height="9.2"/>
+        <rect x="263.2" y="137.2" width="32" height="9.2"/><rect x="301.6" y="137.2" width="32" height="9.2"/>
+      </g>
+      <text x="300" y="40" font-size="11" fill="#1b2929">&#216;200 acrylic window</text>
+      <line x1="320" y1="44" x2="300" y2="97" stroke="#367e75"/>
+      <text x="30" y="70" font-size="11" fill="#1b2929">4-pad controller</text>
+      <line x1="90" y1="74" x2="186" y2="137" stroke="#367e75"/>
     </svg>
     <div style="padding-top:4mm">
       <div class="stat"><div class="lbl">Casing</div><div class="val">&#216;500 &times; 262 mm</div></div>
